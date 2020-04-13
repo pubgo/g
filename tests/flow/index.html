@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/cash/6.0.1/cash.min.js"></script>
+
+    <style>
+
+
+        .app {
+            white-space: pre-wrap;
+            word-wrap: break-word;
+            line-height: 24px;
+            min-height: 24px;
+            padding: 2px 0 3px 28px;
+            position: relative;
+            z-index: 1;
+            -webkit-user-select: text;
+            -moz-user-select: text;
+            -ms-user-select: text;
+            user-select: text;
+            font-size: 16px;
+        }
+
+        input, textarea, div[contenteditable], li[contenteditable] {
+            outline: none;
+        }
+
+        div {
+            display: block;
+        }
+
+    </style>
+    <script>
+
+        ;(
+            window.onkeypress = function (e) {
+                const key = e.key || e.code;
+                const target = e.target;
+                if (key === "Enter") {
+                    if (target.className.indexOf("title") === -1) {
+                        return "";
+                    }
+
+                    var textObj = document.getElementById("content");
+                    var selectedText = window.getSelection().toString();
+                    alert(selectedText);
+                    selectedText = "<span style='background:red'>" + selectedText + "</span>";
+
+                    var start = window.getSelection().anchorOffset;
+                    var end = window.getSelection().focusOffset;
+
+                    var tempStr1 = textObj.innerHTML.substring(0, start);
+                    var tempStr2 = textObj.innerHTML.substring(end);
+
+                    document.getElementById("content").innerHTML = tempStr1 + selectedText + tempStr2;
+                    // window.getSelection().getRangeAt(0).surroundContents(document.createElement("div"));
+                }
+            }
+        )
+    </script>
+
+</head>
+
+<body>
+
+<div contenteditable="true" class="app title">ss</div>
+<hr>
+
+<div class="content" data-id="2f316f6c790c6e0a3" spellcheck="false" autocapitalize="off" contenteditable="true">#
+    sssnj
+</div>
+
+<li class="app" contenteditable="true"></li>
+
+</body>
+
+
+</html>
