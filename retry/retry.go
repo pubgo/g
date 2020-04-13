@@ -3,7 +3,7 @@ package retry
 import (
 	"github.com/pubgo/g/pkg/randutil"
 	"github.com/pubgo/g/xtry"
-	log "github.com/sirupsen/logrus"
+	"log"
 	"math"
 	"time"
 )
