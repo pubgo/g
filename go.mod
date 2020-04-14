@@ -3,13 +3,13 @@ module github.com/pubgo/g
 go 1.13
 
 require (
-	fyne.io/fyne v1.2.1
-	gitee.com/glib/webview v0.1.2
-	github.com/AllenDang/gimu v0.0.0-20191225084600-ccc3ca37cf40
+	fyne.io/fyne v1.2.1 // indirect
+	gitee.com/glib/webview v0.1.2 // indirect
+	github.com/AllenDang/gimu v0.0.0-20191225084600-ccc3ca37cf40 // indirect
 	github.com/DearMadMan/minhash v0.1.0
 	github.com/GoAdminGroup/go-admin v1.1.5
 	github.com/ImVexed/muon v0.0.0-20191209030120-589db8f0f250 // indirect
-	github.com/JesusIslam/tldr v0.6.0
+	github.com/JesusIslam/tldr v0.6.0 // indirect
 	github.com/Masterminds/goutils v1.1.0 // indirect
 	github.com/Masterminds/semver v1.5.0 // indirect
 	github.com/Masterminds/sprig v2.22.0+incompatible
@@ -23,7 +23,7 @@ require (
 	github.com/allegro/bigcache v1.2.1 // indirect
 	github.com/antchfx/htmlquery v1.2.2 // indirect
 	github.com/antchfx/xpath v1.1.4 // indirect
-	github.com/antonmedv/expr v1.4.2
+	github.com/antonmedv/expr v1.4.2 // indirect
 	github.com/araddon/dateparse v0.0.0-20190622164848-0fb0a474d195 // indirect
 	github.com/aristanetworks/goarista v0.0.0-20200224203130-895b4c57c44d // indirect
 	github.com/artyom/autoflags v1.1.1 // indirect
@@ -38,7 +38,7 @@ require (
 	github.com/cheggaaa/pb/v3 v3.0.4 // indirect
 	github.com/dave/flux v0.0.0-20180702001202-0b08a93f243b
 	github.com/deckarep/golang-set v1.7.1
-	github.com/denisbrodbeck/machineid v1.0.1
+	github.com/denisbrodbeck/machineid v1.0.1 // indirect
 	github.com/denisenkom/go-mssqldb v0.0.0-20191001013358-cfbb681360f0
 	github.com/dgrijalva/jwt-go v3.2.0+incompatible
 	github.com/disintegration/imaging v1.6.2
@@ -47,32 +47,32 @@ require (
 	github.com/emirpasic/gods v1.12.0
 	github.com/ethereum/go-ethereum v1.9.6
 	github.com/faiface/glhf v0.0.0-20181018222622-82a6317ac380 // indirect
-	github.com/faiface/gui v0.0.0-20190522095505-ed00d80d15da
-	github.com/faiface/mainthread v0.0.0-20171120011319-8b78f0a41ae3
-	github.com/faiface/pixel v0.8.0
+	github.com/faiface/gui v0.0.0-20190522095505-ed00d80d15da // indirect
+	github.com/faiface/mainthread v0.0.0-20171120011319-8b78f0a41ae3 // indirect
+	github.com/faiface/pixel v0.8.0 // indirect
 	github.com/fatih/color v1.7.0
 	github.com/flosch/pongo2 v0.0.0-20190707114632-bbf5a6c351f4
-	github.com/fogleman/gg v1.3.0
+	github.com/fogleman/gg v1.3.0 // indirect
 	github.com/foolin/goview v0.2.0
 	github.com/fsnotify/fsnotify v1.4.7
 	github.com/garyburd/redigo v1.6.0
-	github.com/gen2brain/beeep v0.0.0-20190719094215-ece0cb67ca77
-	github.com/gen2brain/dlgs v0.0.0-20191023125645-8832682fb7f8
-	github.com/getlantern/systray v0.0.0-20200107154710-8503b3469c93
+	github.com/gen2brain/beeep v0.0.0-20190719094215-ece0cb67ca77 // indirect
+	github.com/gen2brain/dlgs v0.0.0-20191023125645-8832682fb7f8 // indirect
+	github.com/getlantern/systray v0.0.0-20200107154710-8503b3469c93 // indirect
 	github.com/gin-contrib/cors v1.3.0
 	github.com/gin-contrib/sessions v0.0.1
 	github.com/gin-gonic/contrib v0.0.0-20191209060500-d6e26eeaa607
 	github.com/gin-gonic/gin v1.4.1-0.20190924141841-9b9f4fab34cc
 	github.com/go-acme/lego/v3 v3.2.0
 	github.com/go-bindata/go-bindata v3.1.2+incompatible // indirect
-	github.com/go-ego/gse v0.0.0-20200106152254-75ab7b8d2f4a
-	github.com/go-gl/glfw/v3.3/glfw v0.0.0-20191125211704-12ad95a8df72
+	github.com/go-ego/gse v0.0.0-20200106152254-75ab7b8d2f4a // indirect
+	github.com/go-gl/glfw/v3.3/glfw v0.0.0-20191125211704-12ad95a8df72 // indirect
 	github.com/go-gl/mathgl v0.0.0-20190713194549-592312d8590a // indirect
 	github.com/go-redis/redis/v7 v7.2.0
 	github.com/go-resty/resty/v2 v2.1.0
 	github.com/go-session/session v3.1.2+incompatible
 	github.com/go-sql-driver/mysql v1.4.1
-	github.com/go-vgo/robotgo v0.0.0-20200105130635-9c21c09ef9f3
+	github.com/go-vgo/robotgo v0.0.0-20200105130635-9c21c09ef9f3 // indirect
 	github.com/goburrow/cache v0.1.0
 	github.com/godbus/dbus v4.1.0+incompatible // indirect
 	github.com/godcong/fate v2.0.1+incompatible // indirect
@@ -91,7 +91,7 @@ require (
 	github.com/gorilla/sessions v1.2.0
 	github.com/gorilla/websocket v1.4.1
 	github.com/guonaihong/gout v0.0.8 // indirect
-	github.com/hajimehoshi/oto v0.5.4
+	github.com/hajimehoshi/oto v0.5.4 // indirect
 	github.com/huandu/xstrings v1.3.0 // indirect
 	github.com/imdario/mergo v0.3.8 // indirect
 	github.com/iris-contrib/blackfriday v2.0.0+incompatible
@@ -136,15 +136,15 @@ require (
 	github.com/prometheus/client_golang v1.1.0
 	github.com/pubgo/schema v0.0.3
 	github.com/radovskyb/watcher v1.0.7 // indirect
-	github.com/robotn/gohook v0.0.0-20191208195706-98eb507a75d9
-	github.com/rocketlaunchr/react v1.0.8
-	github.com/rs/xid v1.2.1
+	github.com/robotn/gohook v0.0.0-20191208195706-98eb507a75d9 // indirect
+	github.com/rocketlaunchr/react v1.0.8 // indirect
+	github.com/rs/xid v1.2.1 // indirect
 	github.com/rs/zerolog v1.14.3
 	github.com/russross/blackfriday v1.5.2
 	github.com/rwcarlsen/goexif v0.0.0-20190401172101-9e8deecbddbd
 	github.com/sahilm/fuzzy v0.1.0 // indirect
 	github.com/satori/go.uuid v1.2.0
-	github.com/sciter-sdk/go-sciter v0.5.0
+	github.com/sciter-sdk/go-sciter v0.5.0 // indirect
 	github.com/shopspring/decimal v0.0.0-20191009025716-f1972eb1d1f5
 	github.com/shurcooL/go v0.0.0-20191216061654-b114cc39af9f // indirect
 	github.com/silenceper/wechat v2.0.1+incompatible
@@ -168,14 +168,14 @@ require (
 	github.com/unrolled/secure v1.0.7
 	github.com/urfave/cli v1.22.1
 	github.com/urfave/negroni v1.0.0
-	github.com/vcaesar/imgo v0.0.0-20191008162304-a83ea7753bc8
+	github.com/vcaesar/imgo v0.0.0-20191008162304-a83ea7753bc8 // indirect
 	github.com/vinta/pangu v3.0.0+incompatible
 	github.com/vmihailenco/msgpack/v4 v4.2.0
 	github.com/yanyiwu/gojieba v1.1.0
 	go.mongodb.org/mongo-driver v1.1.2
 	go.uber.org/dig v1.8.0
 	go.uber.org/zap v1.10.0
-	gocv.io/x/gocv v0.22.0
+	gocv.io/x/gocv v0.22.0 // indirect
 	golang.org/x/crypto v0.0.0-20200302210943-78000ba7a073
 	golang.org/x/image v0.0.0-20191206065243-da761ea9ff43
 	golang.org/x/net v0.0.0-20200114155413-6afb5195e5aa
