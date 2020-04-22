@@ -4,8 +4,8 @@
 package goph
 
 import (
-	"io/ioutil"
 	"golang.org/x/crypto/ssh"
+	"io/ioutil"
 )
 
 type Auth []ssh.AuthMethod
