@@ -27,12 +27,12 @@ func (t XErr) Error() string {
 	return t.name
 }
 
-// Err err
+// Err err warp
 func (t XErr) Err(format string, args ...interface{}) error {
 	return fmt.Errorf(t.name+": "+format, args...)
 }
 
-// Msg xerr
+// Msg err warp
 func (t XErr) Msg(format string, args ...interface{}) string {
 	return fmt.Sprintf(t.name+": "+format, args...)
 }
@@ -281,4 +281,8 @@ func (t *_Err) _err() *_Err1 {
 		Caller: t.caller,
 		Sub:    t.sub._err(),
 	}
+}
+
+func WithErr(err *error) {
+
 }

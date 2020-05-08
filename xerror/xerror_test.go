@@ -3,23 +3,16 @@ package xerror_test
 import (
 	"errors"
 	"fmt"
+	"github.com/pubgo/g/pkg"
 	"github.com/pubgo/g/retry"
+	"github.com/pubgo/g/xenv"
+	"github.com/pubgo/g/xerror"
+	"github.com/pubgo/g/xtest"
+	"github.com/pubgo/g/xtry"
 	"os"
 	"reflect"
 	"testing"
-	"time"
-
-	"github.com/pubgo/g/pkg"
-	"github.com/pubgo/g/xenv"
-	"github.com/pubgo/g/xerror"
-	"github.com/pubgo/g/xinit"
-	"github.com/pubgo/g/xtest"
-	"github.com/pubgo/g/xtry"
 )
-
-func init() {
-	xerror.Exit(xinit.Start(), "init error")
-}
 
 var _try = xtry.Try
 var _retry = retry.Retry
@@ -202,23 +195,6 @@ func TestResp(t *testing.T) {
 
 }
 
-func TestTicker(t *testing.T) {
-	defer xerror.Assert()
-
-	retry.Ticker(func(i int) time.Duration {
-		fmt.Println(i)
-		return time.Second
-	})
-}
-
-func TestRetryAt(t *testing.T) {
-	retry.At(time.Second*2, func(i int) {
-		fmt.Println(i)
-
-		xerror.PanicT(true, "test RetryAt")
-	})
-}
-
 func TestErr(t *testing.T) {
 	xerror.ErrHandle(_try(func() {
 		xerror.ErrHandle(_try(func() {
@@ -358,4 +334,13 @@ func TestDebug(t *testing.T) {
 	//xenv.SetDebug()
 	//xinit.Start()
 	xerror.Debug("hello", map[string]interface{}{})
+}
+
+func interface1(i interface{}) bool {
+	return i == nil
+}
+
+func TestInterface(t *testing.T) {
+	t.Log(interface1(nil))
+	t.Log(interface1(0))
 }

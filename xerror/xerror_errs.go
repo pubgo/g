@@ -4,7 +4,7 @@ import "errors"
 
 var (
 	// ErrDone done
-	ErrDone = errors.New("xerror.done")
+	ErrDone = errors.New("DONE")
 	// Err base error
 	Err = NewXErr("XErr")
 	// ErrUnknownType error

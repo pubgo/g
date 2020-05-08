@@ -11,38 +11,15 @@ type errF2 = func(...interface{}) (err error)
 type errF3 = func(...interface{}) func(...interface{}) error
 type errF4 = func(...interface{}) func(...interface{}) func(...interface{}) error
 
-func _handle(err interface{}) IErr {
-	if _isNone(err) {
-		return nil
-	}
-
-	switch _e := err.(type) {
-	case errF1:
-		err = _e()
-	case errF2:
-		err = _e()
-	case errF3:
-		err = _e()()
-	case errF4:
-		err = _e()()()
-	}
-
-	if _isNone(err) {
-		return nil
-	}
-
+func _handle(err error) IErr {
 	var m IErr
 	switch _e := err.(type) {
-	case *_Err:
-		m = _e
 	case IErr:
 		m = _e
 	case error:
 		m = &_Err{err: _e}
-	case string:
-		m = &_Err{err: errors.New(_e)}
 	default:
-		m = &_Err{err: ErrUnknownType.Err("type %#v", _e)}
+		m = &_Err{err: ErrUnknownType.Err("type %T", _e)}
 	}
 
 	return m

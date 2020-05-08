@@ -19,15 +19,14 @@ var _funcCaller = func(callDepth int) []string {
 }
 
 // Panic panic
-func Panic(err interface{}) {
-	if _isNone(err) {
+func Panic(err error) {
+	if isErrNil(err) {
 		return
 	}
 
-	if _e := _handle(err); !_isNone(_e) {
-		_e.Caller(_funcCaller(callDepth + 1)...)
-		panic(_e)
-	}
+	_e := _handle(err)
+	_e.Caller(_funcCaller(callDepth + 1)...)
+	panic(_e)
 }
 
 // PanicM error assert
