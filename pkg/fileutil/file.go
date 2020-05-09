@@ -417,3 +417,19 @@ func Empty(fileName string, args ...int64) {
 
 	os.Truncate(fileName, size)
 }
+
+func Save(filename string, r io.Reader) (err error) {
+	f, err := os.OpenFile(filename, os.O_WRONLY|os.O_CREATE|os.O_TRUNC, 0755)
+	if err != nil {
+		return err
+	}
+
+	defer func() {
+		if _err := f.Close(); _err != nil {
+			err = _err
+		}
+	}()
+
+	_, err = io.Copy(f, r)
+	return
+}
