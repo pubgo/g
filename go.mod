@@ -43,6 +43,7 @@ require (
 	github.com/dgrijalva/jwt-go v3.2.0+incompatible
 	github.com/disintegration/imaging v1.6.2
 	github.com/dustin/go-humanize v1.0.0
+	github.com/dvyukov/go-fuzz v0.0.0-20200318091601-be3528f3a813 // indirect
 	github.com/elastic/gosigar v0.10.5 // indirect
 	github.com/emirpasic/gods v1.12.0
 	github.com/ethereum/go-ethereum v1.9.6
@@ -81,6 +82,7 @@ require (
 	github.com/gomarkdown/markdown v0.0.0-20200105192015-0948ad373b2c // indirect
 	github.com/gomodule/redigo v2.0.0+incompatible
 	github.com/google/go-github v17.0.0+incompatible
+	github.com/google/gofuzz v1.0.0 // indirect
 	github.com/google/uuid v1.1.1
 	github.com/gookit/color v1.2.2 // indirect
 	github.com/gopherjs/gopherjs v0.0.0-20191106031601-ce3c9ade29de
@@ -171,7 +173,7 @@ require (
 	github.com/vcaesar/imgo v0.0.0-20191008162304-a83ea7753bc8 // indirect
 	github.com/vinta/pangu v3.0.0+incompatible
 	github.com/vmihailenco/msgpack/v4 v4.2.0
-	github.com/yanyiwu/gojieba v1.1.0
+	github.com/yanyiwu/gojieba v1.1.2
 	go.mongodb.org/mongo-driver v1.1.2
 	go.uber.org/dig v1.8.0
 	go.uber.org/zap v1.10.0
@@ -193,5 +195,3 @@ require (
 	xorm.io/core v0.7.2
 	xorm.io/xorm v0.8.1
 )
-
-replace github.com/yanyiwu/gojieba v1.1.0 => github.com/pubgo/gojieba v1.1.1
