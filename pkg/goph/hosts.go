@@ -4,10 +4,10 @@
 package goph
 
 import (
-	"os"
-	"strings"
 	"golang.org/x/crypto/ssh"
 	"golang.org/x/crypto/ssh/knownhosts"
+	"os"
+	"strings"
 )
 
 // Use default known hosts files to verify host public key.

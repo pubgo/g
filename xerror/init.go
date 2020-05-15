@@ -1,26 +1,37 @@
 package xerror
 
 import (
-	"github.com/pubgo/g/pkg"
-	"github.com/pubgo/g/xenv"
-	"github.com/pubgo/g/xinit"
+	"errors"
+	"fmt"
+	"runtime"
+	"strings"
 )
 
 // func caller depth
-const callDepth = 2
+const callDepth = 3
 
-var _isNone = func(val interface{}) bool {
-	return val == nil || val == ErrDone || pkg.IsNone(val)
+var (
+	// ErrDone done
+	ErrDone  = errors.New("DONE")
+	isErrNil = func(val error) bool {
+		return val == nil || val == ErrDone
+	}
+	replace = strings.ReplaceAll
+)
+
+func handle(err error, msg string, args ...interface{}) error {
+	if err1, ok := err.(*xerror); ok {
+		err1.next(&xerror{Caller: callerWithDepth(callDepth), Msg: fmt.Sprintf(msg, args...)})
+		return err1
+	}
+
+	return &xerror{err: err, Caller: callerWithDepth(callDepth), Msg: fmt.Sprintf(msg, args...)}
 }
-var _isZero = pkg.IsZero
-var _caller = pkg.Caller
-var skipErrorFile = xenv.IsSkipXerror()
-var debug = xenv.IsDebug()
 
-func init() {
-	xinit.Init(func() (err error) {
-		debug = xenv.IsDebug()
-		skipErrorFile = xenv.IsSkipXerror()
-		return
-	})
+func callerWithDepth(callDepth int) string {
+	_, file, line, ok := runtime.Caller(callDepth)
+	if !ok {
+		return "no func caller error"
+	}
+	return fmt.Sprintf("%s:%d", file, line)
 }

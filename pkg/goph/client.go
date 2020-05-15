@@ -4,8 +4,8 @@
 package goph
 
 import (
-	"time"
 	"golang.org/x/crypto/ssh"
+	"time"
 )
 
 type Client struct {
