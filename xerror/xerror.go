@@ -55,15 +55,11 @@ func (t *xError) Recover() {
 	}
 
 	err := recover()
-	if err == nil {
+	if err == nil || err == ErrDone {
 		return
 	}
 
 	if err1, ok := err.(error); ok {
-		if err1 == ErrDone {
-			return
-		}
-
 		*t.err = err1
 		return
 	}
@@ -117,31 +113,34 @@ func (t *xError) PanicErr(d1 interface{}, err error) interface{} {
 }
 
 // ExitErr
-func (t xError) ExitErr(_ interface{}, err error) {
+func ExitErr(_ interface{}, err error) {
 	if isErrNil(err) {
 		return
 	}
 
 	fmt.Println(handle(err, "").Error())
+	debug.PrintStack()
 	os.Exit(1)
 }
 
 // ExitF
-func (t xError) ExitF(err error, msg string, args ...interface{}) {
+func ExitF(err error, msg string, args ...interface{}) {
 	if isErrNil(err) {
 		return
 	}
 
 	fmt.Println(handle(err, msg, args...).Error())
+	debug.PrintStack()
 	os.Exit(1)
 }
 
-func (t xError) Exit(err error) {
+func Exit(err error) {
 	if isErrNil(err) {
 		return
 	}
 
 	fmt.Println(handle(err, "").Error())
+	debug.PrintStack()
 	os.Exit(1)
 }
 

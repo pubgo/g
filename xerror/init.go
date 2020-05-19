@@ -13,10 +13,11 @@ const callDepth = 3
 var (
 	// ErrDone done
 	ErrDone  = errors.New("DONE")
-	isErrNil = func(val error) bool {
-		return val == nil || val == ErrDone
+	isErrNil = func(err error) bool {
+		return err == nil || err == ErrDone
 	}
 	replace = strings.ReplaceAll
+	Debug   = true
 )
 
 func handle(err error, msg string, args ...interface{}) error {

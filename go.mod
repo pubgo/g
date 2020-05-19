@@ -174,6 +174,7 @@ require (
 	github.com/vinta/pangu v3.0.0+incompatible
 	github.com/vmihailenco/msgpack/v4 v4.2.0
 	github.com/yanyiwu/gojieba v1.1.2
+	github.com/zserge/webview v0.0.0-20200410160118-50e4bcc420ab
 	go.mongodb.org/mongo-driver v1.1.2
 	go.uber.org/dig v1.8.0
 	go.uber.org/zap v1.10.0
