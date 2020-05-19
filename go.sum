@@ -1362,6 +1362,8 @@ github.com/zenazn/goji v0.9.0/go.mod h1:7S9M489iMyHBNxwZnk9/EHS098H4/F6TATF2mIxt
 github.com/ziutek/mymysql v1.5.4/go.mod h1:LMSpPZ6DbqWFxNCHW77HeMg9I646SAhApZ/wKdgO/C0=
 github.com/zserge/webview v0.0.0-20200108134508-23539831b470 h1:sqU/QRCxgRmFQ09BnJVh40Lhc275oPD1T/lBCxT64Os=
 github.com/zserge/webview v0.0.0-20200108134508-23539831b470/go.mod h1:a1CV8KR4Dd1eP2g+mEijGOp+HKczwdKHWyx0aPHKvo4=
+github.com/zserge/webview v0.0.0-20200410160118-50e4bcc420ab h1:oN9z1ICUvaapBWxfrsjnVE2P594yMWwi6vgH7Umzq3s=
+github.com/zserge/webview v0.0.0-20200410160118-50e4bcc420ab/go.mod h1:qxc/5N3SOFrs3q+EAVHqaJ1oLbm+hHlDhfhRYg8x7wQ=
 go.etcd.io/bbolt v1.3.2/go.mod h1:IbVyRI1SCnLcuJnV2u8VeU0CEYM7e686BmAb1XKL+uU=
 go.mongodb.org/mongo-driver v1.1.2 h1:jxcFYjlkl8xaERsgLo+RNquI0epW6zuy/ZRQs6jnrFA=
 go.mongodb.org/mongo-driver v1.1.2/go.mod h1:u7ryQJ+DOzQmeO7zB6MHyr8jkEQvC8vH7qLUO4lqsUM=
