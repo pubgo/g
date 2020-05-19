@@ -3,6 +3,8 @@ package xerror
 import (
 	"errors"
 	"fmt"
+	"log"
+	"os"
 	"runtime"
 	"strings"
 )
@@ -17,16 +19,29 @@ var (
 		return err == nil || err == ErrDone
 	}
 	replace = strings.ReplaceAll
-	Debug   = true
+	Debug   bool
+	logger  = log.New(os.Stdout, "[xerror] ", log.LstdFlags|log.Lshortfile)
 )
 
+func init() {
+	Debug = true
+
+	if os.Getenv("debug") == "false" {
+		Debug = false
+	}
+}
+
 func handle(err error, msg string, args ...interface{}) error {
+	if len(args) != 0 {
+		msg = fmt.Sprintf(msg, args...)
+	}
+
 	if err1, ok := err.(*xerror); ok {
-		err1.next(&xerror{Caller: callerWithDepth(callDepth), Msg: fmt.Sprintf(msg, args...)})
+		err1.next(&xerror{Caller: callerWithDepth(callDepth), Msg: msg})
 		return err1
 	}
 
-	return &xerror{err: err, Caller: callerWithDepth(callDepth), Msg: fmt.Sprintf(msg, args...)}
+	return &xerror{err: err, Caller: callerWithDepth(callDepth), Msg: msg}
 }
 
 func callerWithDepth(callDepth int) string {

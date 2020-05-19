@@ -7,12 +7,12 @@ import (
 	"os"
 	"runtime/debug"
 	"strings"
+	"sync"
 )
 
 // NewXErr
-func New(name string) xErr {
-	name = replace(replace(strings.Title(name), " ", ""), "-", "")
-	return xErr{name: name}
+func New(name string) XErr {
+	return &xErr{name: replace(replace(strings.Title(name), " ", ""), "-", "")}
 }
 
 // XErr struct
@@ -35,9 +35,14 @@ func (t xErr) Msg(format string, args ...interface{}) string {
 }
 
 // New
-func (t xErr) New(format string) xErr {
-	t.name = t.name + ":" + replace(replace(strings.Title(format), " ", ""), "-", "")
-	return t
+func (t xErr) New(format string) XErr {
+	return &xErr{name: t.name + ":" + replace(replace(strings.Title(format), " ", ""), "-", "")}
+}
+
+var xErrorPool = &sync.Pool{
+	New: func() interface{} {
+		return &xError{}
+	},
 }
 
 type xError struct {
@@ -45,8 +50,8 @@ type xError struct {
 	isPanic uint32
 }
 
-func WithErr(err *error) xError {
-	return xError{err: err}
+func WithErr(err *error) XError {
+	return &xError{err: err}
 }
 
 func (t *xError) Recover() {
@@ -54,17 +59,7 @@ func (t *xError) Recover() {
 		return
 	}
 
-	err := recover()
-	if err == nil || err == ErrDone {
-		return
-	}
-
-	if err1, ok := err.(error); ok {
-		*t.err = err1
-		return
-	}
-
-	*t.err = fmt.Errorf("%#v", err)
+	recover()
 }
 
 func (t *xError) Panic(err error) {
@@ -73,7 +68,8 @@ func (t *xError) Panic(err error) {
 	}
 
 	t.isPanic = 1
-	panic(handle(err, ""))
+	*t.err = handle(err, "")
+	panic(nil)
 }
 
 func (t *xError) PanicF(err error, msg string, args ...interface{}) {
@@ -82,7 +78,8 @@ func (t *xError) PanicF(err error, msg string, args ...interface{}) {
 	}
 
 	t.isPanic = 1
-	panic(handle(err, msg, args...))
+	*t.err = handle(err, msg, args...)
+	panic(nil)
 }
 
 func (t xError) Wrap(err error) error {
@@ -104,12 +101,12 @@ func (t xError) WrapF(err error) error {
 // PanicErr
 func (t *xError) PanicErr(d1 interface{}, err error) interface{} {
 	if isErrNil(err) {
-		return nil
+		return d1
 	}
 
 	t.isPanic = 1
-	panic(handle(err, ""))
-	return d1
+	*t.err = handle(err, "")
+	panic(nil)
 }
 
 // ExitErr
@@ -119,7 +116,9 @@ func ExitErr(_ interface{}, err error) {
 	}
 
 	fmt.Println(handle(err, "").Error())
-	debug.PrintStack()
+	if Debug {
+		debug.PrintStack()
+	}
 	os.Exit(1)
 }
 
@@ -130,7 +129,9 @@ func ExitF(err error, msg string, args ...interface{}) {
 	}
 
 	fmt.Println(handle(err, msg, args...).Error())
-	debug.PrintStack()
+	if Debug {
+		debug.PrintStack()
+	}
 	os.Exit(1)
 }
 
@@ -140,16 +141,23 @@ func Exit(err error) {
 	}
 
 	fmt.Println(handle(err, "").Error())
-	debug.PrintStack()
+	if Debug {
+		debug.PrintStack()
+	}
 	os.Exit(1)
 }
 
 func UnWrap(err error) *xerror {
+	if isErrNil(err) {
+		return nil
+	}
+
 	err1, ok := err.(*xerror)
 	if ok {
 		return err1
 	}
 
+	logger.Printf("UnWrap Error, type error, %#v", err)
 	return nil
 }
 
@@ -164,7 +172,9 @@ type xerror struct {
 func (t *xerror) P() {
 	if t == nil {
 		log.Println("xerror is nil")
-		debug.PrintStack()
+		if Debug {
+			debug.PrintStack()
+		}
 		os.Exit(1)
 	}
 
