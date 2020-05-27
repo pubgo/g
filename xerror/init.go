@@ -11,7 +11,6 @@ import (
 // func caller depth
 const (
 	callDepth = 3
-	DebugKey  = "debug"
 )
 
 var (
@@ -25,16 +24,13 @@ var (
 	ErrTimeout             = New(408, http.StatusText(408))
 	ErrConflict            = New(409, http.StatusText(409))
 	ErrInternalServerError = New(500, http.StatusText(500))
-	isErrNil               = func(err error) bool {
-		return err == nil || err == ErrDone
-	}
-	Debug  bool
-	logger = log.New(os.Stdout, "[xerror] ", log.LstdFlags|log.Lshortfile)
+	Debug                  bool
+	logger                 = log.New(os.Stdout, "[xerror] ", log.LstdFlags|log.Lshortfile)
 )
 
 func init() {
 	Debug = true
-	if b, _ := strconv.ParseBool(os.Getenv(DebugKey)); !b {
+	if b, _ := strconv.ParseBool(env("debug", "test", "dev")); !b {
 		Debug = false
 	}
 }

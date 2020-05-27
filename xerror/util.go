@@ -3,8 +3,10 @@ package xerror
 import (
 	"errors"
 	"fmt"
+	"os"
 	"runtime"
 	"strconv"
+	"strings"
 )
 
 func handleErr(err *error, _err interface{}) {
@@ -29,9 +31,9 @@ func handle(err error, msg string, args ...interface{}) error {
 		msg = fmt.Sprintf(msg, args...)
 	}
 
-	err2 := xerrorPool.Get().(*xerror)
+	err2 := getXerror()
 	err2.Msg = msg
-	err2.Caller = callerWithDepth(callDepth)
+	err2.Caller = callerWithDepth()
 	if err1, ok := err.(*xerror); ok {
 		err2.Sub = err1
 		err2.xrr = err1.xrr
@@ -46,11 +48,34 @@ func handle(err error, msg string, args ...interface{}) error {
 	return err2
 }
 
-func callerWithDepth(callDepth int) string {
-	_, file, line, ok := runtime.Caller(callDepth)
-	if !ok {
-		return "no func caller error"
+type Frame uintptr
+
+func (f Frame) pc() uintptr { return uintptr(f) - 1 }
+
+func callerWithDepth() string {
+	var pcs = make([]uintptr, 1)
+	if runtime.Callers(callDepth, pcs[:]) == 0 {
+		return ""
 	}
 
+	f := Frame(pcs[0])
+	fn := runtime.FuncForPC(f.pc())
+	if fn == nil {
+		return "unknown func"
+	}
+	file, line := fn.FileLine(f.pc())
 	return file + ":" + strconv.Itoa(line)
+}
+
+func isErrNil(err error) bool {
+	return err == nil || err == ErrDone
+}
+
+func env(es ...string) string {
+	for _, e := range es {
+		if v := os.Getenv(strings.ToUpper(e)); v != "" {
+			return v
+		}
+	}
+	return ""
 }
