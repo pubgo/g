@@ -2,52 +2,39 @@ package xerror
 
 import (
 	"errors"
-	"fmt"
 	"log"
+	"net/http"
 	"os"
-	"runtime"
-	"strings"
+	"strconv"
 )
 
 // func caller depth
-const callDepth = 3
+const (
+	callDepth = 3
+	DebugKey  = "debug"
+)
 
 var (
 	// ErrDone done
-	ErrDone  = errors.New("DONE")
-	isErrNil = func(err error) bool {
+	ErrDone                = errors.New("DONE")
+	ErrBadRequest          = New(400, http.StatusText(400))
+	ErrUnauthorized        = New(401, http.StatusText(401))
+	ErrForbidden           = New(403, http.StatusText(403))
+	ErrNotFound            = New(404, http.StatusText(404))
+	ErrMethodNotAllowed    = New(405, http.StatusText(405))
+	ErrTimeout             = New(408, http.StatusText(408))
+	ErrConflict            = New(409, http.StatusText(409))
+	ErrInternalServerError = New(500, http.StatusText(500))
+	isErrNil               = func(err error) bool {
 		return err == nil || err == ErrDone
 	}
-	replace = strings.ReplaceAll
-	Debug   bool
-	logger  = log.New(os.Stdout, "[xerror] ", log.LstdFlags|log.Lshortfile)
+	Debug  bool
+	logger = log.New(os.Stdout, "[xerror] ", log.LstdFlags|log.Lshortfile)
 )
 
 func init() {
 	Debug = true
-
-	if os.Getenv("debug") == "false" {
+	if b, _ := strconv.ParseBool(os.Getenv(DebugKey)); !b {
 		Debug = false
 	}
-}
-
-func handle(err error, msg string, args ...interface{}) error {
-	if len(args) != 0 {
-		msg = fmt.Sprintf(msg, args...)
-	}
-
-	if err1, ok := err.(*xerror); ok {
-		err1.next(&xerror{Caller: callerWithDepth(callDepth), Msg: msg})
-		return err1
-	}
-
-	return &xerror{err: err, Caller: callerWithDepth(callDepth), Msg: msg}
-}
-
-func callerWithDepth(callDepth int) string {
-	_, file, line, ok := runtime.Caller(callDepth)
-	if !ok {
-		return "no func caller error"
-	}
-	return fmt.Sprintf("%s:%d", file, line)
 }

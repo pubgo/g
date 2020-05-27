@@ -37,6 +37,7 @@ require (
 	github.com/caddyserver/caddy v1.0.4
 	github.com/cheggaaa/pb/v3 v3.0.4 // indirect
 	github.com/dave/flux v0.0.0-20180702001202-0b08a93f243b
+	github.com/davecgh/go-spew v1.1.1
 	github.com/deckarep/golang-set v1.7.1
 	github.com/denisbrodbeck/machineid v1.0.1 // indirect
 	github.com/denisenkom/go-mssqldb v0.0.0-20191001013358-cfbb681360f0
@@ -67,7 +68,6 @@ require (
 	github.com/go-acme/lego/v3 v3.2.0
 	github.com/go-bindata/go-bindata v3.1.2+incompatible // indirect
 	github.com/go-ego/gse v0.0.0-20200106152254-75ab7b8d2f4a // indirect
-	github.com/go-gl/glfw/v3.3/glfw v0.0.0-20191125211704-12ad95a8df72 // indirect
 	github.com/go-gl/mathgl v0.0.0-20190713194549-592312d8590a // indirect
 	github.com/go-redis/redis/v7 v7.2.0
 	github.com/go-resty/resty/v2 v2.1.0
@@ -82,7 +82,6 @@ require (
 	github.com/gomarkdown/markdown v0.0.0-20200105192015-0948ad373b2c // indirect
 	github.com/gomodule/redigo v2.0.0+incompatible
 	github.com/google/go-github v17.0.0+incompatible
-	github.com/google/gofuzz v1.0.0 // indirect
 	github.com/google/uuid v1.1.1
 	github.com/gookit/color v1.2.2 // indirect
 	github.com/gopherjs/gopherjs v0.0.0-20191106031601-ce3c9ade29de
@@ -133,14 +132,13 @@ require (
 	github.com/patrickmn/go-cache v2.1.0+incompatible
 	github.com/pborman/uuid v1.2.0
 	github.com/pelletier/go-toml v1.2.0
+	github.com/pierrec/lz4 v2.0.5+incompatible // indirect
 	github.com/pkg/browser v0.0.0-20180916011732-0a3d74bf9ce4 // indirect
 	github.com/pkg/sftp v1.11.0
 	github.com/prometheus/client_golang v1.1.0
 	github.com/pubgo/schema v0.0.3
 	github.com/radovskyb/watcher v1.0.7 // indirect
-	github.com/robotn/gohook v0.0.0-20191208195706-98eb507a75d9 // indirect
 	github.com/rocketlaunchr/react v1.0.8 // indirect
-	github.com/rs/xid v1.2.1 // indirect
 	github.com/rs/zerolog v1.14.3
 	github.com/russross/blackfriday v1.5.2
 	github.com/rwcarlsen/goexif v0.0.0-20190401172101-9e8deecbddbd
@@ -170,7 +168,7 @@ require (
 	github.com/unrolled/secure v1.0.7
 	github.com/urfave/cli v1.22.1
 	github.com/urfave/negroni v1.0.0
-	github.com/vcaesar/imgo v0.0.0-20191008162304-a83ea7753bc8 // indirect
+	github.com/veandco/go-sdl2 v0.4.4
 	github.com/vinta/pangu v3.0.0+incompatible
 	github.com/vmihailenco/msgpack/v4 v4.2.0
 	github.com/yanyiwu/gojieba v1.1.2

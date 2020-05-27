@@ -1310,6 +1310,8 @@ github.com/vcaesar/gops v0.0.0-20190910162627-58ac09d12a53/go.mod h1:5txYrXKrQG6
 github.com/vcaesar/imgo v0.0.0-20191008162304-a83ea7753bc8 h1:9Y+hoKBYa+UtzGqkODfs8c0Q6gp2UfniVNsHQWghPi0=
 github.com/vcaesar/imgo v0.0.0-20191008162304-a83ea7753bc8/go.mod h1:52+3yYrTNjWKh+CkQozNRCLWCE/X666yAWPGbYC3DZI=
 github.com/vcaesar/tt v0.0.0-20191103173835-6896a351024b/go.mod h1:GHPxQYhn+7OgKakRusH7KJ0M5MhywoeLb8Fcffs/Gtg=
+github.com/veandco/go-sdl2 v0.4.4 h1:coOJGftOdvNvGoUIZmm4XD+ZRQF4mg9ZVHmH3/42zFQ=
+github.com/veandco/go-sdl2 v0.4.4/go.mod h1:FB+kTpX9YTE+urhYiClnRzpOXbiWgaU3+5F2AB78DPg=
 github.com/vinta/pangu v3.0.0+incompatible h1:kqW9Q5BrmWJkLJXLdxwbyPDjlizHUTpOCmHFCKfg1ZA=
 github.com/vinta/pangu v3.0.0+incompatible/go.mod h1:8n5gJh5l7U0Rbz6mjRK/09AiL0Bm+ugibEB+JhvxNNk=
 github.com/vmihailenco/msgpack/v4 v4.2.0 h1:c4L4gd938BvSjSsfr9YahJcvasEf5JZ9W7rcEXfgyys=

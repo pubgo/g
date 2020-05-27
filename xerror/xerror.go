@@ -2,87 +2,52 @@ package xerror
 
 import (
 	"encoding/json"
+	"errors"
 	"fmt"
-	"log"
 	"os"
+	"reflect"
 	"runtime/debug"
-	"strings"
-	"sync"
 )
 
-// NewXErr
-func New(name string) XErr {
-	return &xErr{name: replace(replace(strings.Title(name), " ", ""), "-", "")}
+type XErr interface {
+	error
+	As(err interface{}) bool
+	Is(err error) bool
+	Unwrap() error
+	Wrap(err error) error
+	Code() int
 }
 
-// XErr struct
-type xErr struct {
-	name string
+func RespErr(err *error) {
+	handleErr(err, recover())
 }
 
-func (t xErr) Error() string {
-	return t.name
-}
-
-// Err err warp
-func (t xErr) Err(format string, args ...interface{}) error {
-	return fmt.Errorf(t.name+": "+format, args...)
-}
-
-// Msg err warp
-func (t xErr) Msg(format string, args ...interface{}) string {
-	return fmt.Sprintf(t.name+": "+format, args...)
-}
-
-// New
-func (t xErr) New(format string) XErr {
-	return &xErr{name: t.name + ":" + replace(replace(strings.Title(format), " ", ""), "-", "")}
-}
-
-var xErrorPool = &sync.Pool{
-	New: func() interface{} {
-		return &xError{}
-	},
-}
-
-type xError struct {
-	err     *error
-	isPanic uint32
-}
-
-func WithErr(err *error) XError {
-	return &xError{err: err}
-}
-
-func (t *xError) Recover() {
-	if t.isPanic == 0 {
-		return
+func Resp(f func(err XErr)) {
+	var err error
+	handleErr(&err, recover())
+	if err != nil {
+		f(err.(XErr))
+		err.(*xerror).Reset()
 	}
-
-	recover()
 }
 
-func (t *xError) Panic(err error) {
+func Panic(err error) {
 	if isErrNil(err) {
 		return
 	}
 
-	t.isPanic = 1
-	*t.err = handle(err, "")
-	panic(nil)
+	panic(handle(err, ""))
 }
 
-func (t *xError) PanicF(err error, msg string, args ...interface{}) {
+func PanicF(err error, msg string, args ...interface{}) {
 	if isErrNil(err) {
 		return
 	}
 
-	t.isPanic = 1
-	*t.err = handle(err, msg, args...)
-	panic(nil)
+	panic(handle(err, msg, args...))
 }
 
-func (t xError) Wrap(err error) error {
+func Wrap(err error) error {
 	if isErrNil(err) {
 		return nil
 	}
@@ -90,23 +55,21 @@ func (t xError) Wrap(err error) error {
 	return handle(err, "")
 }
 
-func (t xError) WrapF(err error) error {
+func WrapF(err error, msg string, args ...interface{}) error {
 	if isErrNil(err) {
 		return nil
 	}
 
-	return handle(err, "")
+	return handle(err, msg, args...)
 }
 
 // PanicErr
-func (t *xError) PanicErr(d1 interface{}, err error) interface{} {
+func PanicErr(d1 interface{}, err error) interface{} {
 	if isErrNil(err) {
 		return d1
 	}
 
-	t.isPanic = 1
-	*t.err = handle(err, "")
-	panic(nil)
+	panic(handle(err, ""))
 }
 
 // ExitErr
@@ -115,7 +78,7 @@ func ExitErr(_ interface{}, err error) {
 		return
 	}
 
-	fmt.Println(handle(err, "").Error())
+	logger.Println(handle(err, "").Error())
 	if Debug {
 		debug.PrintStack()
 	}
@@ -128,7 +91,7 @@ func ExitF(err error, msg string, args ...interface{}) {
 		return
 	}
 
-	fmt.Println(handle(err, msg, args...).Error())
+	logger.Println(handle(err, msg, args...).Error())
 	if Debug {
 		debug.PrintStack()
 	}
@@ -140,47 +103,68 @@ func Exit(err error) {
 		return
 	}
 
-	fmt.Println(handle(err, "").Error())
+	logger.Println(handle(err, "").Error())
 	if Debug {
 		debug.PrintStack()
 	}
 	os.Exit(1)
 }
 
-func UnWrap(err error) *xerror {
-	if isErrNil(err) {
-		return nil
-	}
+// ext from errors
+var (
+	UnWrap = errors.Unwrap
+	Is     = errors.Is
+	As     = func(err error, target interface{}) bool {
+		if target == nil {
+			return false
+		}
 
-	err1, ok := err.(*xerror)
-	if ok {
-		return err1
-	}
+		val := reflect.ValueOf(target)
+		typ := val.Type()
 
-	logger.Printf("UnWrap Error, type error, %#v", err)
-	return nil
+		if typ.Kind() != reflect.Ptr || val.IsNil() {
+			return false
+		}
+
+		if e := typ.Elem(); e.Kind() != reflect.Interface && !typ.Implements(errorType) {
+			return false
+		}
+
+		targetType := typ.Elem()
+		for err != nil {
+			if reflect.TypeOf(err).AssignableTo(targetType) {
+				val.Elem().Set(reflect.ValueOf(err))
+				return true
+			}
+			if x, ok := err.(interface{ As(interface{}) bool }); ok && x.As(target) {
+				return true
+			}
+			err = UnWrap(err)
+		}
+		return false
+	}
+	errorType = reflect.TypeOf((*error)(nil)).Elem()
+)
+
+func New(code int, Msg string) interface {
+	Wrap(error) error
+	Code() int
+} {
+	return &xerror{code: code, Msg: Msg}
 }
 
 type xerror struct {
-	err    error
-	Xrr    string  `json:"err,omitempty"`
+	error
+	xrr    error
+	code   int
+	Err    string  `json:"err,omitempty"`
 	Msg    string  `json:"msg,omitempty"`
 	Caller string  `json:"caller,omitempty"`
 	Sub    *xerror `json:"sub,omitempty"`
 }
 
-func (t *xerror) P() {
-	if t == nil {
-		log.Println("xerror is nil")
-		if Debug {
-			debug.PrintStack()
-		}
-		os.Exit(1)
-	}
-
-	t.Xrr = t.err.Error()
-	dt, _ := json.MarshalIndent(t, "", "\t")
-	fmt.Println(string(dt))
+func (t *xerror) Code() int {
+	return t.code
 }
 
 func (t *xerror) next(e *xerror) {
@@ -191,42 +175,80 @@ func (t *xerror) next(e *xerror) {
 	t.Sub.next(e)
 }
 
+func (t *xerror) Unwrap() error {
+	if t == nil {
+		return nil
+	}
+
+	return t.xrr
+}
+
+func (t *xerror) Wrap(err error) error {
+	if isErrNil(err) {
+		return nil
+	}
+
+	t.xrr = err
+	t.Caller = callerWithDepth(callDepth)
+	return t
+}
+
 func (t *xerror) Is(err error) bool {
-	if t == nil || t.err == nil || err == nil {
+	if t == nil {
 		return false
 	}
 
-	return t.err == err
+	return t.xrr == err
 }
 
-func (t *xerror) As(err error) bool {
-	if t == nil || t.err == nil || err == nil {
+func (t *xerror) As(err interface{}) bool {
+	if t == nil || t.xrr == nil || err == nil {
 		return false
 	}
 
-	return strings.HasPrefix(t.err.Error(), err.Error())
-}
-
-func (t *xerror) Err() error {
-	return t.err
+	switch e := err.(type) {
+	case *xerror:
+		fmt.Println(e.code)
+		return t.code == e.code
+	case int:
+		return t.code == e
+	case string:
+		return t.Msg == e
+	default:
+		return false
+	}
 }
 
 // Error
 func (t *xerror) Error() string {
-	if t == nil || t.err == nil || t.err == ErrDone {
+	if t == nil || t.xrr == nil || t.xrr == ErrDone {
 		return ""
 	}
 
-	t.Xrr = t.err.Error()
-	dt, _ := json.Marshal(t)
+	t.Err = t.xrr.Error()
+	var dt []byte
+
+	if Debug {
+		dt, _ = json.MarshalIndent(t, "", "\t")
+	} else {
+		dt, _ = json.Marshal(t)
+	}
 	return string(dt)
 }
 
-func (t xerror) Reset() {
-	t.err = nil
-	t.Caller = ""
+func (t *xerror) Reset() {
+	t.xrr = nil
+	t.code = 0
+	t.Err = ""
 	t.Msg = ""
-	if t.Sub != nil {
-		t.Sub.Reset()
+	t.Caller = ""
+	if t.Sub == nil {
+		xerrorPool.Put(t)
+		return
 	}
+
+	sub := t.Sub
+	t.Sub = nil
+	xerrorPool.Put(t)
+	sub.Reset()
 }
