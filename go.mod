@@ -1,4 +1,4 @@
-module github.com/pubgo/g
+module github.com/pubgo/x
 
 go 1.13
 
@@ -136,6 +136,7 @@ require (
 	github.com/pkg/browser v0.0.0-20180916011732-0a3d74bf9ce4 // indirect
 	github.com/pkg/sftp v1.11.0
 	github.com/prometheus/client_golang v1.1.0
+	github.com/pubgo/g v0.2.52
 	github.com/pubgo/schema v0.0.3
 	github.com/radovskyb/watcher v1.0.7 // indirect
 	github.com/rocketlaunchr/react v1.0.8 // indirect

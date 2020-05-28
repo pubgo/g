@@ -1080,6 +1080,8 @@ github.com/prometheus/procfs v0.0.3/go.mod h1:4A/X28fw3Fc593LaREMrKMqOKvUAntwMDa
 github.com/prometheus/tsdb v0.7.1/go.mod h1:qhTCs0VvXwvX/y3TZrWD7rabWM+ijKTux40TwIPHuXU=
 github.com/pubgo/errors v0.3.13 h1:uTNi1zh5L+QDb7/vy+VkZOU+rFaOpqpzMxVPAKFhnWo=
 github.com/pubgo/errors v0.3.13/go.mod h1:dkZMgoIg3ZZMo5QxUqsutqt0jrWAn8V3x5mbfmG1Et8=
+github.com/pubgo/g v0.2.52 h1:0R0U6/5f02wczDO4zwAJnfN9rx2Mq23RuRBQZ4NYcaY=
+github.com/pubgo/g v0.2.52/go.mod h1:2+0TxMTOOenLx/imaAo//hBInOhnE5T04msyYICR/J4=
 github.com/pubgo/gojieba v1.1.0 h1:i8Qz3RDMYfr5gTEI9d+bNjUUVUGukZAPUxC6XO/jcLo=
 github.com/pubgo/gojieba v1.1.0/go.mod h1:0jxEak/qOlvn8FwgH4qlolKv4yTi2FPVJPJtfe+meDE=
 github.com/pubgo/gojieba v1.1.1 h1:0JFfH9zhhknrw4BP53tp6bNhnNy542Zv4uHdyte2UGw=
