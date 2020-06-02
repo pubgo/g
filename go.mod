@@ -138,6 +138,7 @@ require (
 	github.com/prometheus/client_golang v1.1.0
 	github.com/pubgo/g v0.2.52
 	github.com/pubgo/schema v0.0.3
+	github.com/pubgo/xerror v0.1.1
 	github.com/radovskyb/watcher v1.0.7 // indirect
 	github.com/rocketlaunchr/react v1.0.8 // indirect
 	github.com/rs/zerolog v1.14.3
