@@ -1,33 +1,32 @@
 package xinit
 
-import "log"
+import (
+	slog "log"
+	"os"
+)
 
-var _inits []func() error
+var log = slog.New(os.Stderr, "", slog.LstdFlags|slog.Lshortfile|slog.Ltime)
 
-// Init init
-func Init(fn func() (err error)) {
-	if fn != nil {
-		_inits = append(_inits, fn)
+var inits []func()
+
+// Go init
+func Go(fn func()) {
+	if fn == nil {
+		log.Fatalln("fn is nil")
 	}
-}
-
-// Notify init notify
-func Notify() error {
-	return Start()
+	inits = append(inits, fn)
 }
 
 // Start init start
-func Start() (err error) {
+func Start() {
 	defer func() {
-		if r := recover(); r != nil {
-			log.Fatalln(r)
+		if err1 := recover(); err1 != nil {
+			log.Fatalln(err1)
 		}
 	}()
 
-	for _, fn := range _inits {
-		if err = fn(); err != nil {
-			return
-		}
+	for _, fn := range inits {
+		fn()
 	}
 	return
 }

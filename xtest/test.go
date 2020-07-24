@@ -76,3 +76,9 @@ func Run(fn interface{}, desc func(desc func(string) *Test)) {
 	}
 	xerror.Panic(_err)
 }
+
+func init() {
+	Run(nil, func(desc func(string) *Test) {
+		desc("").In()
+	})
+}
