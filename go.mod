@@ -126,7 +126,7 @@ require (
 	github.com/zserge/webview v0.0.0-20200410160118-50e4bcc420ab
 	go.mongodb.org/mongo-driver v1.1.2
 	go.uber.org/dig v1.8.0
-	go.uber.org/zap v1.10.0
+	go.uber.org/zap v1.13.0
 	golang.org/x/crypto v0.0.0-20200302210943-78000ba7a073
 	golang.org/x/image v0.0.0-20191206065243-da761ea9ff43
 	golang.org/x/net v0.0.0-20200114155413-6afb5195e5aa
