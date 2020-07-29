@@ -7,10 +7,10 @@ import (
 
 var log = slog.New(os.Stderr, "", slog.LstdFlags|slog.Lshortfile|slog.Ltime)
 
-var inits []func()
+var inits []func() error
 
 // Go init
-func Go(fn func()) {
+func Go(fn func() error) {
 	if fn == nil {
 		log.Fatalln("fn is nil")
 	}
