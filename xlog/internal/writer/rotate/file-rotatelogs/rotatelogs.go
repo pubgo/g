@@ -17,10 +17,6 @@ import (
 	strftime "github.com/lestrrat-go/strftime"
 )
 
-func (c clockFn) Now() time.Time {
-	return c()
-}
-
 // New creates a new RotateLogs object. A log filename pattern
 // must be passed. Optional `Option` parameters may be passed
 func New(p string, options ...Option) (*RotateLogs, error) {

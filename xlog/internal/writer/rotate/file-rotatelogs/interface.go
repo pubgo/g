@@ -29,7 +29,12 @@ type RotateLogs struct {
 type Clock interface {
 	Now() time.Time
 }
+
 type clockFn func() time.Time
+
+func (c clockFn) Now() time.Time {
+	return c()
+}
 
 // UTC is an object satisfying the Clock interface, which
 // returns the current time in UTC
