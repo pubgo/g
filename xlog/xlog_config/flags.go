@@ -6,7 +6,5 @@ import (
 
 func GetFlags() *pflag.FlagSet {
 	var flags = &pflag.FlagSet{}
-
-	flags.StringVar()
 	return flags
 }
