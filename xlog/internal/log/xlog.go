@@ -24,7 +24,7 @@ func GetDevLog() internal.XLog {
 	return &xlog{xerror.PanicErr(zap.NewDevelopment()).(*zap.Logger)}
 }
 
-var defaultLog *xlog
+var defaultLog = &xlog{}
 
 func GetLog() internal.XLog {
 	return defaultLog
