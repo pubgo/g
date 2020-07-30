@@ -1,22 +1,49 @@
 package xlog_config
 
 import (
-	"errors"
+	"fmt"
 	"github.com/pubgo/xerror"
-	"github.com/tidwall/gjson"
 	"go.uber.org/zap"
 	"go.uber.org/zap/zapcore"
 	"net/url"
+	"os"
 	"time"
 )
 
-var levelEncoder map[string]zapcore.LevelEncoder
-var timeEncoder map[string]zapcore.TimeEncoder
-var durationEncoder map[string]zapcore.DurationEncoder
-var callerEncoder map[string]zapcore.CallerEncoder
-var nameEncoder map[string]zapcore.NameEncoder
+var levelEncoder = map[string]zapcore.LevelEncoder{
+	"capital":      zapcore.CapitalLevelEncoder,
+	"capitalColor": zapcore.CapitalColorLevelEncoder,
+	"color":        zapcore.LowercaseColorLevelEncoder,
+	"default":      zapcore.LowercaseLevelEncoder,
+}
+var timeEncoder = map[string]zapcore.TimeEncoder{
+	"rfc3339": _RFC3339MilliTimeEncoder,
+	"RFC3339": _RFC3339MilliTimeEncoder,
+	//"rfc3339":     zapcore.RFC3339TimeEncoder,
+	//"RFC3339":     zapcore.RFC3339TimeEncoder,
+	"rfc3339nano": zapcore.RFC3339NanoTimeEncoder,
+	"RFC3339Nano": zapcore.RFC3339NanoTimeEncoder,
+	"iso8601":     zapcore.ISO8601TimeEncoder,
+	"ISO8601":     zapcore.ISO8601TimeEncoder,
+	"millis":      zapcore.EpochMillisTimeEncoder,
+	"nanos":       zapcore.EpochNanosTimeEncoder,
+	"default":     zapcore.EpochTimeEncoder,
+}
+var durationEncoder = map[string]zapcore.DurationEncoder{
+	"string":  zapcore.StringDurationEncoder,
+	"nanos":   zapcore.NanosDurationEncoder,
+	"default": zapcore.SecondsDurationEncoder,
+}
+var callerEncoder = map[string]zapcore.CallerEncoder{
+	"full":    zapcore.FullCallerEncoder,
+	"default": zapcore.ShortCallerEncoder,
+}
+var nameEncoder = map[string]zapcore.NameEncoder{
+	"full":    zapcore.FullNameEncoder,
+	"default": zapcore.FullNameEncoder,
+}
 
-func RFC3339MilliTimeEncoder(t time.Time, enc zapcore.PrimitiveArrayEncoder) {
+func _RFC3339MilliTimeEncoder(t time.Time, enc zapcore.PrimitiveArrayEncoder) {
 	type appendTimeEncoder interface {
 		AppendTimeLayout(time.Time, string)
 	}
@@ -30,53 +57,24 @@ func RFC3339MilliTimeEncoder(t time.Time, enc zapcore.PrimitiveArrayEncoder) {
 }
 
 func init() {
-	levelEncoder = map[string]zapcore.LevelEncoder{
-
-	}
-	timeEncoder = map[string]zapcore.TimeEncoder{
-		"rfc3339": RFC3339MilliTimeEncoder,
-		"RFC3339": RFC3339MilliTimeEncoder,
-	}
-	durationEncoder = map[string]zapcore.DurationEncoder{
-
-	}
-	callerEncoder = map[string]zapcore.CallerEncoder{
-
-	}
-	nameEncoder = map[string]zapcore.NameEncoder{
-
-	}
-
-	xerror.Exit(zap.RegisterEncoder("test", func(config zapcore.EncoderConfig) (zapcore.Encoder, error) {
-		xerror.Exit(errors.New("not implemented"))
-		return nil, nil
+	//zap.RegisterEncoder()
+	xerror.Exit(zap.RegisterSink("rotate", func(u *url.URL) (zap.Sink, error) {
+		if u.User != nil {
+			return nil, fmt.Errorf("user and password not allowed with file URLs: got %v", u)
+		}
+		if u.Fragment != "" {
+			return nil, fmt.Errorf("fragments not allowed with file URLs: got %v", u)
+		}
+		if u.RawQuery != "" {
+			return nil, fmt.Errorf("query parameters not allowed with file URLs: got %v", u)
+		}
+		// Error messages are better if we check hostname and port separately.
+		if u.Port() != "" {
+			return nil, fmt.Errorf("ports not allowed with file URLs: got %v", u)
+		}
+		if hn := u.Hostname(); hn != "" && hn != "localhost" {
+			return nil, fmt.Errorf("file URLs must leave host empty or use localhost: got %v", u)
+		}
+		return os.OpenFile(u.Path, os.O_WRONLY|os.O_APPEND|os.O_CREATE, 0644)
 	}))
-
-	xerror.Exit(zap.RegisterSink("test", func(url *url.URL) (zap.Sink, error) {
-		xerror.Exit(errors.New("not implemented"))
-		return nil, nil
-	}))
-}
-
-// encoderPatch 为zapcore的encoder做扩展
-func encoderPatch(cfg []byte, config *zap.Config) {
-	if fn, ok := levelEncoder[gjson.GetBytes(cfg, "encoderConfig.levelEncoder").String()]; ok {
-		config.EncoderConfig.EncodeLevel = fn
-	}
-
-	if fn, ok := timeEncoder[gjson.GetBytes(cfg, "encoderConfig.timeEncoder").String()]; ok {
-		config.EncoderConfig.EncodeTime = fn
-	}
-
-	if fn, ok := durationEncoder[gjson.GetBytes(cfg, "encoderConfig.durationEncoder").String()]; ok {
-		config.EncoderConfig.EncodeDuration = fn
-	}
-
-	if fn, ok := callerEncoder[gjson.GetBytes(cfg, "encoderConfig.callerEncoder").String()]; ok {
-		config.EncoderConfig.EncodeCaller = fn
-	}
-
-	if fn, ok := nameEncoder[gjson.GetBytes(cfg, "encoderConfig.nameEncoder").String()]; ok {
-		config.EncoderConfig.EncodeName = fn
-	}
 }

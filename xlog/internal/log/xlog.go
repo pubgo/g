@@ -4,6 +4,7 @@ import (
 	"github.com/pubgo/x/xlog/internal"
 	"github.com/pubgo/xerror"
 	"go.uber.org/zap"
+	"go.uber.org/zap/zapcore"
 )
 
 var _ internal.XLog = (*xlog)(nil)
@@ -21,7 +22,9 @@ func (log *xlog) Named(s string) internal.XLog {
 }
 
 func GetDevLog() internal.XLog {
-	return &xlog{xerror.PanicErr(zap.NewDevelopment()).(*zap.Logger)}
+	cfg := zap.NewDevelopmentConfig()
+	cfg.EncoderConfig.EncodeLevel = zapcore.CapitalColorLevelEncoder
+	return &xlog{xerror.PanicErr(cfg.Build()).(*zap.Logger)}
 }
 
 var defaultLog = &xlog{}

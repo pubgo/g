@@ -64,6 +64,7 @@ require (
 	github.com/klauspost/cpuid v1.2.1
 	github.com/labstack/echo/v4 v4.1.11
 	github.com/labstack/gommon v0.3.0
+	github.com/lestrrat-go/strftime v1.0.3
 	github.com/lib/pq v1.2.0
 	github.com/lightningnetwork/lnd v0.0.2 // indirect
 	github.com/lucas-clemente/quic-go v0.14.1

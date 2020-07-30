@@ -21,5 +21,13 @@ func GetLog() XLog {
 
 func init() {
 	// 初始化加载
-	xerror.Exit(xlog_config.InitDevLog())
+	xerror.Exit(xlog_config.InitFromConfig(xlog_config.NewDevConfig()))
+}
+
+func FieldOf(fields ...Field) []Field {
+	return fields
+}
+
+func Sync(ll internal.XLog) error {
+	return log.Sync(ll)
 }
