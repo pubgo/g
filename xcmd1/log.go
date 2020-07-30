@@ -1,4 +1,4 @@
-package xcmd
+package xcmd1
 
 import (
 	"github.com/pubgo/g/xconfig/xconfig_log"

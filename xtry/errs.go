@@ -1,9 +1,8 @@
 package xtry
 
-import "github.com/pubgo/g/xerror"
+import "errors"
 
 var (
-	Err               = xerror.NewXErr("XTry")
-	ErrNotFuncType    = Err.New("func type not match error")
-	ErrParamsNotMatch = Err.New("params not match error")
+	ErrNotFuncType    = errors.New("func type not match error")
+	ErrParamsNotMatch = errors.New("params not match error")
 )

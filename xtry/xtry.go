@@ -1,13 +1,15 @@
 package xtry
 
 import (
-	"github.com/pubgo/g/xerror"
+	"github.com/pubgo/xerror"
 	"reflect"
 	"sync"
 )
 
 func _TryRaw(fn reflect.Value) func(...reflect.Value) func(...reflect.Value) (err error) {
-	xerror.PanicM(xerror.AssertFn(fn), ErrNotFuncType)
+	if !assertFn(fn) {
+		xerror.Exit(ErrNotFuncType)
+	}
 
 	var variadicType reflect.Value
 	var isVariadic = fn.Type().IsVariadic()
@@ -15,18 +17,19 @@ func _TryRaw(fn reflect.Value) func(...reflect.Value) func(...reflect.Value) (er
 		variadicType = reflect.New(fn.Type().In(fn.Type().NumIn() - 1).Elem()).Elem()
 	}
 
-	_NumIn := fn.Type().NumIn()
+	numIn := fn.Type().NumIn()
+	numOut := fn.Type().NumOut()
 	return func(args ...reflect.Value) func(...reflect.Value) (err error) {
-		if isVariadic && len(args) < _NumIn-1 {
-			xerror.PanicM(ErrParamsNotMatch, "func %s input params error,func(%d,%d)", fn.Type(), _NumIn, len(args))
+		if isVariadic && len(args) < numIn-1 {
+			xerror.ExitF(ErrParamsNotMatch, "func %s input params error,func(%d,%d)", fn.Type(), numIn, len(args))
 		}
 
-		if !isVariadic && _NumIn != len(args) {
-			xerror.PanicM(ErrParamsNotMatch, "func %s input params not match,func(%d,%d)", fn.Type(), _NumIn, len(args))
+		if !isVariadic && numIn != len(args) {
+			xerror.ExitF(ErrParamsNotMatch, "func %s input params not match,func(%d,%d)", fn.Type(), numIn, len(args))
 		}
 
 		for i, k := range args {
-			if _isZero(k) {
+			if !k.IsValid() || k.IsZero() {
 				args[i] = reflect.New(fn.Type().In(i)).Elem()
 				continue
 			}
@@ -39,26 +42,17 @@ func _TryRaw(fn reflect.Value) func(...reflect.Value) func(...reflect.Value) (er
 		}
 
 		return func(cfn ...reflect.Value) (err error) {
-			defer func() {
-				xerror.ErrHandle(recover(), func(_err xerror.IErr) {
-					_fn := fn
-					if len(cfn) > 0 && !_isZero(cfn[0]) {
-						_fn = cfn[0]
-					}
-					_err.Caller(_caller.FromFunc(_fn))
-					err = _err
-				})
-			}()
+			defer xerror.RespErr(&err)
+			defer valuePut(args)
 
 			_c := fn.Call(args)
-			if len(cfn) > 0 && !_isZero(cfn[0]) {
-				xerror.PanicM(xerror.AssertFn(cfn[0]), ErrNotFuncType)
-				if cfn[0].Type().NumIn() != fn.Type().NumOut() {
-					xerror.PanicM(ErrParamsNotMatch, "callback func input num and output num not match[%d]<->[%d]", cfn[0].Type().NumIn(), fn.Type().NumOut())
+			if len(cfn) > 0 && cfn[0].IsValid() && !cfn[0].IsZero() {
+				if cfn[0].Type().NumIn() != numOut {
+					xerror.PanicF(ErrParamsNotMatch, "callback func input num and output num not match[%d]<->[%d]", cfn[0].Type().NumIn(), fn.Type().NumOut())
 				}
 
 				if cfn[0].Type().NumIn() != 0 && cfn[0].Type().In(0) != fn.Type().Out(0) {
-					xerror.PanicM(ErrParamsNotMatch, "callback func out type error [%s]<->[%s]", cfn[0].Type().In(0), fn.Type().Out(0))
+					xerror.PanicF(ErrParamsNotMatch, "callback func out type error [%s]<->[%s]", cfn[0].Type().In(0), fn.Type().Out(0))
 				}
 				cfn[0].Call(_c)
 			}
@@ -67,10 +61,26 @@ func _TryRaw(fn reflect.Value) func(...reflect.Value) func(...reflect.Value) (er
 	}
 }
 
-// Try xerror
-func Try(fn interface{}) func(...interface{}) func(...interface{}) (err error) {
-	_tr := _TryRaw(reflect.ValueOf(fn))
+func Try(fn func() error) (err error) {
+	defer xerror.RespErr(&err)
+	err = fn()
 
+	return
+}
+
+func Pipe(fns ...func() error) (err error) {
+	defer xerror.RespErr(&err)
+	for _, fn := range fns {
+		if err = fn(); err != nil {
+			return
+		}
+	}
+	return
+}
+
+// Wrap
+func Wrap(fn interface{}) func(...interface{}) func(...interface{}) (err error) {
+	_tr := _TryRaw(reflect.ValueOf(fn))
 	return func(args ...interface{}) func(...interface{}) (err error) {
 		var _args = valueGet()
 		defer valuePut(_args)
@@ -79,7 +89,6 @@ func Try(fn interface{}) func(...interface{}) func(...interface{}) (err error) {
 			_args = append(_args, reflect.ValueOf(k))
 		}
 		_tr1 := _tr(_args...)
-
 		return func(cfn ...interface{}) (err error) {
 			var _cfn = valueGet()
 			defer valuePut(_cfn)

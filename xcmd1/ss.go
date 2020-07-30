@@ -1,4 +1,4 @@
-package xcmd
+package xcmd1
 
 import (
 	"encoding/base32"
