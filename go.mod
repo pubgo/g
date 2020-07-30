@@ -93,7 +93,7 @@ require (
 	github.com/prometheus/client_golang v1.1.0
 	github.com/pubgo/g v0.2.52
 	github.com/pubgo/schema v0.0.3
-	github.com/pubgo/xerror v0.2.0
+	github.com/pubgo/xerror v0.2.1
 	github.com/roasbeef/btcd v0.0.0-20180418012700-a03db407e40d // indirect
 	github.com/rs/zerolog v1.14.3
 	github.com/russross/blackfriday v1.5.2
@@ -107,6 +107,7 @@ require (
 	github.com/sony/sonyflake v1.0.0
 	github.com/speps/go-hashids v2.0.0+incompatible
 	github.com/spf13/cobra v0.0.5
+	github.com/spf13/pflag v1.0.3
 	github.com/spf13/viper v1.4.0
 	github.com/storyicon/graphquery v0.0.0-20190317074716-6a20a75cd98f
 	github.com/streadway/amqp v0.0.0-20190827072141-edfb9018d271

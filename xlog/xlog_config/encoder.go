@@ -1,9 +1,12 @@
 package xlog_config
 
 import (
+	"errors"
+	"github.com/pubgo/xerror"
 	"github.com/tidwall/gjson"
 	"go.uber.org/zap"
 	"go.uber.org/zap/zapcore"
+	"net/url"
 	"time"
 )
 
@@ -43,6 +46,16 @@ func init() {
 	nameEncoder = map[string]zapcore.NameEncoder{
 
 	}
+
+	xerror.Exit(zap.RegisterEncoder("test", func(config zapcore.EncoderConfig) (zapcore.Encoder, error) {
+		xerror.Exit(errors.New("not implemented"))
+		return nil, nil
+	}))
+
+	xerror.Exit(zap.RegisterSink("test", func(url *url.URL) (zap.Sink, error) {
+		xerror.Exit(errors.New("not implemented"))
+		return nil, nil
+	}))
 }
 
 // encoderPatch 为zapcore的encoder做扩展

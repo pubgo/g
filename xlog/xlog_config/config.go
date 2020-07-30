@@ -27,17 +27,7 @@ type config struct {
 	EncodeName     string
 }
 
-func init() {
-	xerror.Exit(zap.RegisterEncoder("", func(config zapcore.EncoderConfig) (zapcore.Encoder, error) {
-		xerror.Exit(errors.New("not implemented"))
-		return nil, nil
-	}))
 
-	xerror.Exit(zap.RegisterSink("", func(url *url.URL) (zap.Sink, error) {
-		xerror.Exit(errors.New("not implemented"))
-		return nil, nil
-	}))
-}
 
 func InitDevLog(opts ...Option) (err error) {
 	defer xerror.RespErr(&err)
