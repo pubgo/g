@@ -6,14 +6,9 @@ package xlog_config
 
 import (
 	"encoding/json"
-	"errors"
-	"net/url"
-
-	"go.uber.org/zap"
-	"go.uber.org/zap/zapcore"
-
 	"github.com/pubgo/x/xlog/internal/log"
 	"github.com/pubgo/xerror"
+	"go.uber.org/zap"
 )
 
 type Config = zap.Config
@@ -26,8 +21,6 @@ type config struct {
 	EncodeCaller   string
 	EncodeName     string
 }
-
-
 
 func InitDevLog(opts ...Option) (err error) {
 	defer xerror.RespErr(&err)
