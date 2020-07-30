@@ -6,6 +6,7 @@ package xlog_config
 
 import (
 	"encoding/json"
+	"github.com/pubgo/x/xlog/internal"
 	"github.com/pubgo/x/xlog/internal/log"
 	"github.com/pubgo/xerror"
 	"go.uber.org/zap"
@@ -25,7 +26,6 @@ type config struct {
 func InitDevLog(opts ...Option) (err error) {
 	defer xerror.RespErr(&err)
 	logger := xerror.PanicErr(zap.NewDevelopment(opts...)).(*zap.Logger)
-	xerror.Panic(logger.Sync())
 	log.SetLog(logger)
 	return
 }
@@ -33,7 +33,6 @@ func InitDevLog(opts ...Option) (err error) {
 func InitProdLog(opts ...Option) (err error) {
 	defer xerror.RespErr(&err)
 	logger := xerror.PanicErr(zap.NewProduction(opts...)).(*zap.Logger)
-	xerror.Panic(logger.Sync())
 	log.SetLog(logger)
 	return
 }
@@ -41,7 +40,6 @@ func InitProdLog(opts ...Option) (err error) {
 func InitFromConfig(config zap.Config) (err error) {
 	defer xerror.RespErr(&err)
 	logger := xerror.PanicErr(config.Build()).(*zap.Logger)
-	xerror.Panic(logger.Sync())
 	log.SetLog(logger)
 	return
 }
@@ -53,7 +51,6 @@ func InitFromJson(config []byte) (err error) {
 	// 替换zap的encoder
 	encoderPatch(config, &cfg)
 	logger := xerror.PanicErr(cfg.Build()).(*zap.Logger)
-	xerror.Panic(logger.Sync())
 	log.SetLog(logger)
 	return
 }
@@ -61,7 +58,6 @@ func InitFromJson(config []byte) (err error) {
 func InitFromOptions(opt ...Option) (err error) {
 	defer xerror.RespErr(&err)
 	logger := xerror.PanicErr(zap.NewProductionConfig().Build(opt...)).(*zap.Logger)
-	xerror.Panic(logger.Sync())
 	log.SetLog(logger)
 	return
 }
@@ -72,4 +68,8 @@ func NewDevConfig() zap.Config {
 
 func NewProdConfig() zap.Config {
 	return zap.NewProductionConfig()
+}
+
+func Sync(ll internal.XLog) error {
+	return log.Sync(ll)
 }

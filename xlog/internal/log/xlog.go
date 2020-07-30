@@ -33,3 +33,7 @@ func GetLog() internal.XLog {
 func SetLog(lg *zap.Logger) {
 	defaultLog.Logger = lg
 }
+
+func Sync(ll internal.XLog) error {
+	return ll.(*xlog).Sync()
+}
