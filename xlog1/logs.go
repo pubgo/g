@@ -6,8 +6,8 @@ import (
 	"github.com/pubgo/g/xconfig"
 	"github.com/pubgo/g/xenv"
 	"github.com/pubgo/g/xerror"
-	"github.com/pubgo/g/xlog/internal/hooks"
-	"github.com/pubgo/g/xlog/internal/zwriter"
+	"github.com/pubgo/x/xlog1/internal/hooks"
+	"github.com/pubgo/x/xlog1/internal/zwriter"
 	"github.com/rs/zerolog"
 	"os"
 	"path/filepath"
@@ -51,7 +51,7 @@ type options struct {
 
 func appendExtra(ctx zerolog.Context) zerolog.Context {
 	h, err := os.Hostname()
-	xerror.PanicM(err, "get Hostname error")
+	xerror.PanicF(err, "get Hostname error")
 
 	ctx = ctx.Int("cpus", runtime.NumCPU())
 
@@ -115,7 +115,10 @@ func GetLog(fn ...func(*options)) Log {
 		opt.LogLevel = zerolog.DebugLevel.String()
 	}
 
-	xerror.PanicT(!_Match(opt.LogLevel), "log level is not match")
+	if !_Match(opt.LogLevel) {
+		panic("log level is not match")
+	}
+
 	zerolog.SetGlobalLevel(xerror.PanicErr(zerolog.ParseLevel(opt.LogLevel)).(zerolog.Level))
 
 	w := zwriter.NewZWriter()
@@ -123,7 +126,7 @@ func GetLog(fn ...func(*options)) Log {
 		w.Append(zerolog.NewConsoleWriter())
 	} else {
 		_home := xconfig.HomeDir()
-		xerror.PanicM(fileutil.IsNotExistMkDir(filepath.Join(_home, "logs")), "create logs failed")
+		xerror.PanicF(fileutil.IsNotExistMkDir(filepath.Join(_home, "logs")), "create logs failed")
 		w.Append(zwriter.NewFileWriter(filepath.Join(_home, "logs", opt.Filename)))
 	}
 

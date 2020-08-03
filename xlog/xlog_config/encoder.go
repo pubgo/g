@@ -107,4 +107,4 @@ func init() {
 
 type nopCloserSink struct{ zapcore.WriteSyncer }
 
-func (t nopCloserSink) Close() error { return t.Close() }
+func (t nopCloserSink) Close() error { return nil }
