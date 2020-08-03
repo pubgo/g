@@ -11,11 +11,13 @@ import (
 	"time"
 )
 
+const defaultKey = "default"
+
 var levelEncoder = map[string]zapcore.LevelEncoder{
 	"capital":      zapcore.CapitalLevelEncoder,
 	"capitalColor": zapcore.CapitalColorLevelEncoder,
 	"color":        zapcore.LowercaseColorLevelEncoder,
-	"default":      zapcore.LowercaseLevelEncoder,
+	defaultKey:     zapcore.LowercaseLevelEncoder,
 }
 var timeEncoder = map[string]zapcore.TimeEncoder{
 	"rfc3339": _RFC3339MilliTimeEncoder,
@@ -28,20 +30,20 @@ var timeEncoder = map[string]zapcore.TimeEncoder{
 	"ISO8601":     zapcore.ISO8601TimeEncoder,
 	"millis":      zapcore.EpochMillisTimeEncoder,
 	"nanos":       zapcore.EpochNanosTimeEncoder,
-	"default":     zapcore.EpochTimeEncoder,
+	defaultKey:    zapcore.EpochTimeEncoder,
 }
 var durationEncoder = map[string]zapcore.DurationEncoder{
-	"string":  zapcore.StringDurationEncoder,
-	"nanos":   zapcore.NanosDurationEncoder,
-	"default": zapcore.SecondsDurationEncoder,
+	"string":   zapcore.StringDurationEncoder,
+	"nanos":    zapcore.NanosDurationEncoder,
+	defaultKey: zapcore.SecondsDurationEncoder,
 }
 var callerEncoder = map[string]zapcore.CallerEncoder{
-	"full":    zapcore.FullCallerEncoder,
-	"default": zapcore.ShortCallerEncoder,
+	"full":     zapcore.FullCallerEncoder,
+	defaultKey: zapcore.ShortCallerEncoder,
 }
 var nameEncoder = map[string]zapcore.NameEncoder{
-	"full":    zapcore.FullNameEncoder,
-	"default": zapcore.FullNameEncoder,
+	"full":     zapcore.FullNameEncoder,
+	defaultKey: zapcore.FullNameEncoder,
 }
 
 func _RFC3339MilliTimeEncoder(t time.Time, enc zapcore.PrimitiveArrayEncoder) {

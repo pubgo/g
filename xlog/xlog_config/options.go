@@ -71,3 +71,16 @@ func WithStacktrace(lvl zapcore.LevelEnabler) Option {
 		opts.zapOpts = append(opts.zapOpts, zap.AddStacktrace(lvl))
 	}
 }
+
+// WithEncoding ...
+func WithEncoding(enc string) Option {
+	return func(opts *config) {
+		opts.Encoding = enc
+	}
+}
+
+func WithLevel(ll Level) Option {
+	return func(opts *config) {
+		opts.Level = zap.NewAtomicLevelAt(ll)
+	}
+}

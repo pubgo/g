@@ -55,11 +55,28 @@ func (t config) toZapLogger() (_ *zap.Logger, err error) {
 	defer xerror.RespErr(&err)
 	zapCfg := zap.Config{}
 	xerror.Panic(json.Unmarshal(xerror.PanicBytes(json.Marshal(&t)), &zapCfg))
-	zapCfg.EncoderConfig.EncodeLevel = levelEncoder[t.EncoderConfig.EncodeLevel]
-	zapCfg.EncoderConfig.EncodeTime = timeEncoder[t.EncoderConfig.EncodeTime]
-	zapCfg.EncoderConfig.EncodeDuration = durationEncoder[t.EncoderConfig.EncodeDuration]
-	zapCfg.EncoderConfig.EncodeCaller = callerEncoder[t.EncoderConfig.EncodeCaller]
-	zapCfg.EncoderConfig.EncodeName = nameEncoder[t.EncoderConfig.EncodeName]
+
+	var ok bool
+
+	if zapCfg.EncoderConfig.EncodeLevel, ok = levelEncoder[t.EncoderConfig.EncodeLevel]; !ok {
+		zapCfg.EncoderConfig.EncodeLevel = levelEncoder[defaultKey]
+	}
+
+	if zapCfg.EncoderConfig.EncodeTime, ok = timeEncoder[t.EncoderConfig.EncodeTime]; !ok {
+		zapCfg.EncoderConfig.EncodeTime = timeEncoder[defaultKey]
+	}
+
+	if zapCfg.EncoderConfig.EncodeDuration, ok = durationEncoder[t.EncoderConfig.EncodeDuration]; !ok {
+		zapCfg.EncoderConfig.EncodeDuration = durationEncoder[defaultKey]
+	}
+
+	if zapCfg.EncoderConfig.EncodeCaller, ok = callerEncoder[t.EncoderConfig.EncodeCaller]; !ok {
+		zapCfg.EncoderConfig.EncodeCaller = callerEncoder[defaultKey]
+	}
+
+	if zapCfg.EncoderConfig.EncodeName, ok = nameEncoder[t.EncoderConfig.EncodeName]; !ok {
+		zapCfg.EncoderConfig.EncodeName = nameEncoder[defaultKey]
+	}
 	return xerror.PanicErr(zapCfg.Build(t.zapOpts...)).(*zap.Logger), nil
 }
 

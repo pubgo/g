@@ -2,6 +2,8 @@ package xlog_config
 
 import "go.uber.org/zap/zapcore"
 
+type Level = zapcore.Level
+
 const (
 	// DebugLevel logs are typically voluminous, and are usually disabled in
 	// production.

@@ -1,11 +1,12 @@
 package xlog
 
 import (
+	"go.uber.org/zap"
+
 	"github.com/pubgo/x/xlog/internal"
 	"github.com/pubgo/x/xlog/internal/log"
 	"github.com/pubgo/x/xlog/xlog_config"
 	"github.com/pubgo/xerror"
-	"go.uber.org/zap"
 )
 
 type XLog = internal.XLog
