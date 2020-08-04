@@ -10,15 +10,43 @@ import (
 var _ internal.XLog = (*xlog)(nil)
 
 type xlog struct {
-	*zap.Logger
+	zl *zap.Logger
+}
+
+func (log *xlog) Debug(msg string, fields ...internal.Field) {
+	log.zl.Debug(msg, fields...)
+}
+
+func (log *xlog) Info(msg string, fields ...internal.Field) {
+	log.zl.Info(msg, fields...)
+}
+
+func (log *xlog) Warn(msg string, fields ...internal.Field) {
+	log.zl.Warn(msg, fields...)
+}
+
+func (log *xlog) Error(msg string, fields ...internal.Field) {
+	log.zl.Error(msg, fields...)
+}
+
+func (log *xlog) DPanic(msg string, fields ...internal.Field) {
+	log.zl.DPanic(msg, fields...)
+}
+
+func (log *xlog) Panic(msg string, fields ...internal.Field) {
+	log.zl.Panic(msg, fields...)
+}
+
+func (log *xlog) Fatal(msg string, fields ...internal.Field) {
+	log.zl.Fatal(msg, fields...)
 }
 
 func (log *xlog) With(fields ...zap.Field) internal.XLog {
-	return &xlog{log.Logger.With(fields...)}
+	return &xlog{log.zl.With(fields...)}
 }
 
 func (log *xlog) Named(s string) internal.XLog {
-	return &xlog{log.Logger.Named(s)}
+	return &xlog{log.zl.Named(s)}
 }
 
 func GetDevLog() internal.XLog {
@@ -34,9 +62,9 @@ func GetLog() internal.XLog {
 }
 
 func SetLog(lg *zap.Logger) {
-	defaultLog.Logger = lg
+	defaultLog.zl = lg
 }
 
 func Sync(ll internal.XLog) error {
-	return ll.(*xlog).Sync()
+	return ll.(*xlog).zl.Sync()
 }
