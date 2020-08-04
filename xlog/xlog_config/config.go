@@ -6,14 +6,14 @@ package xlog_config
 
 import (
 	"encoding/json"
-	"github.com/pubgo/x/xlog/internal/log"
-	"github.com/pubgo/xerror"
 	"go.uber.org/zap"
 	"go.uber.org/zap/zapcore"
-)
 
-// rolling
-// https://github.com/natefinch/lumberjack
+	"github.com/pubgo/xerror"
+
+	"github.com/pubgo/x/xlog/internal/log"
+	"github.com/pubgo/x/xlog/xlog_errs"
+)
 
 type Config config
 
@@ -59,24 +59,40 @@ func (t config) toZapLogger() (_ *zap.Logger, err error) {
 	var ok bool
 
 	if zapCfg.EncoderConfig.EncodeLevel, ok = levelEncoder[t.EncoderConfig.EncodeLevel]; !ok {
+		if t.EncoderConfig.EncodeLevel != "" {
+			xerror.PanicF(xlog_errs.ErrParamsInValid, "EncodeLevel: %s", t.EncoderConfig.EncodeLevel)
+		}
 		zapCfg.EncoderConfig.EncodeLevel = levelEncoder[defaultKey]
 	}
 
 	if zapCfg.EncoderConfig.EncodeTime, ok = timeEncoder[t.EncoderConfig.EncodeTime]; !ok {
+		if t.EncoderConfig.EncodeTime != "" {
+			xerror.PanicF(xlog_errs.ErrParamsInValid, "EncodeTime: %s", t.EncoderConfig.EncodeTime)
+		}
 		zapCfg.EncoderConfig.EncodeTime = timeEncoder[defaultKey]
 	}
 
 	if zapCfg.EncoderConfig.EncodeDuration, ok = durationEncoder[t.EncoderConfig.EncodeDuration]; !ok {
+		if t.EncoderConfig.EncodeDuration != "" {
+			xerror.PanicF(xlog_errs.ErrParamsInValid, "EncodeDuration: %s", t.EncoderConfig.EncodeDuration)
+		}
 		zapCfg.EncoderConfig.EncodeDuration = durationEncoder[defaultKey]
 	}
 
 	if zapCfg.EncoderConfig.EncodeCaller, ok = callerEncoder[t.EncoderConfig.EncodeCaller]; !ok {
+		if t.EncoderConfig.EncodeCaller != "" {
+			xerror.PanicF(xlog_errs.ErrParamsInValid, "EncodeCaller: %s", t.EncoderConfig.EncodeCaller)
+		}
 		zapCfg.EncoderConfig.EncodeCaller = callerEncoder[defaultKey]
 	}
 
 	if zapCfg.EncoderConfig.EncodeName, ok = nameEncoder[t.EncoderConfig.EncodeName]; !ok {
+		if t.EncoderConfig.EncodeName != "" {
+			xerror.PanicF(xlog_errs.ErrParamsInValid, "EncodeName: %s", t.EncoderConfig.EncodeName)
+		}
 		zapCfg.EncoderConfig.EncodeName = nameEncoder[defaultKey]
 	}
+
 	return xerror.PanicErr(zapCfg.Build(t.zapOpts...)).(*zap.Logger), nil
 }
 
