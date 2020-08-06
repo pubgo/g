@@ -66,12 +66,12 @@ var (
 func init() {
 	// RegisterEncoder
 	for k, v := range encoderNameToConstructor {
-		xerror.Exit(zap.RegisterEncoder(k, v))
+		_ = zap.RegisterEncoder(k, v)
 	}
 
 	// RegisterSink
 	for k, v := range sinkFactories {
-		xerror.Exit(zap.RegisterSink(k, v))
+		_ = zap.RegisterSink(k, v)
 	}
 }
 

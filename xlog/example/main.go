@@ -28,6 +28,16 @@ func main() {
 		xlog.Skip(),
 		xlog.Any("hss", "ss"),
 	)
+
+	log.Error("hello",
+		xlog.Skip(),
+		xlog.Any("hss", "ss"),
+	)
+
+	log.Info("hello",
+		xlog.Skip(),
+		xlog.Any("hss", "ss"),
+	)
 }
 
 func initCfgFromJsonDebug() {
@@ -62,7 +72,6 @@ func initCfgFromJsonDebug() {
 }`
 	xerror.Exit(xlog_config.InitFromJson(
 		[]byte(cfg),
-		xlog_config.WithEncoding("console1"),
 	))
 }
 
