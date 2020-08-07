@@ -134,15 +134,6 @@ func Reflect(key string, val interface{}) Field {
 	return zap.Reflect(key, val)
 }
 
-// Namespace creates a named, isolated scope within the logger's context. All
-// subsequent fields will be added to the new namespace.
-//
-// This helps prevent key collisions when injecting loggers into sub-components
-// or third-party libraries.
-func Namespace(key string) Field {
-	return zap.Namespace(key)
-}
-
 // Stringer constructs a field with the given key and the output of the value's
 // String method. The Stringer's String method is called lazily.
 func Stringer(key string, val fmt.Stringer) Field {

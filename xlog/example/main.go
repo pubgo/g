@@ -8,34 +8,32 @@ import (
 
 var fields = xlog.FieldOf(
 	xlog.String("key", "value"),
-	xlog.Namespace("name"),
 )
 var log = xlog.GetDevLog().With(fields...)
 
 func init() {
 	//initCfgFromJson()
 	initCfgFromJsonDebug()
-	log = xlog.GetLog().With(fields...)
+	log = xlog.GetLog().
+		Named("service").With(fields...).
+		Named("hello").With(fields...).
+		Named("world").With(fields...)
 }
 
 func main() {
 	log.Debug("hello",
-		xlog.Skip(),
 		xlog.Any("hss", "ss"),
 	)
 
 	log.Info("hello",
-		xlog.Skip(),
 		xlog.Any("hss", "ss"),
 	)
 
 	log.Error("hello",
-		xlog.Skip(),
 		xlog.Any("hss", "ss"),
 	)
 
 	log.Info("hello",
-		xlog.Skip(),
 		xlog.Any("hss", "ss"),
 	)
 }

@@ -46,7 +46,7 @@ func (log *xlog) With(fields ...zap.Field) internal.XLog {
 }
 
 func (log *xlog) Named(s string) internal.XLog {
-	return &xlog{log.zl.Named(s)}
+	return &xlog{log.zl.Named(s).With(zap.Namespace(s))}
 }
 
 func GetDevLog() internal.XLog {
