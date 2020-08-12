@@ -58,6 +58,9 @@ func GetDevLog() internal.XLog {
 var defaultLog = &xlog{}
 
 func GetLog() internal.XLog {
+	if defaultLog.zl == nil {
+		panic("please init xlog config")
+	}
 	return defaultLog
 }
 

@@ -93,6 +93,10 @@ func String(key string, val string) Field {
 	return zap.String(key, val)
 }
 
+func Fmt(format string, a ...interface{}) Field {
+	return zap.String("msg", fmt.Sprintf(format, a...))
+}
+
 // Uint constructs a field with the given key and value.
 func Uint(key string, val uint) Field {
 	return zap.Uint(key, val)
