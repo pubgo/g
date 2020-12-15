@@ -2,7 +2,7 @@ package captcha
 
 import (
 	"bytes"
-	"github.com/pubgo/g/pkg/randutil"
+	"github.com/pubgo/x/pkg/randutil"
 	"image"
 	"image/color"
 	"image/png"

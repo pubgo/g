@@ -1,9 +1,9 @@
 package qrcode
 
 import (
-	"github.com/pubgo/g/pkg/encoding/hashutil"
-	"github.com/pubgo/g/pkg/fileutil"
-	"github.com/pubgo/g/xerror"
+	"github.com/pubgo/x/pkg/encoding/hashutil"
+	"github.com/pubgo/x/pkg/fileutil"
+	"github.com/pubgo/x/xerror"
 	"image/jpeg"
 
 	"github.com/boombuler/barcode"

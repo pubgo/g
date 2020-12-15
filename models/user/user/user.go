@@ -1,7 +1,7 @@
 package user
 
 import (
-	"github.com/pubgo/g/models"
+	"github.com/pubgo/x/models"
 	uuid "github.com/satori/go.uuid"
 )
 

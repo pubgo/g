@@ -1,6 +1,6 @@
 package share
 
-import "github.com/pubgo/g/models"
+import "github.com/pubgo/x/models"
 
 type Share struct {
 	models.BaseModel

@@ -4,7 +4,7 @@ import (
 	"crypto/tls"
 	"errors"
 	"fmt"
-	"github.com/pubgo/g/xpay/util"
+	"github.com/pubgo/x/xpay/util"
 	"io/ioutil"
 	"net/http"
 	"time"

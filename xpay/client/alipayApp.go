@@ -4,7 +4,7 @@ import (
 	"encoding/json"
 	"errors"
 	"fmt"
-	"github.com/pubgo/g/xpay/common"
+	"github.com/pubgo/x/xpay/common"
 	"time"
 )
 

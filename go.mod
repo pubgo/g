@@ -21,6 +21,7 @@ require (
 	github.com/coocood/freecache v1.1.0
 	github.com/cweill/gotests v1.5.3 // indirect
 	github.com/dave/flux v0.0.0-20180702001202-0b08a93f243b
+	github.com/dave/ktest v1.1.3 // indirect
 	github.com/davecgh/go-spew v1.1.1
 	github.com/deckarep/golang-set v1.7.1
 	github.com/denisenkom/go-mssqldb v0.0.0-20191001013358-cfbb681360f0
@@ -29,9 +30,11 @@ require (
 	github.com/dustin/go-humanize v1.0.0
 	github.com/emirpasic/gods v1.12.0
 	github.com/ethereum/go-ethereum v1.9.6
-	github.com/fatih/color v1.7.0
+	github.com/fastly/go-utils v0.0.0-20180712184237-d95a45783239 // indirect
+	github.com/fatih/color v1.9.0
 	github.com/flosch/pongo2 v0.0.0-20190707114632-bbf5a6c351f4
 	github.com/foolin/goview v0.2.0
+	github.com/fortytw2/leaktest v1.3.0 // indirect
 	github.com/fsnotify/fsnotify v1.4.7
 	github.com/garyburd/redigo v1.6.0
 	github.com/gin-contrib/cors v1.3.0
@@ -39,6 +42,7 @@ require (
 	github.com/gin-gonic/contrib v0.0.0-20191209060500-d6e26eeaa607
 	github.com/gin-gonic/gin v1.4.1-0.20190924141841-9b9f4fab34cc
 	github.com/go-acme/lego/v3 v3.2.0
+	github.com/go-gorp/gorp v2.2.0+incompatible // indirect
 	github.com/go-redis/redis/v7 v7.2.0
 	github.com/go-resty/resty/v2 v2.1.0
 	github.com/go-session/session v3.1.2+incompatible
@@ -57,6 +61,7 @@ require (
 	github.com/gorilla/websocket v1.4.1
 	github.com/iris-contrib/blackfriday v2.0.0+incompatible
 	github.com/issue9/identicon v1.0.1
+	github.com/jehiah/go-strftime v0.0.0-20171201141054-1d33003b3869 // indirect
 	github.com/jinzhu/gorm v1.9.11
 	github.com/jmoiron/sqlx v1.2.0
 	github.com/jordan-wright/email v0.0.0-20190819015918-041e0cec78b0
@@ -70,7 +75,7 @@ require (
 	github.com/lucas-clemente/quic-go v0.14.1
 	github.com/mattermost/gorp v2.0.0+incompatible
 	github.com/mattn/go-colorable v0.1.4
-	github.com/mattn/go-isatty v0.0.10
+	github.com/mattn/go-isatty v0.0.11
 	github.com/mattn/go-runewidth v0.0.7
 	github.com/mattn/go-sqlite3 v1.11.0
 	github.com/melbahja/goph v0.2.0
@@ -91,6 +96,7 @@ require (
 	github.com/pborman/uuid v1.2.0
 	github.com/pelletier/go-toml v1.2.0
 	github.com/pkg/sftp v1.11.0
+	github.com/poy/onpar v1.0.1 // indirect
 	github.com/prometheus/client_golang v1.1.0
 	github.com/pubgo/g v0.2.52
 	github.com/pubgo/schema v0.0.3
@@ -107,13 +113,16 @@ require (
 	github.com/skratchdot/open-golang v0.0.0-20160302144031-75fb7ed4208c
 	github.com/sony/sonyflake v1.0.0
 	github.com/speps/go-hashids v2.0.0+incompatible
-	github.com/spf13/cobra v0.0.5
+	github.com/spf13/cobra v0.0.6
 	github.com/spf13/pflag v1.0.3
 	github.com/spf13/viper v1.4.0
 	github.com/storyicon/graphquery v0.0.0-20190317074716-6a20a75cd98f
 	github.com/streadway/amqp v0.0.0-20190827072141-edfb9018d271
 	github.com/stretchr/objx v0.2.0
 	github.com/stretchr/testify v1.4.0
+	github.com/syndtr/goleveldb v1.0.0 // indirect
+	github.com/tebeka/strftime v0.1.5 // indirect
+	github.com/throttled/throttled v2.2.5+incompatible // indirect
 	github.com/tidwall/gjson v1.3.2
 	github.com/treewei/blackfriday v2.0.0+incompatible
 	github.com/tylerb/graceful v1.2.15
@@ -131,7 +140,7 @@ require (
 	go.uber.org/zap v1.13.0
 	golang.org/x/crypto v0.0.0-20200302210943-78000ba7a073
 	golang.org/x/image v0.0.0-20191206065243-da761ea9ff43
-	golang.org/x/net v0.0.0-20200114155413-6afb5195e5aa
+	golang.org/x/net v0.0.0-20200226121028-0de0cce0169b
 	golang.org/x/oauth2 v0.0.0-20190604053449-0f29369cfe45
 	golang.org/x/text v0.3.2
 	gopkg.in/go-with/wxpay.v1 v1.3.0

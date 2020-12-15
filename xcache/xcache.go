@@ -4,7 +4,7 @@ import (
 	"bytes"
 	"crypto/sha1"
 	"encoding/gob"
-	"github.com/pubgo/g/xmiddleware/cache/persistence"
+	"github.com/pubgo/x/xmiddleware/cache/persistence"
 	"io"
 	"log"
 	"net/http"

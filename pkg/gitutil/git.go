@@ -2,7 +2,7 @@ package gitutil
 
 import (
 	"errors"
-	"github.com/pubgo/g/pkg/shutil"
+	"github.com/pubgo/x/pkg/shutil"
 	cryptossh "golang.org/x/crypto/ssh"
 	"gopkg.in/src-d/go-git.v4/plumbing/transport"
 	"gopkg.in/src-d/go-git.v4/plumbing/transport/http"

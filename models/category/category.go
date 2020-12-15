@@ -1,6 +1,6 @@
 package category
 
-import "github.com/pubgo/g/models"
+import "github.com/pubgo/x/models"
 
 // 资源命名空间
 

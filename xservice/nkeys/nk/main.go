@@ -20,7 +20,7 @@ import (
 	"encoding/base64"
 	"flag"
 	"fmt"
-	"github.com/pubgo/g/xservice/nkeys"
+	"github.com/pubgo/x/xservice/nkeys"
 	"io"
 	"io/ioutil"
 	"log"

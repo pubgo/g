@@ -2,7 +2,7 @@ package pipe
 
 import (
 	"encoding/json"
-	"github.com/pubgo/g/xerror"
+	"github.com/pubgo/x/xerror"
 	"reflect"
 )
 

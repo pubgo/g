@@ -1,7 +1,7 @@
 package persistence
 
 import (
-	"github.com/pubgo/g/xmiddleware/cache/utils"
+	"github.com/pubgo/x/xmiddleware/cache/utils"
 	"time"
 
 	"github.com/gomodule/redigo/redis"

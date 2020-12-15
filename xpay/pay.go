@@ -2,9 +2,9 @@ package xpay
 
 import (
 	"errors"
-	"github.com/pubgo/g/xpay/client"
-	"github.com/pubgo/g/xpay/common"
-	"github.com/pubgo/g/xpay/constant"
+	"github.com/pubgo/x/xpay/client"
+	"github.com/pubgo/x/xpay/common"
+	"github.com/pubgo/x/xpay/constant"
 )
 
 // 用户下单支付接口

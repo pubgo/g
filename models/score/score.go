@@ -1,7 +1,7 @@
 package score
 
 import (
-	"github.com/pubgo/g/models"
+	"github.com/pubgo/x/models"
 )
 
 type Score struct {

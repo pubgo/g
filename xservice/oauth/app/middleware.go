@@ -4,7 +4,7 @@ import (
 	"errors"
 	"github.com/gin-gonic/gin"
 	"github.com/golang/glog"
-	"github.com/pubgo/g/json"
+	"github.com/pubgo/x/json"
 	"golang.org/x/oauth2"
 	"io/ioutil"
 	"net/http"

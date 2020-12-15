@@ -1,10 +1,10 @@
 package web
 
 import (
-	"github.com/pubgo/g/xservice/sso/api"
-	"github.com/pubgo/g/xservice/sso/app"
-	"github.com/pubgo/g/xservice/sso/model"
-	"github.com/pubgo/g/xservice/sso/utils"
+	"github.com/pubgo/x/xservice/sso/api"
+	"github.com/pubgo/x/xservice/sso/app"
+	"github.com/pubgo/x/xservice/sso/model"
+	"github.com/pubgo/x/xservice/sso/utils"
 	"net/http"
 	"strings"
 

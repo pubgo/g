@@ -2,8 +2,8 @@ package oauthwechat
 
 import (
 	"encoding/json"
-	"github.com/pubgo/g/xservice/sso/einterfaces"
-	"github.com/pubgo/g/xservice/sso/model"
+	"github.com/pubgo/x/xservice/sso/einterfaces"
+	"github.com/pubgo/x/xservice/sso/model"
 	"io"
 )
 

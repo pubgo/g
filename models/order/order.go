@@ -1,8 +1,8 @@
 package order
 
 import (
-	"github.com/pubgo/g/pkg/encoding/hashutil"
-	"github.com/pubgo/g/pkg/timeutil"
+	"github.com/pubgo/x/pkg/encoding/hashutil"
+	"github.com/pubgo/x/pkg/timeutil"
 	"github.com/shopspring/decimal"
 	"strconv"
 )

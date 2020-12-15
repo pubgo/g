@@ -1,6 +1,6 @@
 package group
 
-import "github.com/pubgo/g/models"
+import "github.com/pubgo/x/models"
 
 type Company struct {
 	models.BaseModel

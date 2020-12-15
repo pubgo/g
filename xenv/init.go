@@ -1,7 +1,7 @@
 package xenv
 
 import (
-	"github.com/pubgo/g/xtp"
+	"github.com/pubgo/x/xtp"
 	"os"
 	"strings"
 )
