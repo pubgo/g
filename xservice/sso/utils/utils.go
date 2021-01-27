@@ -2,7 +2,7 @@ package utils
 
 import (
 	"encoding/json"
-	"github.com/pubgo/g/xservice/sso/model"
+	"github.com/pubgo/x/xservice/sso/model"
 	"net"
 	"net/http"
 	"net/url"

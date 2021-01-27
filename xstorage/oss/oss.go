@@ -2,9 +2,9 @@ package oss
 
 import (
 	"github.com/aliyun/aliyun-oss-go-sdk/oss"
-	"github.com/pubgo/g/xconfig"
-	"github.com/pubgo/g/xconfig/xconfig_oss"
-	"github.com/pubgo/g/xerror"
+	"github.com/pubgo/x/xconfig"
+	"github.com/pubgo/x/xconfig/xconfig_oss"
+	"github.com/pubgo/x/xerror"
 	"io"
 	"strings"
 )

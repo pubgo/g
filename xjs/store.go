@@ -2,8 +2,8 @@ package xjs
 
 import (
 	"github.com/dave/flux"
-	"github.com/pubgo/g/pkg"
-	"github.com/pubgo/g/xerror"
+	"github.com/pubgo/x/pkg"
+	"github.com/pubgo/x/xerror"
 )
 
 func (t *Vapper) Store(store flux.StoreInterface) {

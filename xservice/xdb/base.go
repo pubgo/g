@@ -5,7 +5,7 @@ import (
 	"errors"
 	"fmt"
 	"github.com/jinzhu/gorm"
-	"github.com/pubgo/g/xerror"
+	"github.com/pubgo/x/xerror"
 	"github.com/pubgo/schema"
 	"strings"
 )

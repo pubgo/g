@@ -1,9 +1,9 @@
 package xcmd1
 
 import (
-	"github.com/pubgo/g/xenv"
-	"github.com/pubgo/g/xerror"
-	"github.com/pubgo/g/xinit"
+	"github.com/pubgo/x/xenv"
+	"github.com/pubgo/x/xerror"
+	"github.com/pubgo/x/xinit"
 	"github.com/spf13/cobra"
 	"github.com/spf13/viper"
 	"os"

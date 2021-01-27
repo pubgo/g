@@ -3,7 +3,7 @@ package cache
 import (
 	"context"
 	errs "errors"
-	"github.com/pubgo/g/xerror"
+	"github.com/pubgo/x/xerror"
 	"sync/atomic"
 	"time"
 

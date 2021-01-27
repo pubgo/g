@@ -2,13 +2,13 @@ package xtask
 
 import (
 	"fmt"
-	"github.com/pubgo/g/xtry"
+	"github.com/pubgo/x/xtry"
 	"runtime"
 	"sync"
 	"sync/atomic"
 	"time"
 
-	"github.com/pubgo/g/xerror"
+	"github.com/pubgo/x/xerror"
 )
 
 // NewAsyncTask

@@ -2,8 +2,8 @@ package xtask
 
 import (
 	"context"
-	"github.com/pubgo/g/xerror"
-	"github.com/pubgo/g/xtry"
+	"github.com/pubgo/x/xerror"
+	"github.com/pubgo/x/xtry"
 	"sync"
 	"sync/atomic"
 )

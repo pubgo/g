@@ -1,8 +1,8 @@
 package sqlStore
 
 import (
-	"github.com/pubgo/g/xservice/sso/model"
-	"github.com/pubgo/g/xservice/sso/utils"
+	"github.com/pubgo/x/xservice/sso/model"
+	"github.com/pubgo/x/xservice/sso/utils"
 	"os"
 	"time"
 

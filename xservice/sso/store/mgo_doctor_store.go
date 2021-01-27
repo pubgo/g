@@ -1,7 +1,7 @@
 package store
 
 import (
-	"github.com/pubgo/g/xservice/sso/model"
+	"github.com/pubgo/x/xservice/sso/model"
 	"net/http"
 
 	mgo "gopkg.in/mgo.v2"

@@ -7,7 +7,7 @@ import (
 	"net/http"
 	"net/url"
 
-	"github.com/pubgo/g/pkg/timeutil"
+	"github.com/pubgo/x/pkg/timeutil"
 )
 
 type Provider struct {

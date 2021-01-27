@@ -3,7 +3,7 @@ package models
 import (
 	"fmt"
 	"github.com/jinzhu/gorm"
-	"github.com/pubgo/g/xerror"
+	"github.com/pubgo/x/xerror"
 )
 
 func Delete(db *gorm.DB, model interface{}, filter map[string]interface{}) (err error) {

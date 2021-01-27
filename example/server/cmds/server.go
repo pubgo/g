@@ -1,10 +1,10 @@
 package cmds
 
 import (
-	"github.com/pubgo/g/example/server/app"
-	"github.com/pubgo/g/xcmd"
-	"github.com/pubgo/g/xdi"
-	"github.com/pubgo/g/xerror"
+	"github.com/pubgo/x/example/server/app"
+	"github.com/pubgo/x/xcmd"
+	"github.com/pubgo/x/xdi"
+	"github.com/pubgo/x/xerror"
 )
 
 func ExampleCmd() *xcmd.Command {

@@ -2,8 +2,8 @@ package cors
 
 import (
 	"github.com/gin-contrib/cors"
-	"github.com/pubgo/g/xconfig"
-	"github.com/pubgo/g/xdi"
+	"github.com/pubgo/x/xconfig"
+	"github.com/pubgo/x/xdi"
 	"time"
 
 	"github.com/gin-gonic/gin"

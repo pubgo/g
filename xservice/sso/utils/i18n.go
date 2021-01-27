@@ -3,7 +3,7 @@ package utils
 import (
 	"fmt"
 	"github.com/pelletier/go-toml"
-	"github.com/pubgo/g/xservice/sso/model"
+	"github.com/pubgo/x/xservice/sso/model"
 	"golang.org/x/text/language"
 	"io/ioutil"
 	"net/http"

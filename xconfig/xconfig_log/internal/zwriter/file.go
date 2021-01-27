@@ -1,7 +1,7 @@
 package zwriter
 
 import (
-	"github.com/pubgo/g/xerror"
+	"github.com/pubgo/x/xerror"
 	"os"
 )
 

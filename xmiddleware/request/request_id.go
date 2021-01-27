@@ -3,7 +3,7 @@ package request
 import (
 	"github.com/gin-gonic/gin"
 	"github.com/google/uuid"
-	"github.com/pubgo/g/cnst"
+	"github.com/pubgo/x/cnst"
 	"log"
 )
 

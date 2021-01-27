@@ -1,7 +1,7 @@
 package xlog
 
 import (
-	"github.com/pubgo/g/logs"
+	"github.com/pubgo/x/logs"
 	"github.com/rs/zerolog/log"
 )
 

@@ -2,7 +2,7 @@ package auth
 
 import (
 	"github.com/gin-gonic/gin"
-	"github.com/pubgo/g/xdi"
+	"github.com/pubgo/x/xdi"
 )
 
 func init() {

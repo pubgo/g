@@ -2,7 +2,7 @@ package middleware
 
 import (
 	"github.com/gin-gonic/gin"
-	"github.com/pubgo/g/xmiddleware"
+	"github.com/pubgo/x/xmiddleware"
 )
 
 const ApiVersion = "API_VERSION"

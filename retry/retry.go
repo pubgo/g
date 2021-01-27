@@ -1,8 +1,8 @@
 package retry
 
 import (
-	"github.com/pubgo/g/pkg/randutil"
-	"github.com/pubgo/g/xtry"
+	"github.com/pubgo/x/pkg/randutil"
+	"github.com/pubgo/x/xtry"
 	"log"
 	"math"
 	"time"

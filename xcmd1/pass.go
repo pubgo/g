@@ -3,7 +3,7 @@ package xcmd1
 import (
 	"errors"
 	"fmt"
-	"github.com/pubgo/g/xerror"
+	"github.com/pubgo/x/xerror"
 	"golang.org/x/crypto/ssh/terminal"
 	"io"
 	"os"

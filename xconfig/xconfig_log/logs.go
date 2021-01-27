@@ -1,14 +1,14 @@
 package xconfig_log
 
 import (
-	"github.com/pubgo/g/cnst"
-	"github.com/pubgo/g/pkg/fileutil"
-	"github.com/pubgo/g/xconfig"
-	"github.com/pubgo/g/xconfig/xconfig_log/internal/hooks"
-	"github.com/pubgo/g/xconfig/xconfig_log/internal/zwriter"
-	"github.com/pubgo/g/xdi"
-	"github.com/pubgo/g/xenv"
-	"github.com/pubgo/g/xerror"
+	"github.com/pubgo/x/cnst"
+	"github.com/pubgo/x/pkg/fileutil"
+	"github.com/pubgo/x/xconfig"
+	"github.com/pubgo/x/xconfig/xconfig_log/internal/hooks"
+	"github.com/pubgo/x/xconfig/xconfig_log/internal/zwriter"
+	"github.com/pubgo/x/xdi"
+	"github.com/pubgo/x/xenv"
+	"github.com/pubgo/x/xerror"
 	"github.com/rs/zerolog"
 	"github.com/rs/zerolog/log"
 	"os"

@@ -2,7 +2,7 @@ package hashutil_test
 
 import (
 	"fmt"
-	"github.com/pubgo/g/pkg/encoding/hashutil"
+	"github.com/pubgo/x/pkg/encoding/hashutil"
 	"testing"
 )
 

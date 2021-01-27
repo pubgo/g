@@ -3,8 +3,8 @@ package restorm
 import (
 	"database/sql"
 	"github.com/jmoiron/sqlx"
-	"github.com/pubgo/g/retry"
-	"github.com/pubgo/g/xerror"
+	"github.com/pubgo/x/retry"
+	"github.com/pubgo/x/xerror"
 	"github.com/pubgo/schema"
 	"strings"
 	"sync"

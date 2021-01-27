@@ -2,7 +2,7 @@ package xcache_memory
 
 import (
 	"github.com/patrickmn/go-cache"
-	"github.com/pubgo/g/xcache/xcache_abc"
+	"github.com/pubgo/x/xcache/xcache_abc"
 	"time"
 )
 

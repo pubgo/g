@@ -5,8 +5,8 @@ import (
 	"reflect"
 	"strings"
 
-	"github.com/pubgo/g/pkg/colorutil"
-	"github.com/pubgo/g/xerror"
+	"github.com/pubgo/x/pkg/colorutil"
+	"github.com/pubgo/x/xerror"
 )
 
 // Test Test

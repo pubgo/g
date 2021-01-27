@@ -3,7 +3,7 @@ package app
 import (
 	"encoding/json"
 	l4g "github.com/alecthomas/log4go"
-	"github.com/pubgo/g/xservice/sso/model"
+	"github.com/pubgo/x/xservice/sso/model"
 	"io/ioutil"
 	"net/http"
 )

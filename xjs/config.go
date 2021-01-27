@@ -1,8 +1,8 @@
 package xjs
 
 import (
-	"github.com/pubgo/g/pkg"
-	"github.com/pubgo/g/xerror"
+	"github.com/pubgo/x/pkg"
+	"github.com/pubgo/x/xerror"
 	"reflect"
 )
 

@@ -3,15 +3,15 @@ package xconfig_api
 import (
 	"github.com/gin-contrib/sessions"
 	"github.com/gin-gonic/gin"
-	"github.com/pubgo/g/xconfig"
-	"github.com/pubgo/g/xdi"
-	"github.com/pubgo/g/xerror"
-	"github.com/pubgo/g/xmiddleware/admin"
-	"github.com/pubgo/g/xmiddleware/cors"
-	"github.com/pubgo/g/xmiddleware/csrf"
-	"github.com/pubgo/g/xmiddleware/gzip"
-	"github.com/pubgo/g/xmiddleware/recover"
-	"github.com/pubgo/g/xservice/xredis/session_redis_store"
+	"github.com/pubgo/x/xconfig"
+	"github.com/pubgo/x/xdi"
+	"github.com/pubgo/x/xerror"
+	"github.com/pubgo/x/xmiddleware/admin"
+	"github.com/pubgo/x/xmiddleware/cors"
+	"github.com/pubgo/x/xmiddleware/csrf"
+	"github.com/pubgo/x/xmiddleware/gzip"
+	"github.com/pubgo/x/xmiddleware/recover"
+	"github.com/pubgo/x/xservice/xredis/session_redis_store"
 )
 
 type Web struct {

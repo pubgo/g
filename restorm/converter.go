@@ -6,7 +6,7 @@ import (
 	"strconv"
 	"time"
 
-	"github.com/pubgo/g/xerror"
+	"github.com/pubgo/x/xerror"
 )
 
 func _ToInt(p string) int {

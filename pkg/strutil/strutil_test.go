@@ -1,7 +1,7 @@
 package strutil_test
 
 import (
-	"github.com/pubgo/g/pkg/strutil"
+	"github.com/pubgo/x/pkg/strutil"
 	"testing"
 )
 

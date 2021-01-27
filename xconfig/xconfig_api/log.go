@@ -1,9 +1,9 @@
 package xconfig_api
 
 import (
-	"github.com/pubgo/g/logs"
-	"github.com/pubgo/g/xconfig/xconfig_log"
-	"github.com/pubgo/g/xdi"
+	"github.com/pubgo/x/logs"
+	"github.com/pubgo/x/xconfig/xconfig_log"
+	"github.com/pubgo/x/xdi"
 )
 
 var logger = logs.DebugLog("pkg", "web")

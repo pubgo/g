@@ -1,9 +1,9 @@
 package cmds
 
 import (
-	"github.com/pubgo/g/version"
-	"github.com/pubgo/g/xcmd"
-	"github.com/pubgo/g/xerror"
+	"github.com/pubgo/x/version"
+	"github.com/pubgo/x/xcmd"
+	"github.com/pubgo/x/xerror"
 )
 
 const Service = "server"

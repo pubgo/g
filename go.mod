@@ -98,9 +98,9 @@ require (
 	github.com/pkg/sftp v1.11.0
 	github.com/poy/onpar v1.0.1 // indirect
 	github.com/prometheus/client_golang v1.1.0
-	github.com/pubgo/g v0.2.52
+	github.com/pubgo/x v0.2.52
 	github.com/pubgo/schema v0.0.3
-	github.com/pubgo/xerror v0.2.3
+	github.com/pubgo/xerror v0.3.24
 	github.com/roasbeef/btcd v0.0.0-20180418012700-a03db407e40d // indirect
 	github.com/rs/zerolog v1.14.3
 	github.com/russross/blackfriday v1.5.2

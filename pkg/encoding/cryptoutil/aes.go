@@ -3,7 +3,7 @@ package cryptoutil
 import (
 	"crypto/aes"
 	"crypto/cipher"
-	"github.com/pubgo/g/xerror"
+	"github.com/pubgo/x/xerror"
 )
 
 //1.电码本模式（Electronic Codebook Book (ECB)）；

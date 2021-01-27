@@ -1,11 +1,11 @@
 package xlog
 
 import (
-	"github.com/pubgo/g/cnst"
-	"github.com/pubgo/g/pkg/fileutil"
-	"github.com/pubgo/g/xconfig"
-	"github.com/pubgo/g/xenv"
-	"github.com/pubgo/g/xerror"
+	"github.com/pubgo/x/cnst"
+	"github.com/pubgo/x/pkg/fileutil"
+	"github.com/pubgo/x/xconfig"
+	"github.com/pubgo/x/xenv"
+	"github.com/pubgo/x/xerror"
 	"github.com/pubgo/x/xlog1/internal/hooks"
 	"github.com/pubgo/x/xlog1/internal/zwriter"
 	"github.com/rs/zerolog"

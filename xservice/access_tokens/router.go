@@ -2,8 +2,8 @@ package access_tokens
 
 import (
 	"github.com/gin-gonic/gin"
-	"github.com/pubgo/g/models/token"
-	"github.com/pubgo/g/xdi"
+	"github.com/pubgo/x/models/token"
+	"github.com/pubgo/x/xdi"
 )
 
 func init() {

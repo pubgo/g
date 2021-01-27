@@ -3,7 +3,7 @@ package emailutil
 import (
 	"bytes"
 	"crypto/tls"
-	"github.com/pubgo/g/pkg/randutil"
+	"github.com/pubgo/x/pkg/randutil"
 	"html/template"
 	"net"
 	"net/mail"

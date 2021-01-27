@@ -2,8 +2,8 @@ package app
 
 import (
 	"bytes"
-	"github.com/pubgo/g/xservice/sso/model"
-	"github.com/pubgo/g/xservice/sso/utils"
+	"github.com/pubgo/x/xservice/sso/model"
+	"github.com/pubgo/x/xservice/sso/utils"
 	"image"
 	"image/color"
 	"image/draw"

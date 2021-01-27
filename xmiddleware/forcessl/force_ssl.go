@@ -2,9 +2,9 @@ package forcessl
 
 import (
 	"github.com/gin-gonic/gin"
-	"github.com/pubgo/g/xconfig"
-	"github.com/pubgo/g/xdi"
-	"github.com/pubgo/g/xerror"
+	"github.com/pubgo/x/xconfig"
+	"github.com/pubgo/x/xdi"
+	"github.com/pubgo/x/xerror"
 	"net/http"
 	"strings"
 	"testing"

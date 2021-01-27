@@ -4,14 +4,14 @@ import (
 	"bytes"
 	"encoding/json"
 	"fmt"
-	"github.com/pubgo/g/xconfig"
-	"github.com/pubgo/g/xconfig/xconfig_email/abc"
+	"github.com/pubgo/x/xconfig"
+	"github.com/pubgo/x/xconfig/xconfig_email/abc"
 	"io/ioutil"
 	"net/http"
 	"net/url"
 
-	"github.com/pubgo/g/pkg"
-	"github.com/pubgo/g/xerror"
+	"github.com/pubgo/x/pkg"
+	"github.com/pubgo/x/xerror"
 )
 
 var _email map[string]*email

@@ -5,8 +5,8 @@ import (
 	"crypto/rand"
 	"crypto/x509"
 	"encoding/pem"
-	"github.com/pubgo/g/pkg/encoding/hashutil"
-	"github.com/pubgo/g/xerror"
+	"github.com/pubgo/x/pkg/encoding/hashutil"
+	"github.com/pubgo/x/xerror"
 	"math/big"
 )
 

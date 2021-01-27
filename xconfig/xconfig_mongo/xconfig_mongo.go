@@ -2,13 +2,13 @@ package xconfig_mongo
 
 import (
 	"context"
-	"github.com/pubgo/g/pkg"
-	"github.com/pubgo/g/xconfig"
-	"github.com/pubgo/g/xdi"
+	"github.com/pubgo/x/pkg"
+	"github.com/pubgo/x/xconfig"
+	"github.com/pubgo/x/xdi"
 	"go.mongodb.org/mongo-driver/bson"
 	"time"
 
-	"github.com/pubgo/g/xerror"
+	"github.com/pubgo/x/xerror"
 	"go.mongodb.org/mongo-driver/mongo"
 	"go.mongodb.org/mongo-driver/mongo/options"
 	"go.mongodb.org/mongo-driver/mongo/readpref"

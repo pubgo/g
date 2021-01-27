@@ -1,9 +1,9 @@
 package app
 
 import (
-	"github.com/pubgo/g/xservice/sso/model"
-	"github.com/pubgo/g/xservice/sso/sqlStore"
-	"github.com/pubgo/g/xservice/sso/utils"
+	"github.com/pubgo/x/xservice/sso/model"
+	"github.com/pubgo/x/xservice/sso/sqlStore"
+	"github.com/pubgo/x/xservice/sso/utils"
 	"net"
 	"net/http"
 	"strings"

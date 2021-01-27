@@ -1,13 +1,13 @@
 package xconfig_redis
 
 import (
-	"github.com/pubgo/g/xconfig"
-	"github.com/pubgo/g/xdi"
+	"github.com/pubgo/x/xconfig"
+	"github.com/pubgo/x/xdi"
 	"time"
 
 	"github.com/go-redis/redis/v7"
-	"github.com/pubgo/g/pkg"
-	"github.com/pubgo/g/xerror"
+	"github.com/pubgo/x/pkg"
+	"github.com/pubgo/x/xerror"
 )
 
 type Redis struct {
