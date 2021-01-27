@@ -3,7 +3,7 @@ package xcmd1
 import (
 	"errors"
 	"fmt"
-	"github.com/pubgo/x/xerror"
+	"github.com/pubgo/xerror"
 	"golang.org/x/crypto/ssh/terminal"
 	"io"
 	"os"
@@ -131,7 +131,7 @@ func isTerminal(fd uintptr) bool {
 
 func makeRaw(fd uintptr) (*terminalState, error) {
 	state, err := terminal.MakeRaw(int(fd))
-	return &terminalState{state: state}, xerror.Wrap(err, "")
+	return &terminalState{state: state}, xerror.Wrap(err)
 }
 
 func restore(fd uintptr, oldState *terminalState) error {

@@ -3,7 +3,7 @@ package xcache_redis
 import (
 	"context"
 	"errors"
-	"github.com/pubgo/x/xerror"
+	"github.com/pubgo/xerror"
 	"sync/atomic"
 	"time"
 

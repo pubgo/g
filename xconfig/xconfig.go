@@ -6,7 +6,7 @@ import (
 	"github.com/pubgo/x/pkg"
 	"github.com/pubgo/x/xdi"
 	"github.com/pubgo/x/xenv"
-	"github.com/pubgo/x/xerror"
+	"github.com/pubgo/xerror"
 	"github.com/spf13/viper"
 	"path/filepath"
 	"strings"

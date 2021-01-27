@@ -3,7 +3,7 @@ package qrcode
 import (
 	"github.com/pubgo/x/pkg/encoding/hashutil"
 	"github.com/pubgo/x/pkg/fileutil"
-	"github.com/pubgo/x/xerror"
+	"github.com/pubgo/xerror"
 	"image/jpeg"
 
 	"github.com/boombuler/barcode"

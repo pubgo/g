@@ -4,7 +4,7 @@ import (
 	"fmt"
 	"github.com/go-redis/redis/v7"
 	"github.com/pubgo/x/retry"
-	"github.com/pubgo/x/xerror"
+	"github.com/pubgo/xerror"
 	"time"
 )
 

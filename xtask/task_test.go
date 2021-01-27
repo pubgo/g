@@ -5,7 +5,7 @@ import (
 	"context"
 	"crypto/md5"
 	"fmt"
-	"github.com/pubgo/x/xerror"
+	"github.com/pubgo/xerror"
 	"github.com/pubgo/x/xtask"
 	"github.com/pubgo/x/xtry"
 	"github.com/storyicon/graphquery"

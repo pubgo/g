@@ -5,7 +5,7 @@ import (
 	"github.com/pubgo/x/xconfig"
 	"github.com/pubgo/x/xconfig/xconfig_log"
 	"github.com/pubgo/x/xdi"
-	"github.com/pubgo/x/xerror"
+	"github.com/pubgo/xerror"
 	"net/http"
 	"regexp"
 	"time"

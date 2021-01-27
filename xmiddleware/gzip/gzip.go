@@ -6,7 +6,7 @@ import (
 	"fmt"
 	"github.com/pubgo/x/xconfig"
 	"github.com/pubgo/x/xdi"
-	"github.com/pubgo/x/xerror"
+	"github.com/pubgo/xerror"
 	"io/ioutil"
 	"net"
 	"net/http"

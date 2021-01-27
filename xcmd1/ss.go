@@ -5,7 +5,7 @@ import (
 	"fmt"
 	"github.com/pubgo/x/pkg/encoding/cryptoutil"
 	"github.com/pubgo/x/xenv"
-	"github.com/pubgo/x/xerror"
+	"github.com/pubgo/xerror"
 	"os"
 	"strings"
 )

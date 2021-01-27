@@ -3,7 +3,7 @@ package xjs
 import (
 	"github.com/dave/flux"
 	"github.com/pubgo/x/pkg"
-	"github.com/pubgo/x/xerror"
+	"github.com/pubgo/xerror"
 )
 
 func (t *Vapper) Store(store flux.StoreInterface) {

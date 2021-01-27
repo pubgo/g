@@ -4,7 +4,7 @@ import (
 	"database/sql"
 	"github.com/jmoiron/sqlx"
 	"github.com/pubgo/x/retry"
-	"github.com/pubgo/x/xerror"
+	"github.com/pubgo/xerror"
 	"github.com/pubgo/schema"
 	"strings"
 	"sync"

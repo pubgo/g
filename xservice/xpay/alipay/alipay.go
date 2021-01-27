@@ -3,7 +3,7 @@ package alipay
 import (
 	"github.com/pubgo/x/pkg/ethutil"
 	"github.com/pubgo/x/pkg/timeutil"
-	"github.com/pubgo/x/xerror"
+	"github.com/pubgo/xerror"
 	"net/http"
 	"net/url"
 	"time"

@@ -4,7 +4,7 @@ import (
 	"bufio"
 	"bytes"
 	"database/sql"
-	"github.com/pubgo/x/xerror"
+	"github.com/pubgo/xerror"
 	"io"
 	"strings"
 )

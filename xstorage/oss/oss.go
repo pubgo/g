@@ -4,7 +4,7 @@ import (
 	"github.com/aliyun/aliyun-oss-go-sdk/oss"
 	"github.com/pubgo/x/xconfig"
 	"github.com/pubgo/x/xconfig/xconfig_oss"
-	"github.com/pubgo/x/xerror"
+	"github.com/pubgo/xerror"
 	"io"
 	"strings"
 )

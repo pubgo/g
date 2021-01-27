@@ -5,7 +5,7 @@ import (
 	sssions "github.com/gin-contrib/sessions"
 	"github.com/gorilla/securecookie"
 	"github.com/gorilla/sessions"
-	"github.com/pubgo/x/xerror"
+	"github.com/pubgo/xerror"
 	"net/http"
 	"strings"
 )

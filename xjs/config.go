@@ -2,7 +2,7 @@ package xjs
 
 import (
 	"github.com/pubgo/x/pkg"
-	"github.com/pubgo/x/xerror"
+	"github.com/pubgo/xerror"
 	"reflect"
 )
 

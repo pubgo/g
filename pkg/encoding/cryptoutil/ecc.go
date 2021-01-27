@@ -6,7 +6,7 @@ import (
 	"crypto/x509"
 	"encoding/pem"
 	"github.com/pubgo/x/pkg/encoding/hashutil"
-	"github.com/pubgo/x/xerror"
+	"github.com/pubgo/xerror"
 	"math/big"
 )
 

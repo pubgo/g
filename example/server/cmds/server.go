@@ -4,7 +4,7 @@ import (
 	"github.com/pubgo/x/example/server/app"
 	"github.com/pubgo/x/xcmd"
 	"github.com/pubgo/x/xdi"
-	"github.com/pubgo/x/xerror"
+	"github.com/pubgo/xerror"
 )
 
 func ExampleCmd() *xcmd.Command {

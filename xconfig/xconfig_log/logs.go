@@ -8,7 +8,7 @@ import (
 	"github.com/pubgo/x/xconfig/xconfig_log/internal/zwriter"
 	"github.com/pubgo/x/xdi"
 	"github.com/pubgo/x/xenv"
-	"github.com/pubgo/x/xerror"
+	"github.com/pubgo/xerror"
 	"github.com/rs/zerolog"
 	"github.com/rs/zerolog/log"
 	"os"

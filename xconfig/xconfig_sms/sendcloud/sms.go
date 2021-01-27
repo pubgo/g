@@ -7,7 +7,7 @@ import (
 	"github.com/pubgo/x/pkg/encoding/hashutil"
 	"github.com/pubgo/x/xconfig"
 	"github.com/pubgo/x/xconfig/xconfig_sms/abc"
-	"github.com/pubgo/x/xerror"
+	"github.com/pubgo/xerror"
 	"io/ioutil"
 	"net/http"
 	"net/url"

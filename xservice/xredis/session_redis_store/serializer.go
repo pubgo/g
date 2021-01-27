@@ -5,7 +5,7 @@ import (
 	"encoding/gob"
 	"encoding/json"
 	"github.com/gorilla/sessions"
-	"github.com/pubgo/x/xerror"
+	"github.com/pubgo/xerror"
 )
 
 // SessionSerializer provides an interface hook for alternative serializers

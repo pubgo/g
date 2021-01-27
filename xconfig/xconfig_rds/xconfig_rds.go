@@ -9,7 +9,7 @@ import (
 	"xorm.io/xorm"
 
 	"github.com/pubgo/x/pkg"
-	"github.com/pubgo/x/xerror"
+	"github.com/pubgo/xerror"
 )
 
 type Rds struct {

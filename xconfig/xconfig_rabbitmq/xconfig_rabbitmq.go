@@ -7,7 +7,7 @@ import (
 	"github.com/pubgo/x/pkg/randutil"
 	"github.com/pubgo/x/retry"
 	"github.com/pubgo/x/xconfig"
-	"github.com/pubgo/x/xerror"
+	"github.com/pubgo/xerror"
 	"github.com/streadway/amqp"
 	"time"
 )

@@ -6,7 +6,7 @@ import (
 	"encoding/xml"
 	"errors"
 	"fmt"
-	"github.com/pubgo/x/xerror"
+	"github.com/pubgo/xerror"
 	"io"
 	"io/ioutil"
 	"net/http"

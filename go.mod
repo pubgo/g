@@ -1,10 +1,12 @@
 module github.com/pubgo/x
 
-go 1.13
+go 1.14
 
 require (
 	github.com/DearMadMan/minhash v0.1.0
 	github.com/GoAdminGroup/go-admin v1.1.5
+	github.com/Masterminds/goutils v1.1.0 // indirect
+	github.com/Masterminds/semver v1.5.0 // indirect
 	github.com/Masterminds/sprig v2.22.0+incompatible
 	github.com/NYTimes/gziphandler v1.1.1
 	github.com/PuerkitoBio/goquery v1.5.0
@@ -13,13 +15,14 @@ require (
 	github.com/RoaringBitmap/roaring v0.4.23
 	github.com/alecthomas/log4go v0.0.0-20180109082532-d146e6b86faa
 	github.com/aliyun/aliyun-oss-go-sdk v2.0.3+incompatible
+	github.com/antchfx/htmlquery v1.2.3 // indirect
+	github.com/aristanetworks/goarista v0.0.0-20210107181124-fad53805024e // indirect
 	github.com/awa/go-iap v1.1.0
 	github.com/boombuler/barcode v1.0.1-0.20180315051053-3c06908149f7
 	github.com/bradfitz/gomemcache v0.0.0-20190329173943-551aad21a668
+	github.com/btcsuite/btcd v0.21.0-beta // indirect
 	github.com/caddyserver/caddy v1.0.4
-	github.com/cespare/xxhash v1.1.0 // indirect
 	github.com/coocood/freecache v1.1.0
-	github.com/cweill/gotests v1.5.3 // indirect
 	github.com/dave/flux v0.0.0-20180702001202-0b08a93f243b
 	github.com/dave/ktest v1.1.3 // indirect
 	github.com/davecgh/go-spew v1.1.1
@@ -29,13 +32,12 @@ require (
 	github.com/disintegration/imaging v1.6.2
 	github.com/dustin/go-humanize v1.0.0
 	github.com/emirpasic/gods v1.12.0
-	github.com/ethereum/go-ethereum v1.9.6
+	github.com/ethereum/go-ethereum v1.9.25
 	github.com/fastly/go-utils v0.0.0-20180712184237-d95a45783239 // indirect
 	github.com/fatih/color v1.9.0
 	github.com/flosch/pongo2 v0.0.0-20190707114632-bbf5a6c351f4
 	github.com/foolin/goview v0.2.0
-	github.com/fortytw2/leaktest v1.3.0 // indirect
-	github.com/fsnotify/fsnotify v1.4.7
+	github.com/fsnotify/fsnotify v1.4.9
 	github.com/garyburd/redigo v1.6.0
 	github.com/gin-contrib/cors v1.3.0
 	github.com/gin-contrib/sessions v0.0.1
@@ -59,20 +61,22 @@ require (
 	github.com/gorilla/securecookie v1.1.1
 	github.com/gorilla/sessions v1.2.0
 	github.com/gorilla/websocket v1.4.1
+	github.com/huandu/xstrings v1.3.2 // indirect
+	github.com/imdario/mergo v0.3.11
 	github.com/iris-contrib/blackfriday v2.0.0+incompatible
 	github.com/issue9/identicon v1.0.1
 	github.com/jehiah/go-strftime v0.0.0-20171201141054-1d33003b3869 // indirect
 	github.com/jinzhu/gorm v1.9.11
 	github.com/jmoiron/sqlx v1.2.0
 	github.com/jordan-wright/email v0.0.0-20190819015918-041e0cec78b0
-	github.com/json-iterator/go v1.1.7
-	github.com/klauspost/cpuid v1.2.1
+	github.com/json-iterator/go v1.1.9
+	github.com/klauspost/cpuid v1.2.3
 	github.com/labstack/echo/v4 v4.1.11
 	github.com/labstack/gommon v0.3.0
 	github.com/lestrrat-go/strftime v1.0.3
 	github.com/lib/pq v1.2.0
-	github.com/lightningnetwork/lnd v0.0.2 // indirect
 	github.com/lucas-clemente/quic-go v0.14.1
+	github.com/mailru/easyjson v0.7.6 // indirect
 	github.com/mattermost/gorp v2.0.0+incompatible
 	github.com/mattn/go-colorable v0.1.4
 	github.com/mattn/go-isatty v0.0.11
@@ -82,10 +86,11 @@ require (
 	github.com/memcachier/mc v2.0.1+incompatible
 	github.com/mholt/certmagic v0.9.0
 	github.com/microcosm-cc/bluemonday v1.0.2
+	github.com/mitchellh/copystructure v1.0.0 // indirect
 	github.com/mitchellh/go-homedir v1.1.0
 	github.com/mitchellh/mapstructure v1.1.2
 	github.com/mssola/user_agent v0.5.0
-	github.com/naoina/toml v0.1.1
+	github.com/naoina/toml v0.1.2-0.20170918210437-9fafd6967416
 	github.com/nfnt/resize v0.0.0-20180221191011-83c6a9932646
 	github.com/nicksnyder/go-i18n/v2 v2.0.3
 	github.com/nmrshll/rndm-go v0.0.0-20170430161430-8da3024e53de
@@ -97,11 +102,9 @@ require (
 	github.com/pelletier/go-toml v1.2.0
 	github.com/pkg/sftp v1.11.0
 	github.com/poy/onpar v1.0.1 // indirect
-	github.com/prometheus/client_golang v1.1.0
-	github.com/pubgo/x v0.2.52
+	github.com/prometheus/client_golang v1.4.1
 	github.com/pubgo/schema v0.0.3
 	github.com/pubgo/xerror v0.3.24
-	github.com/roasbeef/btcd v0.0.0-20180418012700-a03db407e40d // indirect
 	github.com/rs/zerolog v1.14.3
 	github.com/russross/blackfriday v1.5.2
 	github.com/rwcarlsen/goexif v0.0.0-20190401172101-9e8deecbddbd
@@ -120,7 +123,6 @@ require (
 	github.com/streadway/amqp v0.0.0-20190827072141-edfb9018d271
 	github.com/stretchr/objx v0.2.0
 	github.com/stretchr/testify v1.4.0
-	github.com/syndtr/goleveldb v1.0.0 // indirect
 	github.com/tebeka/strftime v0.1.5 // indirect
 	github.com/throttled/throttled v2.2.5+incompatible // indirect
 	github.com/tidwall/gjson v1.3.2
@@ -138,11 +140,11 @@ require (
 	go.mongodb.org/mongo-driver v1.1.2
 	go.uber.org/dig v1.8.0
 	go.uber.org/zap v1.13.0
-	golang.org/x/crypto v0.0.0-20200302210943-78000ba7a073
+	golang.org/x/crypto v0.0.0-20200622213623-75b288015ac9
 	golang.org/x/image v0.0.0-20191206065243-da761ea9ff43
-	golang.org/x/net v0.0.0-20200226121028-0de0cce0169b
+	golang.org/x/net v0.0.0-20200822124328-c89045814202
 	golang.org/x/oauth2 v0.0.0-20190604053449-0f29369cfe45
-	golang.org/x/text v0.3.2
+	golang.org/x/text v0.3.3
 	gopkg.in/go-with/wxpay.v1 v1.3.0
 	gopkg.in/gormigrate.v1 v1.6.0
 	gopkg.in/mgo.v2 v2.0.0-20180705113604-9856a29383ce
@@ -150,7 +152,7 @@ require (
 	gopkg.in/resty.v1 v1.12.0
 	gopkg.in/src-d/go-git.v4 v4.13.1
 	gopkg.in/throttled/throttled.v2 v2.2.4
-	gopkg.in/yaml.v2 v2.2.7
+	gopkg.in/yaml.v2 v2.3.0
 	xorm.io/core v0.7.2
 	xorm.io/xorm v0.8.1
 )

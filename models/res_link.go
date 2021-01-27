@@ -1,7 +1,7 @@
 package models
 
 import (
-	"github.com/pubgo/x/xerror"
+	"github.com/pubgo/xerror"
 	"gopkg.in/yaml.v2"
 )
 

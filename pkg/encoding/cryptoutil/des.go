@@ -4,7 +4,7 @@ import (
 	"crypto/cipher"
 	"crypto/des"
 
-	"github.com/pubgo/x/xerror"
+	"github.com/pubgo/xerror"
 )
 
 func DesCbcEncrypt(plainText, key []byte, ivDes ...byte) (cipherText []byte, err error) {

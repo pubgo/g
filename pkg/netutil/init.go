@@ -1,7 +1,7 @@
 package netutil
 
 import (
-	"github.com/pubgo/x/xerror"
+	"github.com/pubgo/xerror"
 	"net"
 )
 

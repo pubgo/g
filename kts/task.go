@@ -2,7 +2,7 @@ package kts
 
 import (
 	"encoding/json"
-	"github.com/pubgo/x/xerror"
+	"github.com/pubgo/xerror"
 )
 
 // Task xtask define

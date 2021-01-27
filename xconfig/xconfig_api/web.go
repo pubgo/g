@@ -5,7 +5,7 @@ import (
 	"github.com/gin-gonic/gin"
 	"github.com/pubgo/x/xconfig"
 	"github.com/pubgo/x/xdi"
-	"github.com/pubgo/x/xerror"
+	"github.com/pubgo/xerror"
 	"github.com/pubgo/x/xmiddleware/admin"
 	"github.com/pubgo/x/xmiddleware/cors"
 	"github.com/pubgo/x/xmiddleware/csrf"

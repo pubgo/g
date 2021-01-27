@@ -8,7 +8,7 @@ import (
 	"sync/atomic"
 	"time"
 
-	"github.com/pubgo/x/xerror"
+	"github.com/pubgo/xerror"
 )
 
 // NewAsyncTask

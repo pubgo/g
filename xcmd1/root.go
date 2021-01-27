@@ -2,8 +2,8 @@ package xcmd1
 
 import (
 	"github.com/pubgo/x/xenv"
-	"github.com/pubgo/x/xerror"
 	"github.com/pubgo/x/xinit"
+	"github.com/pubgo/xerror"
 	"github.com/spf13/cobra"
 	"github.com/spf13/viper"
 	"os"
@@ -26,8 +26,8 @@ func Init(cfn ...func(cmd *Command)) func(...string) {
 		})
 	rootCmd.PersistentPreRunE = func(cmd *Command, args []string) (err error) {
 		defer xerror.RespErr(&err)
-		xerror.PanicM(viper.BindPFlags(cmd.Flags()), "Flags Error")
-		xerror.PanicM(xinit.Start(), "xinit error")
+		xerror.Panic(viper.BindPFlags(cmd.Flags()), "Flags Error")
+		xerror.Panic(xinit.Start(), "xinit error")
 		return
 	}
 

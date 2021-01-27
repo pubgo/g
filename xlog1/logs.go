@@ -5,7 +5,7 @@ import (
 	"github.com/pubgo/x/pkg/fileutil"
 	"github.com/pubgo/x/xconfig"
 	"github.com/pubgo/x/xenv"
-	"github.com/pubgo/x/xerror"
+	"github.com/pubgo/xerror"
 	"github.com/pubgo/x/xlog1/internal/hooks"
 	"github.com/pubgo/x/xlog1/internal/zwriter"
 	"github.com/rs/zerolog"

@@ -6,7 +6,7 @@ import (
 	"strings"
 
 	"github.com/pubgo/x/pkg/colorutil"
-	"github.com/pubgo/x/xerror"
+	"github.com/pubgo/xerror"
 )
 
 // Test Test
