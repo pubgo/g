@@ -1,8 +1,8 @@
 package xcmd1
 
 import (
-	"github.com/pubgo/g/xconfig/xconfig_log"
-	"github.com/pubgo/g/xdi"
+	"github.com/pubgo/x/xconfig/xconfig_log"
+	"github.com/pubgo/x/xdi"
 )
 
 func init() {

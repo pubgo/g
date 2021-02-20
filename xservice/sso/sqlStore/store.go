@@ -1,7 +1,7 @@
 package sqlStore
 
 import (
-	"github.com/pubgo/g/xservice/sso/model"
+	"github.com/pubgo/x/xservice/sso/model"
 	"time"
 
 	l4g "github.com/alecthomas/log4go"

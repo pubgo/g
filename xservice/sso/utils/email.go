@@ -3,7 +3,7 @@ package utils
 import (
 	"crypto/tls"
 	"fmt"
-	"github.com/pubgo/g/xservice/sso/model"
+	"github.com/pubgo/x/xservice/sso/model"
 	"mime"
 	"net"
 	"net/mail"

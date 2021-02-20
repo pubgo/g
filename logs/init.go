@@ -1,8 +1,8 @@
 package logs
 
 import (
-	"github.com/pubgo/g/pkg"
-	"github.com/pubgo/g/xerror"
+	"github.com/pubgo/x/pkg"
+	"github.com/pubgo/xerror"
 )
 
 var _isNone = func(val interface{}) bool {

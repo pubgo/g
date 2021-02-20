@@ -3,8 +3,8 @@ package redsid
 import (
 	"fmt"
 	"github.com/go-redis/redis/v7"
-	"github.com/pubgo/g/retry"
-	"github.com/pubgo/g/xerror"
+	"github.com/pubgo/x/retry"
+	"github.com/pubgo/xerror"
 	"time"
 )
 

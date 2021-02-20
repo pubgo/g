@@ -2,8 +2,8 @@ package controller
 
 import (
 	"github.com/gin-gonic/gin"
-	"github.com/pubgo/g/example/server/models"
-	"github.com/pubgo/g/xdi"
+	"github.com/pubgo/x/example/server/models"
+	"github.com/pubgo/x/xdi"
 )
 
 func init() {

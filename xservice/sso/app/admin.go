@@ -1,7 +1,7 @@
 package app
 
 import (
-	"github.com/pubgo/g/xservice/sso/utils"
+	"github.com/pubgo/x/xservice/sso/utils"
 	"runtime/debug"
 
 )

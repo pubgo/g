@@ -5,9 +5,9 @@ import (
 	"crypto/x509"
 	"encoding/pem"
 	"fmt"
-	"github.com/pubgo/g/xpay/client"
-	"github.com/pubgo/g/xpay/common"
-	"github.com/pubgo/g/xpay/constant"
+	"github.com/pubgo/x/xpay/client"
+	"github.com/pubgo/x/xpay/common"
+	"github.com/pubgo/x/xpay/constant"
 	"net/http"
 	"testing"
 )

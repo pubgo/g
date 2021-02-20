@@ -1,6 +1,6 @@
 package article
 
-import "github.com/pubgo/g/models"
+import "github.com/pubgo/x/models"
 
 type Statistic struct {
 	models.BaseModel

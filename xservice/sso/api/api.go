@@ -3,9 +3,9 @@ package api
 import (
 	"encoding/json"
 	"errors"
-	"github.com/pubgo/g/xservice/sso/app"
-	"github.com/pubgo/g/xservice/sso/model"
-	"github.com/pubgo/g/xservice/sso/utils"
+	"github.com/pubgo/x/xservice/sso/app"
+	"github.com/pubgo/x/xservice/sso/model"
+	"github.com/pubgo/x/xservice/sso/utils"
 	"io"
 	"net/http"
 	"reflect"

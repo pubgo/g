@@ -1,7 +1,7 @@
 package collect
 
 import (
-	"github.com/pubgo/g/models"
+	"github.com/pubgo/x/models"
 )
 
 // Collect 资源收藏

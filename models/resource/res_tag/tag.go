@@ -1,6 +1,6 @@
 package res_tag
 
-import "github.com/pubgo/g/models"
+import "github.com/pubgo/x/models"
 
 type ResTag struct {
 	models.BaseModel

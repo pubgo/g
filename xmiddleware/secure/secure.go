@@ -3,7 +3,7 @@ package secure
 import (
 	"fmt"
 	"github.com/gin-gonic/gin"
-	"github.com/pubgo/g/cnst"
+	"github.com/pubgo/x/cnst"
 )
 
 type (

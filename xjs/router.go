@@ -2,7 +2,7 @@ package xjs
 
 import (
 	"github.com/gopherjs/gopherjs/js"
-	"github.com/pubgo/g/xerror"
+	"github.com/pubgo/xerror"
 	dom "github.com/siongui/godom"
 	"log"
 	"net/url"

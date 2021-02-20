@@ -1,6 +1,6 @@
 package user_event
 
-import "github.com/pubgo/g/models"
+import "github.com/pubgo/x/models"
 
 // 用户对某一资源进行动作，以及所带有的数据
 // 点赞, 评论, 转发, 收藏, 喜欢, 打赏, 标记, 订阅, 举报, 分享, ...

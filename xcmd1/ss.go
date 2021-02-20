@@ -3,9 +3,9 @@ package xcmd1
 import (
 	"encoding/base32"
 	"fmt"
-	"github.com/pubgo/g/pkg/encoding/cryptoutil"
-	"github.com/pubgo/g/xenv"
-	"github.com/pubgo/g/xerror"
+	"github.com/pubgo/x/pkg/encoding/cryptoutil"
+	"github.com/pubgo/x/xenv"
+	"github.com/pubgo/xerror"
 	"os"
 	"strings"
 )

@@ -2,7 +2,7 @@ package pathutil
 
 import (
 	"bufio"
-	"github.com/pubgo/g/xerror"
+	"github.com/pubgo/xerror"
 	"io"
 	"io/ioutil"
 	"os"

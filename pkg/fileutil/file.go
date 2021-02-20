@@ -4,8 +4,6 @@ package fileutil
 
 import (
 	"bufio"
-	"github.com/pubgo/g/pkg/encoding/hashutil"
-	"github.com/pubgo/g/xerror"
 	"io"
 	"io/ioutil"
 	"log"

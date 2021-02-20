@@ -1,9 +1,9 @@
 package xcmd1
 
 import (
-	"github.com/pubgo/g/xenv"
-	"github.com/pubgo/g/xerror"
-	"github.com/pubgo/g/xinit"
+	"github.com/pubgo/x/xenv"
+	"github.com/pubgo/x/xinit"
+	"github.com/pubgo/xerror"
 	"github.com/spf13/cobra"
 	"github.com/spf13/viper"
 	"os"
@@ -14,20 +14,19 @@ type Command = cobra.Command
 var rootCmd = &Command{}
 
 func Init(cfn ...func(cmd *Command)) func(...string) {
-	rootCmd.Use = xenv.Cfg.Service
+	rootCmd.Use = xenv.Cfg.Prefix
 	rootCmd.AddCommand(
 		ss(), &Command{
 			Use:     "version",
 			Aliases: []string{"v"},
 			Short:   "version info",
 			Run: func(cmd *Command, args []string) {
-				xenv.Version()
 			},
 		})
 	rootCmd.PersistentPreRunE = func(cmd *Command, args []string) (err error) {
 		defer xerror.RespErr(&err)
-		xerror.PanicM(viper.BindPFlags(cmd.Flags()), "Flags Error")
-		xerror.PanicM(xinit.Start(), "xinit error")
+		xerror.Panic(viper.BindPFlags(cmd.Flags()), "Flags Error")
+		xinit.Start()
 		return
 	}
 

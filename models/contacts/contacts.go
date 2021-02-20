@@ -1,6 +1,6 @@
 package contacts
 
-import "github.com/pubgo/g/models"
+import "github.com/pubgo/x/models"
 
 // 名字
 // 姓氏

@@ -1,9 +1,9 @@
 package models
 
 import (
-	"github.com/pubgo/g/xconfig"
-	"github.com/pubgo/g/xconfig/xconfig_rds"
-	"github.com/pubgo/g/xdi"
+	"github.com/pubgo/x/xconfig"
+	"github.com/pubgo/x/xconfig/xconfig_rds"
+	"github.com/pubgo/x/xdi"
 	"xorm.io/xorm"
 )
 

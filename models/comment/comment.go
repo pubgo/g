@@ -1,6 +1,6 @@
 package comment
 
-import "github.com/pubgo/g/models"
+import "github.com/pubgo/x/models"
 
 type Comment struct {
 	models.BaseModel

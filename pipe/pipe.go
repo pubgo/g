@@ -2,7 +2,7 @@ package pipe
 
 import (
 	"fmt"
-	"github.com/pubgo/g/xerror"
+	"github.com/pubgo/xerror"
 	"reflect"
 )
 

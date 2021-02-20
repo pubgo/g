@@ -4,7 +4,7 @@ package xjs
 
 import (
 	"github.com/dave/flux"
-	"github.com/pubgo/g/xerror"
+	"github.com/pubgo/xerror"
 	dom "github.com/siongui/godom"
 	"reflect"
 	"sync"

@@ -2,7 +2,7 @@ package color
 
 import (
 	"fmt"
-	"github.com/pubgo/g/pkg/osutil"
+	"github.com/pubgo/x/pkg/osutil"
 )
 
 const (

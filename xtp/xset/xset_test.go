@@ -2,7 +2,7 @@ package xset_test
 
 import (
 	"fmt"
-	"github.com/pubgo/g/xtp/xset"
+	"github.com/pubgo/x/xtp/xset"
 	"testing"
 )
 

@@ -1,6 +1,6 @@
 package article
 
-import "github.com/pubgo/g/models"
+import "github.com/pubgo/x/models"
 
 // 权限, 职责
 type Permission struct {

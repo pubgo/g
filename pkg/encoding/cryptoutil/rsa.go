@@ -8,7 +8,7 @@ import (
 	"crypto/x509"
 	"encoding/base64"
 	"encoding/pem"
-	"github.com/pubgo/g/xerror"
+	"github.com/pubgo/xerror"
 	"log"
 	"os"
 	"runtime"

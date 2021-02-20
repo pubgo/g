@@ -1,6 +1,6 @@
 package report
 
-import "github.com/pubgo/g/models"
+import "github.com/pubgo/x/models"
 
 // 举报
 type Report struct {

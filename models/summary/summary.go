@@ -1,6 +1,6 @@
 package summary
 
-import "github.com/pubgo/g/models"
+import "github.com/pubgo/x/models"
 
 type ArticleGlance struct {
 	models.BaseModel

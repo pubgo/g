@@ -1,6 +1,6 @@
 package log
 
-import "github.com/pubgo/g/models"
+import "github.com/pubgo/x/models"
 
 type Log struct {
 	models.BaseModel

@@ -1,9 +1,9 @@
 package xtest
 
 import (
-	"github.com/pubgo/g/pkg"
-	"github.com/pubgo/g/pkg/colorutil"
-	"github.com/pubgo/g/xtry"
+	"github.com/pubgo/x/pkg"
+	"github.com/pubgo/x/pkg/colorutil"
+	"github.com/pubgo/x/xtry"
 )
 
 var _caller = pkg.Caller

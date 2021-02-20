@@ -8,7 +8,7 @@ import (
 	"encoding/base64"
 	"errors"
 	"fmt"
-	"github.com/pubgo/g/xpay/common"
+	"github.com/pubgo/x/xpay/common"
 	"net/url"
 	"sort"
 	"strings"

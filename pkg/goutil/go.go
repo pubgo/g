@@ -1,8 +1,8 @@
 package goutil
 
 import (
-	"github.com/pubgo/g/pkg/fileutil"
-	"github.com/pubgo/g/pkg/osutil"
+	"github.com/pubgo/x/pkg/fileutil"
+	"github.com/pubgo/x/pkg/osutil"
 	"os"
 	"path"
 	"path/filepath"

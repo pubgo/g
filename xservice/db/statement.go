@@ -7,7 +7,7 @@ package db
 import (
 	dbsql "database/sql"
 	"errors"
-	"github.com/pubgo/g/xservice/db/dialect"
+	"github.com/pubgo/x/xservice/db/dialect"
 	"regexp"
 	"strconv"
 	"strings"

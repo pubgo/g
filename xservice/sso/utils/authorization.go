@@ -1,7 +1,7 @@
 package utils
 
 import (
-	"github.com/pubgo/g/xservice/sso/model"
+	"github.com/pubgo/x/xservice/sso/model"
 )
 
 func SetDefaultRolesBasedOnConfig() {

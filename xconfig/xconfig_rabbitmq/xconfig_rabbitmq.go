@@ -2,12 +2,12 @@ package xconfig_rabbitmq
 
 import (
 	"fmt"
-	"github.com/pubgo/g/kts"
-	"github.com/pubgo/g/pkg"
-	"github.com/pubgo/g/pkg/randutil"
-	"github.com/pubgo/g/retry"
-	"github.com/pubgo/g/xconfig"
-	"github.com/pubgo/g/xerror"
+	"github.com/pubgo/x/kts"
+	"github.com/pubgo/x/pkg"
+	"github.com/pubgo/x/pkg/randutil"
+	"github.com/pubgo/x/retry"
+	"github.com/pubgo/x/xconfig"
+	"github.com/pubgo/xerror"
 	"github.com/streadway/amqp"
 	"time"
 )

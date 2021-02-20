@@ -2,7 +2,7 @@ package app
 
 import (
 	l4g "github.com/alecthomas/log4go"
-	"github.com/pubgo/g/xservice/sso/model"
+	"github.com/pubgo/x/xservice/sso/model"
 )
 
 func CustomClaimsHasPermissionTo(customClaims model.CustomClaims, permission *model.Permission) bool {

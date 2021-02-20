@@ -2,7 +2,7 @@ package idutil
 
 import (
 	"errors"
-	"github.com/pubgo/g/pkg/strutil"
+	"github.com/pubgo/x/pkg/strutil"
 	"github.com/sony/sonyflake"
 	"github.com/speps/go-hashids"
 	"net"

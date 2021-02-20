@@ -1,6 +1,6 @@
 package group
 
-import "github.com/pubgo/g/models"
+import "github.com/pubgo/x/models"
 
 // 送鱼 打鱼 晒鱼 买鱼 卖鱼 岛上面挖矿
 // island 海岛 开放 封闭

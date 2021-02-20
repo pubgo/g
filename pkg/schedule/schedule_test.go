@@ -2,7 +2,7 @@ package schedule_test
 
 import (
 	"context"
-	"github.com/pubgo/g/pkg/schedule"
+	"github.com/pubgo/x/pkg/schedule"
 	"log"
 	"testing"
 	"time"

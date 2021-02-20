@@ -3,11 +3,11 @@ package xconfig_oss
 import (
 	"fmt"
 	"github.com/aliyun/aliyun-oss-go-sdk/oss"
-	"github.com/pubgo/g/pkg"
-	"github.com/pubgo/g/xconfig"
-	"github.com/pubgo/g/xdi"
-	"github.com/pubgo/g/xenv"
-	"github.com/pubgo/g/xerror"
+	"github.com/pubgo/x/pkg"
+	"github.com/pubgo/x/xconfig"
+	"github.com/pubgo/x/xdi"
+	"github.com/pubgo/x/xenv"
+	"github.com/pubgo/xerror"
 	"regexp"
 )
 

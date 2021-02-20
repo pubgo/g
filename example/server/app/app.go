@@ -2,10 +2,10 @@ package app
 
 import (
 	"github.com/gin-gonic/gin"
-	"github.com/pubgo/g/example/server/controller"
-	"github.com/pubgo/g/example/server/models"
-	"github.com/pubgo/g/xconfig/xconfig_web"
-	"github.com/pubgo/g/xdi"
+	"github.com/pubgo/x/example/server/controller"
+	"github.com/pubgo/x/example/server/models"
+	"github.com/pubgo/x/xconfig/xconfig_web"
+	"github.com/pubgo/x/xdi"
 )
 
 type App struct {

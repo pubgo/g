@@ -3,7 +3,7 @@ package ziputil
 import (
 	"archive/zip"
 	"bytes"
-	"github.com/pubgo/g/xerror"
+	"github.com/pubgo/xerror"
 	"io"
 	"io/ioutil"
 	"os"

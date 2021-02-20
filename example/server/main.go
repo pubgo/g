@@ -1,7 +1,7 @@
 package main
 
 import (
-	"github.com/pubgo/g/example/server/cmds"
+	"github.com/pubgo/x/example/server/cmds"
 )
 
 func main() {

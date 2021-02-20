@@ -1,7 +1,7 @@
 package menu
 
 import (
-	"github.com/pubgo/g/models"
+	"github.com/pubgo/x/models"
 )
 
 type BaseMenu struct {

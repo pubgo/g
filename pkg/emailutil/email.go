@@ -3,7 +3,7 @@ package emailutil
 import (
 	"errors"
 	"fmt"
-	"github.com/pubgo/g/xerror"
+	"github.com/pubgo/xerror"
 	"net"
 	"net/smtp"
 	"regexp"

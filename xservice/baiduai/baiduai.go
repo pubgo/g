@@ -3,7 +3,7 @@ package baiduai
 import (
 	"encoding/json"
 	"errors"
-	"github.com/pubgo/g/pkg/strutil"
+	"github.com/pubgo/x/pkg/strutil"
 	"strings"
 	"sync"
 

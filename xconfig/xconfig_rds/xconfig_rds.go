@@ -2,14 +2,14 @@ package xconfig_rds
 
 import (
 	"encoding/json"
-	"github.com/pubgo/g/xconfig"
-	"github.com/pubgo/g/xdi"
+	"github.com/pubgo/x/xconfig"
+	"github.com/pubgo/x/xdi"
 	"time"
 	"xorm.io/core"
 	"xorm.io/xorm"
 
-	"github.com/pubgo/g/pkg"
-	"github.com/pubgo/g/xerror"
+	"github.com/pubgo/x/pkg"
+	"github.com/pubgo/xerror"
 )
 
 type Rds struct {

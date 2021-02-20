@@ -1,6 +1,6 @@
 package user_oauth
 
-import "github.com/pubgo/g/models"
+import "github.com/pubgo/x/models"
 
 const OAuthGoogle = 1
 

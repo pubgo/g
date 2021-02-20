@@ -3,7 +3,7 @@ package tableutil_test
 import (
 	"fmt"
 	"github.com/mattn/go-runewidth"
-	"github.com/pubgo/g/pkg/tableutil"
+	"github.com/pubgo/x/pkg/tableutil"
 	"testing"
 )
 
