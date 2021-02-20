@@ -1,6 +1,7 @@
-package versionx
+package xversion
 
 import (
+	"runtime"
 	"sync"
 
 	"github.com/imdario/mergo"
@@ -36,4 +37,23 @@ func List() map[string]M {
 		return true
 	})
 	return ms
+}
+
+var GoVersion = runtime.Version()
+var GoPath = ""
+var GoROOT = ""
+var CommitID = ""
+var Project = ""
+
+func init() {
+	xerror.ExitErr(ver.NewVersion(Version))
+	golug_version.Register("golug_version", golug_version.M{
+		"build_time": BuildTime,
+		"version":    Version,
+		"go_version": GoVersion,
+		"go_path":    GoPath,
+		"go_root":    GoROOT,
+		"commit_id":  CommitID,
+		"project":    Project,
+	})
 }

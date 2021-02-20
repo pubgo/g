@@ -14,20 +14,19 @@ type Command = cobra.Command
 var rootCmd = &Command{}
 
 func Init(cfn ...func(cmd *Command)) func(...string) {
-	rootCmd.Use = xenv.Cfg.Service
+	rootCmd.Use = xenv.Cfg.Prefix
 	rootCmd.AddCommand(
 		ss(), &Command{
 			Use:     "version",
 			Aliases: []string{"v"},
 			Short:   "version info",
 			Run: func(cmd *Command, args []string) {
-				xenv.Version()
 			},
 		})
 	rootCmd.PersistentPreRunE = func(cmd *Command, args []string) (err error) {
 		defer xerror.RespErr(&err)
 		xerror.Panic(viper.BindPFlags(cmd.Flags()), "Flags Error")
-		xerror.Panic(xinit.Start(), "xinit error")
+		xinit.Start()
 		return
 	}
 
