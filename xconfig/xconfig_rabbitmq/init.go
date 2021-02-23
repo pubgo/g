@@ -1,3 +1,0 @@
-package xconfig_rabbitmq
-
-
