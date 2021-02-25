@@ -1,11 +1,12 @@
 package retry
 
 import (
-	"github.com/pubgo/x/randutil"
-	"github.com/pubgo/x/xtry"
 	"log"
 	"math"
 	"time"
+
+	"github.com/pubgo/x/rand2"
+	"github.com/pubgo/xerror"
 )
 
 const (
@@ -71,14 +72,14 @@ func (t *retry) Constant() *retry {
 // Random 随机时间
 func (t *retry) Random() *retry {
 	t.strategy = func(u uint) time.Duration {
-		return time.Duration(randutil.Uint64n(uint64(t.factor)))
+		return time.Duration(rand2.Uint64n(uint64(t.factor)))
 	}
 	return t
 }
 
 func (t *retry) RandomIncremental() *retry {
 	t.strategy = func(u uint) time.Duration {
-		return time.Duration(randutil.Uint64n(uint64(t.factor) * uint64(u)))
+		return time.Duration(rand2.Uint64n(uint64(t.factor) * uint64(u)))
 	}
 	return t
 }
@@ -140,13 +141,13 @@ func (t *retry) Do() (err error) {
 
 	var dur time.Duration
 	for i := uint(1); i <= t.attempt && t.deadline.Before(time.Now()); i++ {
-		if err = xtry.Try(func() {
+		if err = xerror.Try(func() {
 			if t.transformation != nil {
 				dur = t.transformation(t.strategy(i))
 			}
 
 			t.handle(i, dur)
-		})()(); err == nil {
+		}); err == nil {
 			return
 		}
 		time.Sleep(dur)

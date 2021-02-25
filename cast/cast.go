@@ -1,6 +1,8 @@
 package cast
 
-import "time"
+import (
+	"time"
+)
 
 // ToBool casts an interface to a bool type.
 func ToBool(i interface{}) bool {

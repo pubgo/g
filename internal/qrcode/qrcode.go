@@ -1,8 +1,8 @@
 package qrcode
 
 import (
-	"github.com/pubgo/x/encoding/hashutil"
-	"github.com/pubgo/x/fileutil"
+	"github.com/pubgo/x/filex"
+	"github.com/pubgo/x/internal/encoding/hashutil"
 	"github.com/pubgo/xerror"
 	"image/jpeg"
 
@@ -51,14 +51,14 @@ func (q *QrCode) Encode(path string) (name string, err error) {
 
 	name = GetQrCodeFileName(q.URL) + q.GetQrCodeExt()
 
-	if fileutil.CheckNotExist(path+name) == true {
+	if filex.CheckNotExist(path+name) == true {
 		code, err := qr.Encode(q.URL, q.Level, q.Mode)
 		xerror.Panic(err)
 
 		code, err = barcode.Scale(code, q.Width, q.Height)
 		xerror.Panic(err)
 
-		f, err := fileutil.MustOpen(name, path)
+		f, err := filex.MustOpen(name, path)
 		xerror.Panic(err)
 		defer f.Close()
 

@@ -2,14 +2,15 @@ package gitutil
 
 import (
 	"errors"
+	"io/ioutil"
+	"log"
+	"strings"
+
 	"github.com/pubgo/x/shutil"
 	cryptossh "golang.org/x/crypto/ssh"
 	"gopkg.in/src-d/go-git.v4/plumbing/transport"
 	"gopkg.in/src-d/go-git.v4/plumbing/transport/http"
 	"gopkg.in/src-d/go-git.v4/plumbing/transport/ssh"
-	"io/ioutil"
-	"log"
-	"strings"
 )
 
 func GitSSHAuth(privateKeyPath string) transport.AuthMethod {

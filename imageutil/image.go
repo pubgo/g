@@ -89,7 +89,7 @@ func ImageResizeChange(source []byte, quality, width int) (*ImageInfo, error) {
 
 	switch strings.ToLower(suffix) {
 	case "jpg", "jpeg":
-		err = jpeg.Encode(tempFile, canvas, &jpeg.Options{quality})
+		err = jpeg.Encode(tempFile, canvas, &jpeg.Options{Quality: quality})
 		if err != nil {
 			return nil, err
 		}

@@ -93,7 +93,7 @@ func (this *HDC) DrawText(pen Pen, text string) bool {
 	for _, s := range strings.Split(text, "\r\n") {
 		_, err := c.DrawString(s, pt)
 		if err != nil {
-			log.Println("c.DrawString(%s) error(%v)", s, err)
+			log.Printf("c.DrawString(%s) error(%v)\n", s, err)
 			return false
 		}
 		pt.Y += c.PointToFixed(pen.FontSize * 1.5)
@@ -116,7 +116,7 @@ func (this *HDC) Save(imagePath string) bool {
 	}
 	if err != nil {
 
-		log.Println("image encode error(%v)", err)
+		log.Printf("image encode error(%v)", err)
 		//mylog.Error(err)
 		return false
 	}
