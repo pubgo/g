@@ -5,8 +5,8 @@ import (
 	"runtime"
 )
 
-// FunctionName ...
-func FunctionName(i interface{}) string {
+// FnName ...
+func FnName(i interface{}) string {
 	return runtime.FuncForPC(reflect.ValueOf(i).Pointer()).Name()
 }
 

@@ -7,7 +7,7 @@ import (
 
 	"github.com/pubgo/x/abc"
 	"github.com/pubgo/x/fx"
-	"github.com/pubgo/x/stack2"
+	"github.com/pubgo/x/stack"
 	"github.com/pubgo/x/sync2"
 	"github.com/pubgo/xerror"
 	"github.com/pubgo/xlog"
@@ -133,7 +133,7 @@ func (s *promise) Go(fn func()) {
 func Promise(fn func(g abc.Future)) abc.IPromise {
 	xerror.Assert(fn == nil, "[fn] should not be nil")
 
-	s := &promise{data: make(chan abc.FutureValue), stack: stack2.Func(fn)}
+	s := &promise{data: make(chan abc.FutureValue), stack: stack.Func(fn)}
 	s.Go(func() { fn(&future{p: s}) })
 	return s
 }
@@ -151,7 +151,7 @@ func Async(fn interface{}, args ...interface{}) (val1 abc.FutureValue) {
 	go func() {
 		defer xerror.Resp(func(err1 xerror.XErr) {
 			value.setErr(err1.WrapF("recovery error, input:%#v, func:%s, caller:%s",
-				args, reflect.TypeOf(fn), stack2.Func(fn)))
+				args, reflect.TypeOf(fn), stack.Func(fn)))
 			data <- make([]reflect.Value, 0)
 		})
 

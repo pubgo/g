@@ -1,9 +1,10 @@
 package sshutil
 
 import (
-	"golang.org/x/crypto/ssh"
 	"strconv"
 	"time"
+
+	"golang.org/x/crypto/ssh"
 )
 
 type terminal struct {

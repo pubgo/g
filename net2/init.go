@@ -1,8 +1,9 @@
 package net2
 
 import (
-	"github.com/pubgo/xerror"
 	"net"
+
+	"github.com/pubgo/xerror"
 )
 
 func IpAddress() string {

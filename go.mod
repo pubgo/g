@@ -18,7 +18,6 @@ require (
 	github.com/mattn/go-isatty v0.0.12
 	github.com/melbahja/goph v0.2.0
 	github.com/microcosm-cc/bluemonday v1.0.2
-	github.com/mitchellh/mapstructure v1.4.1
 	github.com/modern-go/reflect2 v1.0.1
 	github.com/nfnt/resize v0.0.0-20180221191011-83c6a9932646
 	github.com/pkg/sftp v1.11.0

@@ -96,23 +96,6 @@ func GetWwwIP() (exip string) {
 	return string(bytes.TrimSpace(b))
 }
 
-// GetLocalIP 获取内网ip
-func GetLocalIP() (ip string) {
-	addrs, err := net.InterfaceAddrs()
-	if err != nil {
-		return
-	}
-	for _, a := range addrs {
-		if ipnet, ok := a.(*net.IPNet); ok && !ipnet.IP.IsLoopback() {
-			if ipnet.IP.To4() != nil {
-				ip = ipnet.IP.String()
-				break
-			}
-		}
-	}
-	return
-}
-
 // GetClientIP 获取用户ip
 func GetClientIP(r *http.Request) (ip string) {
 	ip = r.Header.Get("X-Real-Ip")
@@ -150,6 +133,23 @@ func GetIp138(ip string) string {
 	})
 
 	return result
+}
+
+// GetLocalIP 获取内网ip
+func GetLocalIP1() (ip string) {
+	addrs, err := net.InterfaceAddrs()
+	if err != nil {
+		return
+	}
+	for _, a := range addrs {
+		if ipnet, ok := a.(*net.IPNet); ok && !ipnet.IP.IsLoopback() {
+			if ipnet.IP.To4() != nil {
+				ip = ipnet.IP.String()
+				break
+			}
+		}
+	}
+	return
 }
 
 func GetLocalIp() string {

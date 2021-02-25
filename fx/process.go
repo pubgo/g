@@ -86,11 +86,11 @@ func (t *process) tick(args ...interface{}) <-chan time.Time {
 	return c
 }
 
-func (t *process) goCtx(fn func(ctx context.Context)) *abc.CancelValue {
+func (t *process) goCtx(fn func(ctx context.Context)) *abc.Cancel {
 	xerror.Assert(fn == nil, "[fn] should not be nil")
 
 	ctx, cancel := context.WithCancel(context.Background())
-	var val = &abc.CancelValue{Cancel: cancel}
+	var val = &abc.Cancel{Cancel: cancel}
 	go func() {
 		defer cancel()
 		defer xerror.RespErr(&val.Err)
@@ -101,11 +101,27 @@ func (t *process) goCtx(fn func(ctx context.Context)) *abc.CancelValue {
 	return val
 }
 
-func (t *process) goLoopCtx(fn func(ctx context.Context)) *abc.CancelValue {
+func (t *process) loopCtx(fn func(i int)) (gErr error) {
+	xerror.Assert(fn == nil, "[fn] should not be nil")
+
+	defer xerror.Resp(func(err xerror.XErr) {
+		if xerror.Cause(err) == errBreak {
+			return
+		}
+
+		gErr = err
+	})
+
+	for i := 0; ; i++ {
+		fn(i)
+	}
+}
+
+func (t *process) goLoopCtx(fn func(ctx context.Context)) *abc.Cancel {
 	xerror.Assert(fn == nil, "[fn] should not be nil")
 
 	ctx, cancel := context.WithCancel(context.Background())
-	var val = &abc.CancelValue{Cancel: cancel}
+	var val = &abc.Cancel{Cancel: cancel}
 	go func() {
 		defer cancel()
 		defer xerror.Resp(func(err xerror.XErr) {

@@ -2,7 +2,6 @@ package pathutil
 
 import (
 	"bufio"
-	"github.com/pubgo/xerror"
 	"io"
 	"io/ioutil"
 	"os"
@@ -11,10 +10,12 @@ import (
 	"path/filepath"
 	"regexp"
 	"strings"
+
+	"github.com/pubgo/xerror"
 )
 
-// CheckNotExist check if the file exists
-func CheckNotExist(src string) bool {
+// IsNotExist check if the file exists
+func IsNotExist(src string) bool {
 	_, err := os.Stat(src)
 	return os.IsNotExist(err)
 }
@@ -29,8 +30,8 @@ func CheckPermission(src string) bool {
 func IsNotExistMkDir(src string) (err error) {
 	defer xerror.RespErr(&err)
 
-	if notExist := CheckNotExist(src); notExist == true {
-		xerror.PanicM(MkDir(src), "MkDir Error")
+	if notExist := IsNotExist(src); notExist == true {
+		xerror.Panic(MkDir(src), "MkDir Error")
 	}
 
 	return

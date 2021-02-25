@@ -1,4 +1,4 @@
-package stack2
+package stack
 
 import (
 	"reflect"

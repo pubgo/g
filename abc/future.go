@@ -1,6 +1,8 @@
 package abc
 
-import "reflect"
+import (
+	"reflect"
+)
 
 type IPromise interface {
 	Await() chan FutureValue

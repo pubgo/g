@@ -4,7 +4,7 @@ import (
 	"context"
 )
 
-type CancelValue struct {
+type Cancel struct {
 	Cancel context.CancelFunc
 	Err    error
 }

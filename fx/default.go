@@ -20,12 +20,14 @@ func Tick(args ...interface{}) <-chan time.Time { return defaultProcess.tick(arg
 
 // Go
 // 启动一个goroutine
-func Go(fn func(ctx context.Context)) *abc.CancelValue { return defaultProcess.goCtx(fn) }
+func Go(fn func(ctx context.Context)) *abc.Cancel { return defaultProcess.goCtx(fn) }
 
 // GoLoop
 // 启动一个goroutine loop
 // 是为了替换 `go func() {for{ }}()` 这类的代码
-func GoLoop(fn func(ctx context.Context)) *abc.CancelValue { return defaultProcess.goLoopCtx(fn) }
+func GoLoop(fn func(ctx context.Context)) *abc.Cancel { return defaultProcess.goLoopCtx(fn) }
+
+func Loop(fn func(i int)) error { return defaultProcess.loopCtx(fn) }
 
 // GoDelay
 // 延迟goroutine
