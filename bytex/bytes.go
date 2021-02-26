@@ -6,11 +6,6 @@ import (
 	"strconv"
 )
 
-type (
-	// Bytes struct
-	Bytes struct{}
-)
-
 const (
 	_ = 1.0 << (10 * iota) // ignore first value by assigning to blank identifier
 	KB
@@ -21,19 +16,19 @@ const (
 	EB
 )
 
-var (
-	pattern = regexp.MustCompile(`(?i)^(-?\d+(?:\.\d+)?)([KMGTPE]B?|B?)$`)
-	global  = New()
+type (
+	// bytes struct
+	bytes struct{}
 )
 
-// New creates a Bytes instance.
-func New() *Bytes {
-	return &Bytes{}
-}
+var (
+	pattern = regexp.MustCompile(`(?i)^(-?\d+(?:\.\d+)?)([KMGTPE]B?|B?)$`)
+	global  = &bytes{}
+)
 
 // Format formats bytes integer to human readable string.
 // For example, 31323 bytes will return 30.59KB.
-func (*Bytes) Format(b int64) string {
+func (*bytes) Format(b int64) string {
 	multiple := ""
 	value := float64(b)
 
@@ -67,7 +62,7 @@ func (*Bytes) Format(b int64) string {
 
 // Parse parses human readable bytes string to bytes integer.
 // For example, 6GB (6G is also valid) will return 6442450944.
-func (*Bytes) Parse(value string) (i int64, err error) {
+func (*bytes) Parse(value string) (i int64, err error) {
 	parts := pattern.FindStringSubmatch(value)
 	if len(parts) < 3 {
 		return 0, fmt.Errorf("error parsing value=%s", value)
@@ -97,12 +92,12 @@ func (*Bytes) Parse(value string) (i int64, err error) {
 	}
 }
 
-// Format wraps global Bytes's Format function.
+// Format wraps global bytes's Format function.
 func Format(b int64) string {
 	return global.Format(b)
 }
 
-// Parse wraps global Bytes's Parse function.
+// Parse wraps global bytes's Parse function.
 func Parse(val string) (int64, error) {
 	return global.Parse(val)
 }

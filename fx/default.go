@@ -33,6 +33,8 @@ func Loop(fn func(i int)) error { return defaultProcess.loopCtx(fn) }
 // 延迟goroutine
 func GoDelay(dur time.Duration, fn func()) error { return defaultProcess.goWithDelay(dur, fn) }
 
+func Delay(dur time.Duration, fn func()) error { return defaultProcess.delay(dur, fn) }
+
 // Timeout
 // 执行超时函数, 超时后, 函数自动退出
 func Timeout(dur time.Duration, fn func()) error {

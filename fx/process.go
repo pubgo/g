@@ -188,3 +188,23 @@ func (t *process) goWithDelay(dur time.Duration, fn func()) (gErr error) {
 
 	return
 }
+
+func (t *process) delay(dur time.Duration, fn func()) (gErr error) {
+	defer xerror.RespErr(&gErr)
+
+	xerror.Assert(dur <= 0, "[dur] should not be less than zero")
+	xerror.Assert(fn == nil, "[fn] should not be nil")
+
+	defer xerror.Resp(func(err xerror.XErr) {
+		dur = 0
+		gErr = err.WrapF("process.goWithDelay error")
+	})
+
+	fn()
+
+	if dur != 0 {
+		time.Sleep(dur)
+	}
+
+	return
+}

@@ -1,9 +1,10 @@
 package filex
 
 import (
-	"github.com/pubgo/x/hashutil"
 	"io/ioutil"
 	"os"
+
+	"github.com/pubgo/x/hashutil"
 )
 
 // TempFileWithText creates the temporary file with the given content,

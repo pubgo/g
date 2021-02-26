@@ -14,11 +14,15 @@ func handleKey(key string) string {
 	if !strings.HasPrefix(key, Prefix) {
 		key = Prefix + "_" + key
 	}
-	return key
+	return upper(key)
 }
 
 func Set(key, value string) error {
-	return os.Setenv(upper(handleKey(key)), value)
+	return os.Setenv(handleKey(key), value)
+}
+
+func Unsetenv(key string) error {
+	return os.Unsetenv(handleKey(key))
 }
 
 func Get(names ...string) string {
@@ -38,11 +42,7 @@ func GetVal(val *string, names ...string) {
 }
 
 func Lookup(key string) (string, bool) {
-	return os.LookupEnv(upper(handleKey(key)))
-}
-
-func Unsetenv(key string) error {
-	return os.Unsetenv(upper(handleKey(key)))
+	return os.LookupEnv(handleKey(key))
 }
 
 // ExpandEnv returns value of convert with environment variable.
