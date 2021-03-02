@@ -12,6 +12,7 @@ require (
 	github.com/ethereum/go-ethereum v1.9.25
 	github.com/go-ole/go-ole v1.2.4 // indirect
 	github.com/golang/freetype v0.0.0-20170609003504-e2365dfdc4a0
+	github.com/golang/snappy v0.0.3-0.20201103224600-674baa8c7fc3
 	github.com/google/go-cmp v0.5.1 // indirect
 	github.com/iris-contrib/blackfriday v2.0.0+incompatible
 	github.com/json-iterator/go v1.1.10
