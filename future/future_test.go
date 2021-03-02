@@ -5,7 +5,7 @@ import (
 	"net/http"
 	"testing"
 
-	"github.com/pubgo/xprocess/xprocess_abc"
+	"github.com/pubgo/x/abc"
 	"github.com/stretchr/testify/assert"
 )
 
@@ -82,8 +82,8 @@ func TestAwait(t *testing.T) {
 	assert.Equal(t, head.Get().(http.Header).Get("aa"), "11")
 }
 
-func promise1() xprocess_abc.IPromise {
-	return Promise(func(g xprocess_abc.Future) {
+func promise1() abc.IPromise {
+	return Promise(func(g abc.Future) {
 		for i := 0; i < 10; i++ {
 			val := Async(http.Get, "https://www.cnblogs.com")
 			g.Yield(val)

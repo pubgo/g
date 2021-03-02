@@ -2,10 +2,12 @@ package filex
 
 import (
 	"io"
+	"io/ioutil"
 	"os"
+	"path/filepath"
+	"runtime"
+	"strings"
 )
-
-const bufSize = 1024
 
 func FirstLine(filename string) (string, error) {
 	file, err := os.Open(filename)

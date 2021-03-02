@@ -6,7 +6,7 @@ import (
 	"time"
 
 	"github.com/pubgo/x/rand2"
-	"github.com/pubgo/xerror"
+	"github.com/pubgo/x/utilx"
 )
 
 const (
@@ -126,7 +126,7 @@ func (t *retry) Go() (err error) {
 }
 
 // Do 运行
-func (t *retry) Do() (err error) {
+func (t *retry) Do() (gErr error) {
 	if t.delay > 0 {
 		time.Sleep(t.delay)
 	}
@@ -141,15 +141,13 @@ func (t *retry) Do() (err error) {
 
 	var dur time.Duration
 	for i := uint(1); i <= t.attempt && t.deadline.Before(time.Now()); i++ {
-		if err = xerror.Try(func() {
+		utilx.Try(func() {
 			if t.transformation != nil {
 				dur = t.transformation(t.strategy(i))
 			}
 
 			t.handle(i, dur)
-		}); err == nil {
-			return
-		}
+		}, func(err error) { gErr = err })
 		time.Sleep(dur)
 	}
 	return
