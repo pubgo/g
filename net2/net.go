@@ -5,6 +5,7 @@ import (
 	"errors"
 	"fmt"
 	"github.com/pubgo/x/utilx"
+	"github.com/pubgo/xerror"
 	"io/ioutil"
 	"log"
 	"net"
@@ -110,7 +111,8 @@ func GetClientIP(r *http.Request) (ip string) {
 func GetIp138(ip string) string {
 	result := ""
 	utilx.Try(func() {
-		resp, _ := http.Get("http://ip138.com/ips138.asp?ip=" + ip)
+		resp, err := http.Get("http://ip138.com/ips138.asp?ip=" + ip)
+		xerror.Panic(err)
 
 		defer resp.Body.Close()
 		input, _ := ioutil.ReadAll(resp.Body)
