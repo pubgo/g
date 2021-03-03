@@ -18,7 +18,20 @@ func Exec(shell ...string) (string, error) {
 	var out = strutil.GetBuilder()
 	defer out.Reset()
 
-	cmd := Cmd(shell...)
+	cmd := Bash(shell...)
+	cmd.Stdout = out
+
+	if err := cmd.Run(); err != nil {
+		return "", err
+	}
+
+	return out.String(), nil
+}
+
+func Run(cmd *exec.Cmd) (string, error) {
+	var out = strutil.GetBuilder()
+	defer out.Reset()
+
 	cmd.Stdout = out
 
 	if err := cmd.Run(); err != nil {
@@ -29,6 +42,14 @@ func Exec(shell ...string) (string, error) {
 }
 
 func Cmd(args ...string) *exec.Cmd {
+	cmd := exec.Command(args[0], args[1:]...)
+	cmd.Stdout = os.Stdout
+	cmd.Stdin = os.Stdin
+	cmd.Stderr = os.Stderr
+	return cmd
+}
+
+func Bash(args ...string) *exec.Cmd {
 	cmd := exec.Command("/bin/bash", "-c", strings.Join(args, " "))
 	cmd.Stdout = os.Stdout
 	cmd.Stdin = os.Stdin
@@ -53,22 +74,23 @@ func GraphViz(in, out string) (err error) {
 	return ioutil.WriteFile(out, []byte(ret), 0600)
 }
 
-// TimeDifference returns the time difference between the localhost and the given NTP server.
-func TimeDifference(server string) (time.Duration, error) {
-	output, err := exec.Command("/usr/sbin/ntpdate", "-q", server).CombinedOutput()
+// NtpTimeDiff returns the time difference between the localhost and the given NTP server.
+func NtpTimeDiff(server string) (time.Duration, error) {
+	output, err := Run(Cmd("/usr/sbin/ntpdate", "-q", server))
 	if err != nil {
 		return time.Duration(0), err
 	}
 
 	re, _ := regexp.Compile("offset (.*) sec")
-	submatched := re.FindSubmatch(output)
-	if len(submatched) != 2 {
+	matched := re.FindSubmatch([]byte(output))
+	if len(matched) != 2 {
 		return time.Duration(0), errors.New("invalid ntpdate output")
 	}
 
-	f, err := strconv.ParseFloat(string(submatched[1]), 64)
+	f, err := strconv.ParseFloat(string(matched[1]), 64)
 	if err != nil {
 		return time.Duration(0), err
 	}
+
 	return time.Duration(f*1000) * time.Millisecond, nil
 }
