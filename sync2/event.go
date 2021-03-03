@@ -16,7 +16,7 @@
  *
  */
 
-// Package xprocess_event implements additional synchronization primitives built upon
+// Package event implements additional synchronization primitives built upon
 // the sync package.
 
 package sync2

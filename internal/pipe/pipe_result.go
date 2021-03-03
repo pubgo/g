@@ -2,7 +2,7 @@ package pipe
 
 import (
 	"encoding/json"
-	"github.com/pubgo/x/utilx"
+	"github.com/pubgo/x/xutil"
 	"github.com/pubgo/xerror"
 	"reflect"
 )
@@ -37,7 +37,7 @@ func (t *_func) ToData(fn ...interface{}) interface{} {
 	_rst := reflect.MakeSlice(reflect.SliceOf(_t), 0, len(t.params))
 	_rst = reflect.Append(_rst, t.params...)
 
-	if len(fn) != 0 && !utilx.IsZero(fn[0]) && reflect.TypeOf(fn[0]).Kind() == reflect.Func {
+	if len(fn) != 0 && !xutil.IsZero(fn[0]) && reflect.TypeOf(fn[0]).Kind() == reflect.Func {
 		reflect.ValueOf(fn[0]).Call([]reflect.Value{_rst})
 		return nil
 	}
@@ -48,7 +48,7 @@ func (t *_func) ToData(fn ...interface{}) interface{} {
 func (t *_func) ToJSON() string {
 	var _res []interface{}
 	for _, _p := range t.params {
-		_res = append(_res, utilx.If(utilx.IsZero(_p), "", _p.Interface))
+		_res = append(_res, xutil.If(xutil.IsZero(_p), "", _p.Interface))
 	}
 
 	dt, err := json.Marshal(_res)

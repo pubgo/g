@@ -9,8 +9,6 @@ import (
 	"strconv"
 	"strings"
 	"unsafe"
-
-	"github.com/tal-tech/go-zero/core/lang"
 )
 
 var (
@@ -89,13 +87,13 @@ func TakeWithPriority(fns ...func() string) string {
 }
 
 func Union(first, second []string) []string {
-	set := make(map[string]lang.PlaceholderType)
+	set := make(map[string]struct{})
 
 	for _, each := range first {
-		set[each] = lang.Placeholder
+		set[each] = struct{}{}
 	}
 	for _, each := range second {
-		set[each] = lang.Placeholder
+		set[each] = struct{}{}
 	}
 
 	merged := make([]string, 0, len(set))

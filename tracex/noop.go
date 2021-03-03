@@ -2,8 +2,7 @@ package tracex
 
 import (
 	"context"
-
-	"github.com/tal-tech/go-zero/core/trace/tracespec"
+	"github.com/pubgo/x/tracex/tracespec"
 )
 
 var emptyNoopSpan = noopSpan{}

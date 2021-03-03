@@ -6,7 +6,7 @@ import (
 	"time"
 
 	"github.com/pubgo/x/rand2"
-	"github.com/pubgo/x/utilx"
+	"github.com/pubgo/x/xutil"
 )
 
 const (
@@ -141,7 +141,7 @@ func (t *retry) Do() (gErr error) {
 
 	var dur time.Duration
 	for i := uint(1); i <= t.attempt && t.deadline.Before(time.Now()); i++ {
-		utilx.Try(func() {
+		xutil.Try(func() {
 			if t.transformation != nil {
 				dur = t.transformation(t.strategy(i))
 			}

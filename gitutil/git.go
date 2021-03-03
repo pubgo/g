@@ -30,7 +30,7 @@ func GitSSHAuth(privateKeyPath string) transport.AuthMethod {
 func GitCredentialAuth() (transport.AuthMethod, error) {
 	_auth := &http.BasicAuth{}
 
-	_dt, err := shutil.Execute("git credential fill")
+	_dt, err := shutil.Exec("git credential fill")
 	if err != nil {
 		return _auth, err
 	}

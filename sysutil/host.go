@@ -1,9 +1,9 @@
 package sysutil
 
 import (
+	"github.com/pubgo/x/strutil"
+	
 	"os"
-
-	"github.com/tal-tech/go-zero/core/stringx"
 )
 
 var hostname string
@@ -12,7 +12,7 @@ func init() {
 	var err error
 	hostname, err = os.Hostname()
 	if err != nil {
-		hostname = stringx.RandId()
+		hostname = strutil.RandId()
 	}
 }
 

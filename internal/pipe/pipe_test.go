@@ -3,7 +3,7 @@ package pipe
 import (
 	"encoding/hex"
 	"fmt"
-	"github.com/pubgo/x/utilx"
+	"github.com/pubgo/x/xutil"
 	"math/big"
 	"reflect"
 	"strings"
@@ -23,7 +23,7 @@ func TestP(t *testing.T) {
 func TestFilter(t *testing.T) {
 	t.Run("test filter", func(t *testing.T) {
 		SliceOf(t1{A: "dd", b: 1}, &t1{A: "sss", b: 2}).Filter(func(i int, v interface{}) bool {
-			return !utilx.IsZero(v)
+			return !xutil.IsZero(v)
 		}).P()
 	})
 

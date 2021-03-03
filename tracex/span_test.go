@@ -4,9 +4,9 @@ import (
 	"context"
 	"testing"
 
+	"github.com/pubgo/x/strutil"
+	"github.com/pubgo/x/tracex/tracespec"
 	"github.com/stretchr/testify/assert"
-	"github.com/tal-tech/go-zero/core/stringx"
-	"github.com/tal-tech/go-zero/core/trace/tracespec"
 	"google.golang.org/grpc/metadata"
 )
 
@@ -97,7 +97,7 @@ func TestSpan_Follow(t *testing.T) {
 	}
 
 	for _, test := range tests {
-		t.Run(stringx.RandId(), func(t *testing.T) {
+		t.Run(strutil.RandId(), func(t *testing.T) {
 			md := metadata.New(map[string]string{
 				traceIdKey: "a",
 				spanIdKey:  test.span,

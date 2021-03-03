@@ -4,7 +4,7 @@ import (
 	"bytes"
 	"errors"
 	"fmt"
-	"github.com/pubgo/x/utilx"
+	"github.com/pubgo/x/xutil"
 	"github.com/pubgo/xerror"
 	"io/ioutil"
 	"log"
@@ -110,7 +110,7 @@ func GetClientIP(r *http.Request) (ip string) {
 // ~~~~~~ 暂时废弃，采用 IPIP
 func GetIp138(ip string) string {
 	result := ""
-	utilx.Try(func() {
+	xutil.Try(func() {
 		resp, err := http.Get("http://ip138.com/ips138.asp?ip=" + ip)
 		xerror.Panic(err)
 

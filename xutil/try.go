@@ -1,4 +1,4 @@
-package utilx
+package xutil
 
 import "github.com/pubgo/xerror"
 

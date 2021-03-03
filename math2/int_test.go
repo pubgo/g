@@ -3,8 +3,8 @@ package math2
 import (
 	"testing"
 
+	"github.com/pubgo/x/strutil"
 	"github.com/stretchr/testify/assert"
-	"github.com/tal-tech/go-zero/core/stringx"
 )
 
 func TestMaxInt(t *testing.T) {
@@ -32,7 +32,7 @@ func TestMaxInt(t *testing.T) {
 
 	for _, each := range cases {
 		each := each
-		t.Run(stringx.Rand(), func(t *testing.T) {
+		t.Run(strutil.Rand(), func(t *testing.T) {
 			actual := MaxInt(each.a, each.b)
 			assert.Equal(t, each.expect, actual)
 		})
@@ -63,7 +63,7 @@ func TestMinInt(t *testing.T) {
 	}
 
 	for _, each := range cases {
-		t.Run(stringx.Rand(), func(t *testing.T) {
+		t.Run(strutil.Rand(), func(t *testing.T) {
 			actual := MinInt(each.a, each.b)
 			assert.Equal(t, each.expect, actual)
 		})

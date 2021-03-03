@@ -162,22 +162,6 @@ func Perm(n int) []int {
 	return m
 }
 
-// UUID
-// return uuid
-func UUID(length int64) string {
-	ele := []string{"1", "2", "3", "4", "5", "6", "7", "8", "9", "0", "a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "v", "k",
-		"l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z", "A", "B", "C", "D", "E", "F", "G",
-		"H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z"}
-	ele = Random(ele)
-
-	uuid := ""
-	var i int64
-	for i = 0; i < length; i++ {
-		uuid += ele[IntN(59)]
-	}
-	return uuid
-}
-
 // Random
 // return random string from string slice
 func Random(ss []string) []string {

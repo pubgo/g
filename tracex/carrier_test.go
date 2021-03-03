@@ -5,8 +5,8 @@ import (
 	"net/http/httptest"
 	"testing"
 
+	"github.com/pubgo/x/strutil"
 	"github.com/stretchr/testify/assert"
-	"github.com/tal-tech/go-zero/core/stringx"
 )
 
 func TestHttpCarrier(t *testing.T) {
@@ -19,7 +19,7 @@ func TestHttpCarrier(t *testing.T) {
 	}
 
 	for _, test := range tests {
-		t.Run(stringx.RandId(), func(t *testing.T) {
+		t.Run(strutil.RandId(), func(t *testing.T) {
 			req := httptest.NewRequest(http.MethodGet, "http://localhost", nil)
 			carrier := httpCarrier(req.Header)
 			for k, v := range test {
@@ -43,7 +43,7 @@ func TestGrpcCarrier(t *testing.T) {
 	}
 
 	for _, test := range tests {
-		t.Run(stringx.RandId(), func(t *testing.T) {
+		t.Run(strutil.RandId(), func(t *testing.T) {
 			m := make(map[string][]string)
 			carrier := grpcCarrier(m)
 			for k, v := range test {

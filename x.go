@@ -56,7 +56,7 @@ func CopyBytes(b []byte) []byte {
 	return tmp
 }
 
-func Try(fn func(), catch ...func(err error)) {
+func TryCatch(fn func(), catch ...func(err error)) {
 	xerror.Assert(fn == nil, "[fn] should not be nil")
 
 	defer xerror.Resp(func(err xerror.XErr) {
@@ -66,4 +66,13 @@ func Try(fn func(), catch ...func(err error)) {
 	})
 
 	fn()
+}
+
+func Try(fn func()) (err error) {
+	xerror.Assert(fn == nil, "[fn] should not be nil")
+
+	defer xerror.RespErr(&err)
+	fn()
+
+	return nil
 }

@@ -3,13 +3,11 @@ package tracex
 import (
 	"context"
 	"fmt"
+	"github.com/pubgo/x/strutil"
+	"github.com/pubgo/x/tracex/tracespec"
 	"strconv"
 	"strings"
 	"time"
-
-	"github.com/tal-tech/go-zero/core/stringx"
-	"github.com/tal-tech/go-zero/core/timex"
-	"github.com/tal-tech/go-zero/core/trace/tracespec"
 )
 
 const (
@@ -31,13 +29,13 @@ type Span struct {
 }
 
 func newServerSpan(carrier Carrier, serviceName, operationName string) tracespec.Trace {
-	traceId := stringx.TakeWithPriority(func() string {
+	traceId := strutil.TakeWithPriority(func() string {
 		if carrier != nil {
 			return carrier.Get(traceIdKey)
 		}
 		return ""
-	}, stringx.RandId)
-	spanId := stringx.TakeWithPriority(func() string {
+	}, strutil.RandId)
+	spanId := strutil.TakeWithPriority(func() string {
 		if carrier != nil {
 			return carrier.Get(spanIdKey)
 		}
@@ -53,7 +51,7 @@ func newServerSpan(carrier Carrier, serviceName, operationName string) tracespec
 		},
 		serviceName:   serviceName,
 		operationName: operationName,
-		startTime:     timex.Time(),
+		startTime:     time.Now(),
 		flag:          serverFlag,
 	}
 }
@@ -69,7 +67,7 @@ func (s *Span) Follow(ctx context.Context, serviceName, operationName string) (c
 		},
 		serviceName:   serviceName,
 		operationName: operationName,
-		startTime:     timex.Time(),
+		startTime:     time.Now(),
 		flag:          s.flag,
 	}
 	return context.WithValue(ctx, tracespec.TracingKey, span), span
@@ -83,7 +81,7 @@ func (s *Span) Fork(ctx context.Context, serviceName, operationName string) (con
 		},
 		serviceName:   serviceName,
 		operationName: operationName,
-		startTime:     timex.Time(),
+		startTime:     time.Now(),
 		flag:          clientFlag,
 	}
 	return context.WithValue(ctx, tracespec.TracingKey, span), span

@@ -2,7 +2,7 @@ package pipe
 
 import (
 	"fmt"
-	"github.com/pubgo/x/utilx"
+	"github.com/pubgo/x/xutil"
 	"reflect"
 
 	"github.com/pubgo/xerror"
@@ -74,7 +74,7 @@ func (t *_func) Map(fn interface{}) *_func {
 			p = reflect.New(_t.In(_t.NumIn() - 1).Elem())
 		}
 
-		_r := _fn.Call(utilx.If(_t.NumIn() == 1, []reflect.Value{p}, []reflect.Value{reflect.ValueOf(i), p}).([]reflect.Value))
+		_r := _fn.Call(xutil.If(_t.NumIn() == 1, []reflect.Value{p}, []reflect.Value{reflect.ValueOf(i), p}).([]reflect.Value))
 		if !_r[0].IsValid() {
 			_r[0] = reflect.New(_t.Out(0).Elem())
 		}
@@ -126,7 +126,7 @@ func (t *_func) Reduce(fn interface{}) *_func {
 
 func (t *_func) Any(fn func(v interface{}) bool) bool {
 	for _, p := range t.params {
-		if fn(utilx.Default(p, p.Interface)) {
+		if fn(xutil.Default(p, p.Interface)) {
 			return true
 		}
 	}
@@ -135,7 +135,7 @@ func (t *_func) Any(fn func(v interface{}) bool) bool {
 
 func (t *_func) Every(fn func(v interface{}) bool) bool {
 	for _, p := range t.params {
-		if !fn(utilx.If(!p.IsValid(), nil, p.Interface)) {
+		if !fn(xutil.If(!p.IsValid(), nil, p.Interface)) {
 			return false
 		}
 	}
@@ -144,13 +144,13 @@ func (t *_func) Every(fn func(v interface{}) bool) bool {
 
 func (t *_func) MustNotNil() {
 	for _, p := range t.params {
-		xerror.Assert(utilx.IsZero(p), "nil error")
+		xerror.Assert(xutil.IsZero(p), "nil error")
 	}
 }
 
 func (t *_func) FilterNil() *_func {
 	return t.Filter(func(v interface{}) bool {
-		return !utilx.IsZero(v)
+		return !xutil.IsZero(v)
 	})
 }
 
@@ -167,7 +167,7 @@ func (t *_func) Filter(fn interface{}) *_func {
 			p = reflect.New(_t.In(_t.NumIn() - 1).Elem())
 		}
 
-		_r := _fn.Call(utilx.If(_t.NumIn() == 1, []reflect.Value{p}, []reflect.Value{reflect.ValueOf(i), p}).([]reflect.Value))
+		_r := _fn.Call(xutil.If(_t.NumIn() == 1, []reflect.Value{p}, []reflect.Value{reflect.ValueOf(i), p}).([]reflect.Value))
 		if _r[0].Bool() {
 			vs = append(vs, p)
 		}
@@ -187,6 +187,6 @@ func (t *_func) Each(fn interface{}) {
 		if !p.IsValid() {
 			p = reflect.New(_t.In(_t.NumIn() - 1).Elem())
 		}
-		_fn.Call(utilx.If(_t.NumIn() == 1, []reflect.Value{p}, []reflect.Value{reflect.ValueOf(i), p}).([]reflect.Value))
+		_fn.Call(xutil.If(_t.NumIn() == 1, []reflect.Value{p}, []reflect.Value{reflect.ValueOf(i), p}).([]reflect.Value))
 	}
 }
