@@ -1,4 +1,4 @@
-package bytex
+package byteutil
 
 import (
 	"strconv"
@@ -89,7 +89,7 @@ type Pool struct {
 }
 
 // NewPool constructs a new Pool.
-func NewBytes(optionalSize ...int) Pool {
+func NewPool(optionalSize ...int) Pool {
 	defaultSize := 1024
 	if len(optionalSize) != 0 && optionalSize[0] > 1024 {
 		defaultSize = optionalSize[0]

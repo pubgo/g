@@ -110,7 +110,7 @@ func GetClientIP(r *http.Request) (ip string) {
 // ~~~~~~ 暂时废弃，采用 IPIP
 func GetIp138(ip string) string {
 	result := ""
-	xutil.Try(func() {
+	xutil.TryCatch(func() {
 		resp, err := http.Get("http://ip138.com/ips138.asp?ip=" + ip)
 		xerror.Panic(err)
 

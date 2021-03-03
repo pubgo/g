@@ -1,9 +1,25 @@
 package xutil
 
 import (
+	"github.com/pubgo/xerror"
+
 	"reflect"
 	"unsafe"
 )
+
+// #nosec G103
+// ToStr returns a string pointer without allocation
+func ToStr(bytes []byte) string {
+	return *(*string)(unsafe.Pointer(&bytes))
+}
+
+// #nosec G103
+// ToBytes returns a byte pointer without allocation
+func ToBytes(str string) []byte {
+	x := (*[2]uintptr)(unsafe.Pointer(&str))
+	h := [3]uintptr{x[0], x[1], x[1]}
+	return *(*[]byte)(unsafe.Pointer(&h))
+}
 
 // If exported
 func If(check bool, a, b interface{}) interface{} {
@@ -25,31 +41,32 @@ func IsZero(val interface{}) bool {
 	return val == nil || reflect.ValueOf(val).IsZero()
 }
 
-// #nosec G103
-// GetString returns a string pointer without allocation
-func UnsafeString(b []byte) string {
-	return *(*string)(unsafe.Pointer(&b))
+func TryCatch(fn func(), catch ...func(err error)) {
+	xerror.Assert(fn == nil, "[fn] should not be nil")
+
+	defer xerror.Resp(func(err xerror.XErr) {
+		if len(catch) > 0 {
+			catch[0](err)
+		}
+	})
+
+	fn()
 }
 
-// #nosec G103
-// GetBytes returns a byte pointer without allocation
-func UnsafeBytes(s string) (bs []byte) {
-	sh := (*reflect.StringHeader)(unsafe.Pointer(&s))
-	bh := (*reflect.SliceHeader)(unsafe.Pointer(&bs))
-	bh.Data = sh.Data
-	bh.Len = sh.Len
-	bh.Cap = sh.Len
+func TryWith(err *error, fn func()) {
+	xerror.Assert(fn == nil, "[fn] should not be nil")
+
+	defer xerror.RespErr(err)
+	fn()
+
 	return
 }
 
-// CopyString copies a string to make it immutable
-func CopyString(s string) string {
-	return string(UnsafeBytes(s))
-}
+func Try(fn func()) (err error) {
+	xerror.Assert(fn == nil, "[fn] should not be nil")
 
-// CopyBytes copies a slice to make it immutable
-func CopyBytes(b []byte) []byte {
-	tmp := make([]byte, len(b))
-	copy(tmp, b)
-	return tmp
+	defer xerror.RespErr(&err)
+	fn()
+
+	return
 }

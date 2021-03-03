@@ -141,13 +141,13 @@ func (t *retry) Do() (gErr error) {
 
 	var dur time.Duration
 	for i := uint(1); i <= t.attempt && t.deadline.Before(time.Now()); i++ {
-		xutil.Try(func() {
+		xutil.TryWith(&gErr, func() {
 			if t.transformation != nil {
 				dur = t.transformation(t.strategy(i))
 			}
 
 			t.handle(i, dur)
-		}, func(err error) { gErr = err })
+		})
 		time.Sleep(dur)
 	}
 	return

@@ -1,4 +1,4 @@
-package bytex
+package byteutil
 
 import (
 	"fmt"
