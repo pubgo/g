@@ -2,6 +2,7 @@ package xutil
 
 import (
 	"github.com/pubgo/x/fx"
+	"github.com/pubgo/x/stack"
 	"github.com/pubgo/xerror"
 
 	"reflect"
@@ -42,31 +43,32 @@ func IsZero(val interface{}) bool {
 	return val == nil || reflect.ValueOf(val).IsZero()
 }
 
-func TryCatch(fn func(), catch ...func(err xerror.XErr)) {
+func TryCatch(fn func(), catch ...func(err error)) {
 	xerror.Assert(fn == nil, "[fn] should not be nil")
 
 	defer xerror.Resp(func(err xerror.XErr) {
-		if len(catch) > 0 {
-			catch[0](err)
+		if len(catch) == 0 {
+			return
 		}
+		catch[0](xerror.Wrap(err, stack.Func(fn)))
 	})
 
 	fn()
 }
 
-func TryWith(err *error, fn interface{}, args ...interface{}) {
+func TryWith(gErr *error, fn interface{}, args ...interface{}) {
 	xerror.Assert(fn == nil, "[fn] should not be nil")
 
-	defer xerror.RespErr(err)
+	defer xerror.Resp(func(err xerror.XErr) { *gErr = xerror.Wrap(err, stack.Func(fn)) })
 	fx.WrapValue(fn, args...)
 
 	return
 }
 
-func Try(fn interface{}, args ...interface{}) (err error) {
+func Try(fn interface{}, args ...interface{}) (gErr error) {
 	xerror.Assert(fn == nil, "[fn] should not be nil")
 
-	defer xerror.RespErr(&err)
+	defer xerror.Resp(func(err xerror.XErr) { gErr = xerror.Wrap(err, stack.Func(fn)) })
 	fx.WrapValue(fn, args...)
 
 	return

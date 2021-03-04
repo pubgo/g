@@ -1,13 +1,12 @@
 package stack
 
 import (
+	"github.com/pubgo/x/strutil"
+	"github.com/pubgo/xerror"
+
 	"reflect"
 	"runtime"
 	"strconv"
-	"strings"
-
-	"github.com/pubgo/x/strutil"
-	"github.com/pubgo/xerror"
 )
 
 type frame uintptr
@@ -40,14 +39,14 @@ func Func(fn interface{}, fns ...func(fn *runtime.Func, pc uintptr) string) stri
 	xerror.Assert(fn == nil, "[fn] is nil")
 
 	var vfn = reflect.ValueOf(fn)
+	var p = vfn.Pointer()
 	xerror.Assert(!vfn.IsValid() || vfn.Kind() != reflect.Func || vfn.IsNil(), "[fn] func is nil or type error")
 
-	var fnStack = runtime.FuncForPC(vfn.Pointer())
+	var fnStack = runtime.FuncForPC(p)
 	if len(fns) > 0 {
-		return fns[0](fnStack, vfn.Pointer())
+		return fns[0](fnStack, p)
 	}
 
-	var file, line = fnStack.FileLine(vfn.Pointer())
-	ma := strings.Split(fnStack.Name(), ".")
-	return strutil.Append(file, ":", strconv.Itoa(line), " ", ma[len(ma)-1])
+	var file, line = fnStack.FileLine(p)
+	return strutil.Append(file, ":", strconv.Itoa(line), " <", vfn.Type().String(), ">")
 }
