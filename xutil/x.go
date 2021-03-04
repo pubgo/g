@@ -42,7 +42,7 @@ func IsZero(val interface{}) bool {
 	return val == nil || reflect.ValueOf(val).IsZero()
 }
 
-func TryCatch(fn func(), catch ...func(err error)) {
+func TryCatch(fn func(), catch ...func(err xerror.XErr)) {
 	xerror.Assert(fn == nil, "[fn] should not be nil")
 
 	defer xerror.Resp(func(err xerror.XErr) {
