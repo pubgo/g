@@ -63,10 +63,10 @@ func TryWith(err *error, fn interface{}, args ...interface{}) {
 	return
 }
 
-func Try(fn interface{}, args ...interface{}) (err error) {
+func Try(fn interface{}, args ...interface{}) (gErr xerror.XErr) {
 	xerror.Assert(fn == nil, "[fn] should not be nil")
 
-	defer xerror.RespErr(&err)
+	defer xerror.Resp(func(err xerror.XErr) { gErr = err })
 	fx.WrapValue(fn, args...)
 
 	return
