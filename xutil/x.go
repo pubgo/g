@@ -1,6 +1,7 @@
 package xutil
 
 import (
+	"github.com/pubgo/x/fx"
 	"github.com/pubgo/xerror"
 
 	"reflect"
@@ -53,20 +54,20 @@ func TryCatch(fn func(), catch ...func(err error)) {
 	fn()
 }
 
-func TryWith(err *error, fn func()) {
+func TryWith(err *error, fn interface{}, args ...interface{}) {
 	xerror.Assert(fn == nil, "[fn] should not be nil")
 
 	defer xerror.RespErr(err)
-	fn()
+	fx.WrapValue(fn, args...)
 
 	return
 }
 
-func Try(fn func()) (err error) {
+func Try(fn interface{}, args ...interface{}) (err error) {
 	xerror.Assert(fn == nil, "[fn] should not be nil")
 
 	defer xerror.RespErr(&err)
-	fn()
+	fx.WrapValue(fn, args...)
 
 	return
 }
