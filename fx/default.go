@@ -5,7 +5,6 @@ import (
 	"time"
 
 	"github.com/pubgo/x/abc"
-	"github.com/pubgo/x/sync2"
 )
 
 var defaultProcess = &process{}
@@ -39,12 +38,4 @@ func Delay(dur time.Duration, fn func()) error { return defaultProcess.delay(dur
 // 执行超时函数, 超时后, 函数自动退出
 func Timeout(dur time.Duration, fn func()) error {
 	return defaultProcess.goWithTimeout(dur, fn)
-}
-
-func Parallel(fns ...func(ctx context.Context)) {
-	var g = sync2.NewGroup()
-	defer g.Wait()
-	for i := 0; i < len(fns); i++ {
-		g.Go(fns[i])
-	}
 }

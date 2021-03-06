@@ -17,6 +17,7 @@ require (
 	github.com/google/uuid v1.2.0
 	github.com/iris-contrib/blackfriday v2.0.0+incompatible
 	github.com/json-iterator/go v1.1.10
+	github.com/kr/pretty v0.2.0
 	github.com/kr/text v0.2.0 // indirect
 	github.com/mattn/go-colorable v0.1.6
 	github.com/mattn/go-isatty v0.0.12

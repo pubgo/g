@@ -14,6 +14,14 @@ type group struct {
 	wg     WaitGroup
 }
 
+func Parallel(fns ...func(ctx context.Context)) {
+	var g = NewGroup()
+	defer g.Wait()
+	for i := 0; i < len(fns); i++ {
+		g.Go(fns[i])
+	}
+}
+
 // NewGroup
 // 创建一个group对象, 可以带上默认的Context
 func NewGroup(c ...uint16) *group {
