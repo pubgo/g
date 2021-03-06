@@ -10,6 +10,7 @@ func main() {
 	e := []int{1, 2, 3}
 	f := []byte("goodbye world")
 	g := e[1:]
+	h := func(n int) bool { return n > 0 }
 
-	q.Q(a, b, c, d, e, f, g)
+	q.Q(a, b, c, d, e, f, g, h)
 }

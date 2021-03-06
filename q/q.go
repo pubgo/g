@@ -2,7 +2,17 @@ package q
 
 import (
 	"fmt"
+	"github.com/pubgo/xerror"
+	"io"
+	"os"
 )
+
+var writer io.Writer = os.Stdout
+
+func SetWriter(w io.Writer) {
+	xerror.Assert(w == nil, "[w] should not be nil")
+	writer = w
+}
 
 // nolint: gochecknoglobals
 var (
@@ -26,7 +36,6 @@ func Q(v ...interface{}) {
 	funcName, file, line, err := getCallerInfo()
 	if err != nil {
 		std.output(args...) // no name=value printing
-
 		return
 	}
 
