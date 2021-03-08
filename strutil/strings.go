@@ -8,8 +8,7 @@ import (
 	"net"
 	"strconv"
 	"strings"
-
-	"github.com/pubgo/x/xutil"
+	"unsafe"
 )
 
 var (
@@ -105,9 +104,17 @@ func Union(first, second []string) []string {
 	return merged
 }
 
+// #nosec G103
+// ToBytes returns a byte pointer without allocation
+func ToBytes(str string) []byte {
+	x := (*[2]uintptr)(unsafe.Pointer(&str))
+	h := [3]uintptr{x[0], x[1], x[1]}
+	return *(*[]byte)(unsafe.Pointer(&h))
+}
+
 // Copy copies a string to make it immutable
 func Copy(s string) string {
-	return string(xutil.ToBytes(s))
+	return string(ToBytes(s))
 }
 
 func Find(ss []string, str string) int {

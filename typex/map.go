@@ -8,15 +8,15 @@ import (
 	"go.uber.org/atomic"
 )
 
-func NewSyncMap() *SyncMap { return &SyncMap{} }
+func NewSMap() *SMap { return &SMap{} }
 
-type SyncMap struct {
+type SMap struct {
 	data  sync.Map
 	count atomic.Uint32
 }
 
-func (t *SyncMap) Each(fn interface{}) {
-	defer xerror.RespExit("SyncMap.Each")
+func (t *SMap) Each(fn interface{}) {
+	defer xerror.RespExit("SMap.Each")
 
 	vfn := reflect.ValueOf(fn)
 	isKey := vfn.Type().NumIn() == 1
@@ -32,8 +32,8 @@ func (t *SyncMap) Each(fn interface{}) {
 	})
 }
 
-func (t *SyncMap) Map(data interface{}) {
-	defer xerror.RespExit("SyncMap.Map")
+func (t *SMap) Map(data interface{}) {
+	defer xerror.RespExit("SMap.Map")
 
 	vd := reflect.ValueOf(data)
 	if vd.Kind() == reflect.Ptr {
@@ -51,16 +51,16 @@ func (t *SyncMap) Map(data interface{}) {
 	})
 }
 
-func (t *SyncMap) Set(key, value interface{}) {
+func (t *SMap) Set(key, value interface{}) {
 	_, ok := t.data.LoadOrStore(key, value)
 	if !ok {
 		t.count.Inc()
 	}
 }
 
-func (t *SyncMap) Load(key interface{}) (value interface{}, ok bool) { return t.data.Load(key) }
-func (t *SyncMap) Range(f func(key, value interface{}) bool)         { t.data.Range(f) }
-func (t *SyncMap) Len() int                                          { return int(t.count.Load()) }
-func (t *SyncMap) Delete(key interface{})                            { t.data.Delete(key); t.count.Dec() }
-func (t *SyncMap) Get(key interface{}) (value interface{})           { value, _ = t.data.Load(key); return }
-func (t *SyncMap) Has(key interface{}) (ok bool)                     { _, ok = t.data.Load(key); return }
+func (t *SMap) Load(key interface{}) (value interface{}, ok bool) { return t.data.Load(key) }
+func (t *SMap) Range(f func(key, value interface{}) bool)         { t.data.Range(f) }
+func (t *SMap) Len() int                                          { return int(t.count.Load()) }
+func (t *SMap) Delete(key interface{})                            { t.data.Delete(key); t.count.Dec() }
+func (t *SMap) Get(key interface{}) (value interface{})           { value, _ = t.data.Load(key); return }
+func (t *SMap) Has(key interface{}) (ok bool)                     { _, ok = t.data.Load(key); return }
