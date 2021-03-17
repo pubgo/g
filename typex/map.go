@@ -4,6 +4,7 @@ import (
 	"reflect"
 	"sync"
 
+	"github.com/pubgo/x/fx"
 	"github.com/pubgo/xerror"
 	"go.uber.org/atomic"
 )
@@ -15,25 +16,28 @@ type SMap struct {
 	count atomic.Uint32
 }
 
-func (t *SMap) Each(fn interface{}) {
-	defer xerror.RespExit("SMap.Each")
+func (t *SMap) Each(fn interface{}) (err error) {
+	defer xerror.RespErr(&err)
 
-	vfn := reflect.ValueOf(fn)
-	isKey := vfn.Type().NumIn() == 1
+	xerror.Assert(fn == nil, "[fn] should not be nil")
 
+	vfn := fx.WrapRaw(fn)
+	onlyKey := reflect.TypeOf(fn).NumIn() == 1
 	t.data.Range(func(key, value interface{}) bool {
-		if isKey {
-			vfn.Call([]reflect.Value{reflect.ValueOf(key)})
+		if onlyKey {
+			_ = vfn(key)
 			return true
 		}
 
-		vfn.Call([]reflect.Value{reflect.ValueOf(key), reflect.ValueOf(value)})
+		_ = vfn(key, value)
 		return true
 	})
+
+	return nil
 }
 
-func (t *SMap) Map(data interface{}) {
-	defer xerror.RespExit("SMap.Map")
+func (t *SMap) Map(data interface{}) (err error) {
+	defer xerror.RespErr(&err)
 
 	vd := reflect.ValueOf(data)
 	if vd.Kind() == reflect.Ptr {
@@ -49,6 +53,8 @@ func (t *SMap) Map(data interface{}) {
 		vd.SetMapIndex(reflect.ValueOf(key), reflect.ValueOf(value))
 		return true
 	})
+
+	return nil
 }
 
 func (t *SMap) Set(key, value interface{}) {
