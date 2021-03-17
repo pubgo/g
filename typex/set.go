@@ -8,7 +8,7 @@ import (
 	"go.uber.org/atomic"
 )
 
-func NewSet(val ...interface{}) *Set {
+func SetOf(val ...interface{}) *Set {
 	s := &Set{}
 	for i := range val {
 		s.Add(val[i])
