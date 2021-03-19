@@ -7,8 +7,9 @@ import (
 	"runtime"
 	"time"
 
-	"github.com/pubgo/x/abc"
+	"github.com/pubgo/x/stack"
 	"github.com/pubgo/xerror"
+	"github.com/pubgo/xlog"
 )
 
 var errBreak = errors.New("break")
@@ -86,19 +87,20 @@ func (t *process) tick(args ...interface{}) <-chan time.Time {
 	return c
 }
 
-func (t *process) goCtx(fn func(ctx context.Context)) *abc.Cancel {
+func (t *process) goCtx(fn func(ctx context.Context)) context.CancelFunc {
 	xerror.Assert(fn == nil, "[fn] should not be nil")
 
 	ctx, cancel := context.WithCancel(context.Background())
-	var val = &abc.Cancel{Cancel: cancel}
 	go func() {
 		defer cancel()
-		defer xerror.RespErr(&val.Err)
+		defer xerror.Resp(func(err xerror.XErr) {
+			xlog.Error("[fx] goCtx func error", xlog.String("fn", stack.Func(fn)), xlog.Any("err", err))
+		})
 
 		fn(ctx)
 	}()
 
-	return val
+	return cancel
 }
 
 func (t *process) loopCtx(fn func(i int)) (gErr error) {
@@ -117,11 +119,10 @@ func (t *process) loopCtx(fn func(i int)) (gErr error) {
 	}
 }
 
-func (t *process) goLoopCtx(fn func(ctx context.Context)) *abc.Cancel {
+func (t *process) goLoopCtx(fn func(ctx context.Context)) context.CancelFunc {
 	xerror.Assert(fn == nil, "[fn] should not be nil")
 
 	ctx, cancel := context.WithCancel(context.Background())
-	var val = &abc.Cancel{Cancel: cancel}
 	go func() {
 		defer cancel()
 		defer xerror.Resp(func(err xerror.XErr) {
@@ -129,7 +130,7 @@ func (t *process) goLoopCtx(fn func(ctx context.Context)) *abc.Cancel {
 				return
 			}
 
-			val.Err = err
+			xlog.Error("[fx] goLoopCtx run error", xlog.String("fn", stack.Func(fn)), xlog.Any("err", err))
 		})
 
 		for {
@@ -142,7 +143,7 @@ func (t *process) goLoopCtx(fn func(ctx context.Context)) *abc.Cancel {
 		}
 	}()
 
-	return val
+	return cancel
 }
 
 func (t *process) goWithTimeout(dur time.Duration, fn func()) (gErr error) {
@@ -154,7 +155,9 @@ func (t *process) goWithTimeout(dur time.Duration, fn func()) (gErr error) {
 	var ch = make(chan struct{})
 	go func() {
 		defer close(ch)
-		defer xerror.RespErr(&gErr)
+		defer xerror.Resp(func(err xerror.XErr) {
+			gErr = err.WrapF("func:%s", stack.Func(fn))
+		})
 
 		fn()
 	}()

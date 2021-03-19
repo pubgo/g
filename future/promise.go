@@ -38,9 +38,12 @@ func Async(fn interface{}, args ...interface{}) (val1 abc.FutureValue) {
 
 func Await(val abc.FutureValue, fn interface{}, errs ...func(err error)) {
 	err := val.Value(fn)
-	if len(errs) > 0 {
-		errs[0](err)
+
+	if len(errs) == 0 {
+		xerror.Panic(err)
 	}
+
+	errs[0](err)
 }
 
 func APipe(val abc.FutureValue, fn interface{}) (val1 abc.FutureValue) {

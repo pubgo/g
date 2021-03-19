@@ -1,12 +1,11 @@
 package stack
 
 import (
-	"github.com/pubgo/x/strutil"
-	"github.com/pubgo/xerror"
-
+	"fmt"
 	"reflect"
 	"runtime"
-	"strconv"
+
+	"github.com/pubgo/xerror"
 )
 
 type frame uintptr
@@ -31,7 +30,7 @@ func Caller(cd int, fns ...func(fn *runtime.Func, pc uintptr) string) string {
 	}
 
 	file, line := fn.FileLine(f.pc())
-	return strutil.Append(file, ":", strconv.Itoa(line))
+	return fmt.Sprintf("%s:%d", file, line)
 }
 
 // Func 函数栈
@@ -48,5 +47,5 @@ func Func(fn interface{}, fns ...func(fn *runtime.Func, pc uintptr) string) stri
 	}
 
 	var file, line = fnStack.FileLine(p)
-	return strutil.Append(file, ":", strconv.Itoa(line), " <", vfn.Type().String(), ">")
+	return fmt.Sprintf("%s:%d <%s>", file, line, vfn.Type().String())
 }
