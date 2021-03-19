@@ -15,7 +15,9 @@ require (
 	github.com/golang/snappy v0.0.3-0.20201103224600-674baa8c7fc3
 	github.com/google/go-cmp v0.5.1 // indirect
 	github.com/google/uuid v1.2.0
+	github.com/imdario/mergo v0.3.12 // indirect
 	github.com/iris-contrib/blackfriday v2.0.0+incompatible
+	github.com/jinzhu/copier v0.2.8
 	github.com/json-iterator/go v1.1.10
 	github.com/kr/pretty v0.2.0
 	github.com/kr/text v0.2.0 // indirect
@@ -23,13 +25,17 @@ require (
 	github.com/mattn/go-isatty v0.0.12
 	github.com/melbahja/goph v0.2.0
 	github.com/microcosm-cc/bluemonday v1.0.2
+	github.com/mitchellh/go-homedir v1.1.0
+	github.com/mitchellh/mapstructure v1.4.1
 	github.com/modern-go/reflect2 v1.0.1
 	github.com/nfnt/resize v0.0.0-20180221191011-83c6a9932646
 	github.com/niemeyer/pretty v0.0.0-20200227124842-a10e7caefd8e // indirect
+	github.com/pkg/errors v0.9.1
 	github.com/pkg/sftp v1.11.0
 	github.com/prometheus/tsdb v0.7.1 // indirect
 	github.com/pubgo/xerror v0.4.1
 	github.com/pubgo/xlog v0.0.18
+	github.com/reactivex/rxgo/v2 v2.4.0
 	github.com/sergi/go-diff v1.1.0 // indirect
 	github.com/shopspring/decimal v0.0.0-20191009025716-f1972eb1d1f5
 	github.com/sirupsen/logrus v1.7.0

@@ -18,7 +18,6 @@ type FutureValue interface {
 	Expect(format string, a ...interface{})
 	Err() error
 	String() string
-	Get() interface{}
 	Raw() []reflect.Value
 	Value(fn interface{}) error
 }

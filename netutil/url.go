@@ -1,4 +1,4 @@
-package net2
+package netutil
 
 import (
 	"net/url"

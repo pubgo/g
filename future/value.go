@@ -12,13 +12,13 @@ import (
 
 var _ abc.FutureValue = (*futureValue)(nil)
 
-func newFutureValue() *futureValue { return &futureValue{} }
+func newFutureValue() *futureValue { return &futureValue{valChan: make(chan []reflect.Value, 1)} }
 
 type futureValue struct {
-	done   sync.Once
-	values []reflect.Value
-	err    error
-	valFn  func() []reflect.Value
+	done    sync.Once
+	values  []reflect.Value
+	err     error
+	valChan chan []reflect.Value
 }
 
 func (v *futureValue) Expect(format string, a ...interface{}) { xerror.PanicF(v.Err(), format, a...) }
@@ -27,19 +27,11 @@ func (v *futureValue) setErr(err error) *futureValue          { v.err = err; ret
 func (v *futureValue) Raw() []reflect.Value                   { return v.getVal() }
 func (v *futureValue) String() string                         { return valueStr(v.getVal()...) }
 
-func (v *futureValue) Get() interface{} {
-	val := v.getVal()
-	if len(val) == 0 || !val[0].IsValid() {
-		return nil
-	}
-
-	return val[0].Interface()
-}
-
 func (v *futureValue) getVal() []reflect.Value {
 	v.done.Do(func() {
-		if v.valFn != nil {
-			v.values = v.valFn()
+		if v.valChan != nil {
+			defer close(v.valChan)
+			v.values = <-v.valChan
 		}
 	})
 	return v.values
@@ -56,14 +48,3 @@ func (v *futureValue) Value(fn interface{}) (gErr error) {
 	fx.WrapReflect(fn)(v.getVal()...)
 	return
 }
-
-var _ abc.Value = (*value)(nil)
-
-type value struct {
-	err error
-	val interface{}
-}
-
-func (v *value) Assert(format string, a ...interface{}) { xerror.PanicF(v.Err(), format, a...) }
-func (v *value) Err() error                             { return v.err }
-func (v *value) Value() interface{}                     { return v.val }

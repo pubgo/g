@@ -1,7 +1,7 @@
 package uuid
 
 import (
-	"github.com/pubgo/x/net2"
+	"github.com/pubgo/x/netutil"
 	"github.com/sony/sonyflake"
 )
 
@@ -12,7 +12,7 @@ func init() {
 	sf = sonyflake.NewSonyflake(st)
 	if sf == nil {
 		sf = sonyflake.NewSonyflake(sonyflake.Settings{
-			MachineID: net2.Lower16BitIP,
+			MachineID: netutil.Lower16BitIP,
 		})
 	}
 }
