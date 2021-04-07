@@ -20,6 +20,8 @@ func Copy(dst, src interface{}, opts ...Option) error {
 	return xerror.WrapF(copier.CopyWithOption(dst, src, optList), "\ndst: %#v\n\nsrc: %#v", dst, src)
 }
 
+func CopyStruct(dst, src interface{}, opts ...Option) error { return Copy(dst, src, opts...) }
+
 // MapStruct
 // map<->struct
 // map和结构体相互转化
