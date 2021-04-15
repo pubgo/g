@@ -15,19 +15,19 @@ func Promise(provider rxgo.Producer, opts ...rxgo.Option) rxgo.Observable {
 	return rxgo.Create([]rxgo.Producer{provider}, opts...)
 }
 
-func Async(fn interface{}, args ...interface{}) (val1 abc.FutureValue) {
+func Async(fn interface{}, args ...interface{}) (val abc.FutureValue) {
 	var value = newFutureValue()
 
-	defer xerror.Resp(func(err xerror.XErr) { val1 = value.setErr(err) })
+	defer xerror.Resp(func(err xerror.XErr) { val = value.setErr(err) })
 
 	xerror.Assert(fn == nil, "[fn] should not be nil")
 
 	var vfn = fx.WrapRaw(fn)
 	go func() {
-		defer xerror.Resp(func(err1 xerror.XErr) {
-			value.setErr(err1.WrapF("recovery error, input:%#v, func:%s, caller:%s",
+		defer xerror.Resp(func(err xerror.XErr) {
+			value.setErr(err.WrapF("recovery error, input:%#v, func:%s, caller:%s",
 				args, reflect.TypeOf(fn), stack.Func(fn)))
-			value.valChan = nil
+			value.valChan <- nil
 		})
 
 		value.valChan <- vfn(args...)
@@ -58,13 +58,13 @@ func APipe(val abc.FutureValue, fn interface{}) (val1 abc.FutureValue) {
 	go func() {
 		if err := val.Err(); err != nil {
 			value.setErr(err)
-			value.valChan = nil
+			value.valChan <- nil
 			return
 		}
 
 		defer xerror.Resp(func(err1 xerror.XErr) {
 			value.setErr(err1.WrapF("input:%s, func:%s", val.Raw(), reflect.TypeOf(fn)))
-			value.valChan <- make([]reflect.Value, 0)
+			value.valChan <- nil
 		})
 
 		value.valChan <- vfn(val.Raw()...)
