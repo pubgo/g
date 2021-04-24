@@ -54,7 +54,7 @@ func (b *Buffer) Cap() int {
 	return cap(b.bs)
 }
 
-// bytes returns a mutable reference to the underlying byte slice.
+// bytesFormat returns a mutable reference to the underlying byte slice.
 func (b *Buffer) Bytes() []byte {
 	return b.bs
 }
