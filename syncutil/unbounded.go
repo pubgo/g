@@ -16,7 +16,7 @@
  */
 
 // Package buffer provides an implementation of an unbounded buffer.
-package sync2
+package syncutil
 
 import "sync"
 

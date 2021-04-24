@@ -1,4 +1,4 @@
-package sync2
+package syncutil
 
 import (
 	"context"

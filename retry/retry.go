@@ -5,16 +5,16 @@ import (
 	"math"
 	"time"
 
-	"github.com/pubgo/x/rand2"
-	"github.com/pubgo/x/xutil"
+	"github.com/pubgo/x/randutil"
+	"github.com/pubgo/x/try"
 )
 
 const (
-	// RetryTimes defines the default max amount of times to retry a request.
-	RetryTimes = 3
+	// Times defines the default max amount of times to retry a request.
+	Times = 3
 
-	// RetryWait defines the default amount of time to wait before each retry attempt.
-	RetryWait = 100 * time.Millisecond
+	// Wait defines the default amount of time to wait before each retry attempt.
+	Wait = 100 * time.Millisecond
 )
 
 type retry struct {
@@ -72,14 +72,14 @@ func (t *retry) Constant() *retry {
 // Random 随机时间
 func (t *retry) Random() *retry {
 	t.strategy = func(u uint) time.Duration {
-		return time.Duration(rand2.Uint64n(uint64(t.factor)))
+		return time.Duration(randutil.Uint64n(uint64(t.factor)))
 	}
 	return t
 }
 
 func (t *retry) RandomIncremental() *retry {
 	t.strategy = func(u uint) time.Duration {
-		return time.Duration(rand2.Uint64n(uint64(t.factor) * uint64(u)))
+		return time.Duration(randutil.Uint64n(uint64(t.factor) * uint64(u)))
 	}
 	return t
 }
@@ -141,13 +141,14 @@ func (t *retry) Do() (gErr error) {
 
 	var dur time.Duration
 	for i := uint(1); i <= t.attempt && t.deadline.Before(time.Now()); i++ {
-		xutil.TryWith(&gErr, func() {
+		try.With(&gErr, func() {
 			if t.transformation != nil {
 				dur = t.transformation(t.strategy(i))
 			}
 
 			t.handle(i, dur)
 		})
+
 		time.Sleep(dur)
 	}
 	return

@@ -1,38 +1,35 @@
 package try
 
 import (
-	"github.com/pubgo/x/fx"
-	"github.com/pubgo/x/stack"
 	"github.com/pubgo/xerror"
 )
 
 func Catch(fn func(), catch ...func(err error)) {
 	xerror.Assert(fn == nil, "[fn] should not be nil")
 
-	defer xerror.Resp(func(err xerror.XErr) {
-		if len(catch) == 0 {
-			return
-		}
-		catch[0](xerror.Wrap(err, stack.Func(fn)))
-	})
+	if len(catch) > 0 && catch[0] != nil {
+		defer xerror.Resp(func(err xerror.XErr) {
+			catch[0](err)
+		})
+	}
 
 	fn()
 }
 
-func With(gErr *error, fn interface{}, args ...interface{}) {
+func With(gErr *error, fn func()) {
 	xerror.Assert(fn == nil, "[fn] should not be nil")
 
-	defer xerror.Resp(func(err xerror.XErr) { *gErr = xerror.Wrap(err, stack.Func(fn)) })
-	_ = fx.WrapValue(fn, args...)
+	defer xerror.RespErr(gErr)
+	fn()
 
 	return
 }
 
-func Do(fn interface{}, args ...interface{}) (gErr error) {
+func Try(fn func()) (gErr error) {
 	xerror.Assert(fn == nil, "[fn] should not be nil")
 
-	defer xerror.Resp(func(err xerror.XErr) { gErr = xerror.Wrap(err, stack.Func(fn)) })
-	_ = fx.WrapValue(fn, args...)
+	defer xerror.RespErr(&gErr)
 
-	return
+	fn()
+	return nil
 }

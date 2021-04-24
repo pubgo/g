@@ -19,7 +19,7 @@
 // Package event implements additional synchronization primitives built upon
 // the sync package.
 
-package sync2
+package syncutil
 
 import (
 	"sync"

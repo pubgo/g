@@ -1,4 +1,4 @@
-package time2
+package timeutil
 
 // Custom predefined layouts
 const (

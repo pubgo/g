@@ -15,7 +15,7 @@
  *
  */
 
-package sync2
+package syncutil
 
 import (
 	"reflect"

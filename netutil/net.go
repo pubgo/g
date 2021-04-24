@@ -4,8 +4,6 @@ import (
 	"bytes"
 	"errors"
 	"fmt"
-	"github.com/pubgo/x/xutil"
-	"github.com/pubgo/xerror"
 	"io/ioutil"
 	"log"
 	"net"
@@ -14,6 +12,8 @@ import (
 	"strings"
 
 	"github.com/axgle/mahonia"
+	"github.com/pubgo/x/try"
+	"github.com/pubgo/xerror"
 )
 
 // LocalIP gets the first NIC's IP address.
@@ -110,7 +110,7 @@ func GetClientIP(r *http.Request) (ip string) {
 // ~~~~~~ 暂时废弃，采用 IPIP
 func GetIp138(ip string) string {
 	result := ""
-	xutil.TryCatch(func() {
+	try.Catch(func() {
 		resp, err := http.Get("http://ip138.com/ips138.asp?ip=" + ip)
 		xerror.Panic(err)
 

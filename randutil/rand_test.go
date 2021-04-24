@@ -1,4 +1,4 @@
-package rand2
+package randutil
 
 import (
 	"fmt"

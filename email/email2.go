@@ -9,7 +9,7 @@ import (
 	"net/smtp"
 	"time"
 
-	"github.com/pubgo/x/rand2"
+	"github.com/pubgo/x/randutil"
 )
 
 type (
@@ -85,7 +85,7 @@ func (e *Email) Send(m *Message) (err error) {
 	// Message header
 	m.buffer = bytes.NewBuffer(make([]byte, 256))
 	m.buffer.Reset()
-	m.boundary = rand2.String(16)
+	m.boundary = randutil.String(16)
 	m.writeHeader("MIME-Version", "1.0")
 	m.writeHeader("Message-ID", m.ID)
 	m.writeHeader("Date", time.Now().Format(time.RFC1123Z))
