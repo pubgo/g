@@ -215,11 +215,11 @@ func (c *cmp) equals(a, b reflect.Value, level int) {
 					"foo": 1,
 					"bar": 2,
 				}
-			Type = map[string]int, Kind = reflect.Map
+			Type = map[string]int, Kind = reflect.MapTo
 
 			Or:
 				type T map[string]int{}
-			Type = <pkg>.T, Kind = reflect.Map
+			Type = <pkg>.T, Kind = reflect.MapTo
 
 			Iterate through the map keys (foo, bar), recurse into their values.
 		*/

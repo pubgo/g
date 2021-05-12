@@ -9,8 +9,6 @@ import (
 	"go.uber.org/atomic"
 )
 
-func NewSMap() *SMap { return &SMap{} }
-
 type SMap struct {
 	data  sync.Map
 	count atomic.Uint32
@@ -36,7 +34,7 @@ func (t *SMap) Each(fn interface{}) (err error) {
 	return nil
 }
 
-func (t *SMap) Map(data interface{}) (err error) {
+func (t *SMap) MapTo(data interface{}) (err error) {
 	defer xerror.RespErr(&err)
 
 	vd := reflect.ValueOf(data)
@@ -45,8 +43,8 @@ func (t *SMap) Map(data interface{}) (err error) {
 		vd.Set(reflect.MakeMap(vd.Type()))
 	}
 
-	// var data = make(map[string]int); Map(data)
-	// var data map[string]int; Map(&data)
+	// var data = make(map[string]int); MapTo(data)
+	// var data map[string]int; MapTo(&data)
 	xerror.Assert(!vd.IsValid() || vd.IsNil(), "[data] type error")
 
 	t.data.Range(func(key, value interface{}) bool {
