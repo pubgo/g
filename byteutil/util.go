@@ -1,6 +1,8 @@
 package byteutil
 
-import "unsafe"
+import (
+	"unsafe"
+)
 
 // Copy copies a slice to make it immutable
 func Copy(b []byte) []byte {

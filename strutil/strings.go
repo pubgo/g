@@ -333,3 +333,10 @@ func (ss Strings) Head4() (h0, h1, h2, h3 string) {
 func Split(raw string, sep string) Strings {
 	return Strings(strings.Split(raw, sep))
 }
+
+func Ternary(s1, s2 string) string {
+	if s1 == "" {
+		return s2
+	}
+	return s1
+}

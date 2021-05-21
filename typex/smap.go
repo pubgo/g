@@ -2,16 +2,19 @@ package typex
 
 import (
 	"reflect"
+	"sync"
 
 	"github.com/pubgo/x/fx"
 	"github.com/pubgo/xerror"
+	"go.uber.org/atomic"
 )
 
-var NotFound = new(interface{})
+type SMap struct {
+	data  sync.Map
+	count atomic.Uint32
+}
 
-type Map map[string]interface{}
-
-func (t Map) Each(fn interface{}) (err error) {
+func (t *SMap) Each(fn interface{}) (err error) {
 	defer xerror.RespErr(&err)
 
 	xerror.Assert(fn == nil, "[fn] should not be nil")
@@ -31,7 +34,7 @@ func (t Map) Each(fn interface{}) (err error) {
 	return nil
 }
 
-func (t *Map) MapTo(data interface{}) (err error) {
+func (t *SMap) MapTo(data interface{}) (err error) {
 	defer xerror.RespErr(&err)
 
 	vd := reflect.ValueOf(data)
@@ -52,26 +55,16 @@ func (t *Map) MapTo(data interface{}) (err error) {
 	return nil
 }
 
-func (t *Map) Set(key, value interface{}) {
+func (t *SMap) Set(key, value interface{}) {
 	_, ok := t.data.LoadOrStore(key, value)
 	if !ok {
 		t.count.Inc()
 	}
 }
 
-func (t *Map) Load(key interface{}) (value interface{}, ok bool) { return t.data.Load(key) }
-func (t *Map) Range(f func(key, value interface{}) bool)         { t.data.Range(f) }
-func (t *Map) Len() int                                          { return int(t.count.Load()) }
-func (t *Map) Delete(key interface{})                            { t.data.Delete(key); t.count.Dec() }
-func (t Map) Get(key string) interface{} {
-	value, ok := t[key]
-	if ok {
-		return value
-	}
-	return NotFound
-}
-
-func (t Map) Has(key string) bool {
-	_, ok := t[key]
-	return ok
-}
+func (t *SMap) Load(key interface{}) (value interface{}, ok bool) { return t.data.Load(key) }
+func (t *SMap) Range(f func(key, value interface{}) bool)         { t.data.Range(f) }
+func (t *SMap) Len() int                                          { return int(t.count.Load()) }
+func (t *SMap) Delete(key interface{})                            { t.data.Delete(key); t.count.Dec() }
+func (t *SMap) Get(key interface{}) (value interface{})           { value, _ = t.data.Load(key); return }
+func (t *SMap) Has(key interface{}) (ok bool)                     { _, ok = t.data.Load(key); return }

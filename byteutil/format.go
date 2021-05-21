@@ -23,12 +23,12 @@ type (
 
 var (
 	pattern = regexp.MustCompile(`(?i)^(-?\d+(?:\.\d+)?)([KMGTPE]B?|B?)$`)
-	global  = &bytesFormat{}
+	global  bytesFormat
 )
 
 // Format formats bytesFormat integer to human readable string.
 // For example, 31323 bytesFormat will return 30.59KB.
-func (*bytesFormat) Format(b int64) string {
+func (bytesFormat) Format(b int64) string {
 	multiple := ""
 	value := float64(b)
 
@@ -62,11 +62,12 @@ func (*bytesFormat) Format(b int64) string {
 
 // Parse parses human readable bytesFormat string to bytesFormat integer.
 // For example, 6GB (6G is also valid) will return 6442450944.
-func (*bytesFormat) Parse(value string) (i int64, err error) {
+func (bytesFormat) Parse(value string) (i int64, err error) {
 	parts := pattern.FindStringSubmatch(value)
 	if len(parts) < 3 {
 		return 0, fmt.Errorf("error parsing value=%s", value)
 	}
+
 	bytesString := parts[1]
 	multiple := parts[2]
 	bytes, err := strconv.ParseFloat(bytesString, 64)
