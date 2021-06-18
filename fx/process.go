@@ -170,16 +170,18 @@ func (t *process) goWithTimeout(dur time.Duration, fn func()) (gErr error) {
 	}
 }
 
-func (t *process) goWithDelay(dur time.Duration, fn func()) (gErr error) {
-	defer xerror.RespErr(&gErr)
-
-	xerror.Assert(dur <= 0, "[dur] should not be less than zero")
+func (t *process) goWithDelay(fn func(), durList ...time.Duration) {
 	xerror.Assert(fn == nil, "[fn] should not be nil")
+
+	dur := time.Millisecond * 10
+	if len(durList) > 0 {
+		dur = durList[0]
+	}
 
 	go func() {
 		defer xerror.Resp(func(err xerror.XErr) {
 			dur = 0
-			gErr = err.WrapF("process.goWithDelay error")
+			xlog.Error("process.goWithDelay error")
 		})
 
 		fn()

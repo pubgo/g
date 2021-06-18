@@ -28,8 +28,7 @@ func Loop(fn func(i int)) error { return defaultProcess.loopCtx(fn) }
 
 // GoDelay
 // 延迟goroutine
-func GoDelay(dur time.Duration, fn func()) error { return defaultProcess.goWithDelay(dur, fn) }
-
+func GoDelay(fn func(), dur ...time.Duration)  { defaultProcess.goWithDelay(fn, dur...) }
 func Delay(dur time.Duration, fn func()) error { return defaultProcess.delay(dur, fn) }
 
 // Timeout
