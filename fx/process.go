@@ -9,7 +9,7 @@ import (
 
 	"github.com/pubgo/x/stack"
 	"github.com/pubgo/xerror"
-	"github.com/pubgo/xlog"
+	"go.uber.org/zap"
 )
 
 var errBreak = errors.New("break")
@@ -94,7 +94,7 @@ func (t *process) goCtx(fn func(ctx context.Context)) context.CancelFunc {
 	go func() {
 		defer cancel()
 		defer xerror.Resp(func(err xerror.XErr) {
-			xlog.Error("[fx] goCtx func error", xlog.String("fn", stack.Func(fn)), xlog.Any("err", err))
+			logs.Error("[fx] goCtx func error", zap.String("fn", stack.Func(fn)), zap.Any("err", err))
 		})
 
 		fn(ctx)
@@ -130,7 +130,7 @@ func (t *process) goLoopCtx(fn func(ctx context.Context)) context.CancelFunc {
 				return
 			}
 
-			xlog.Error("[fx] goLoopCtx run error", xlog.String("fn", stack.Func(fn)), xlog.Any("err", err))
+			logs.Error("[fx] goLoopCtx run error", zap.String("fn", stack.Func(fn)), zap.Any("err", err))
 		})
 
 		for {
@@ -181,7 +181,7 @@ func (t *process) goWithDelay(fn func(), durList ...time.Duration) {
 	go func() {
 		defer xerror.Resp(func(err xerror.XErr) {
 			dur = 0
-			xlog.Error("process.goWithDelay error")
+			logs.Error("process.goWithDelay error")
 		})
 
 		fn()

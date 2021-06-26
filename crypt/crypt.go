@@ -9,7 +9,6 @@ import (
 	"encoding/hex"
 	"errors"
 	"fmt"
-	"github.com/pubgo/xlog"
 	"math/rand"
 	"time"
 
@@ -91,7 +90,7 @@ func New(passphrase []byte, usersalt []byte) (key []byte, salt []byte, err error
 		// http://www.ietf.org/rfc/rfc2898.txt
 		// Salt.
 		if _, err := rand.Read(salt); err != nil {
-			xlog.Fatalf("can't get random salt: %v", err)
+			logs.Fatalf("can't get random salt: %v", err)
 		}
 	} else {
 		salt = usersalt
@@ -107,7 +106,7 @@ func Encrypt(plaintext []byte, key []byte) (encrypted []byte, err error) {
 	// Section 8.2
 	ivBytes := make([]byte, 12)
 	if _, err := rand.Read(ivBytes); err != nil {
-		xlog.Fatalf("can't initialize crypto: %v", err)
+		logs.Fatalf("can't initialize crypto: %v", err)
 	}
 	b, err := aes.NewCipher(key)
 	if err != nil {

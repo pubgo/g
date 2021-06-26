@@ -12,8 +12,6 @@ import (
 	"net"
 	"os"
 	"time"
-
-	"github.com/pubgo/xlog"
 )
 
 var (
@@ -33,7 +31,7 @@ func InitTls() {
 func NewTlsServerConn(conn net.Conn) net.Conn {
 	var err error
 	if err != nil {
-		xlog.Error(err.Error())
+		logs.Error(err.Error())
 		os.Exit(0)
 		return nil
 	}

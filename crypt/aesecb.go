@@ -6,8 +6,6 @@ import (
 	"crypto/cipher"
 	"encoding/base64"
 	"errors"
-
-	"github.com/pubgo/xlog"
 )
 
 var ErrPaddingSize = errors.New("padding size error")
@@ -32,14 +30,14 @@ func NewECBEncrypter(b cipher.Block) cipher.BlockMode {
 
 func (x *ecbEncrypter) BlockSize() int { return x.blockSize }
 
-// why we don't return error is because cipher.BlockMode doesn't allow this
+// CryptBlocks why we don't return error is because cipher.BlockMode doesn't allow this
 func (x *ecbEncrypter) CryptBlocks(dst, src []byte) {
 	if len(src)%x.blockSize != 0 {
-		xlog.Error("crypto/cipher: input not full blocks")
+		logs.Error("crypto/cipher: input not full blocks")
 		return
 	}
 	if len(dst) < len(src) {
-		xlog.Error("crypto/cipher: output smaller than input")
+		logs.Error("crypto/cipher: output smaller than input")
 		return
 	}
 
@@ -63,11 +61,11 @@ func (x *ecbDecrypter) BlockSize() int {
 // why we don't return error is because cipher.BlockMode doesn't allow this
 func (x *ecbDecrypter) CryptBlocks(dst, src []byte) {
 	if len(src)%x.blockSize != 0 {
-		xlog.Error("crypto/cipher: input not full blocks")
+		logs.Error("crypto/cipher: input not full blocks")
 		return
 	}
 	if len(dst) < len(src) {
-		xlog.Error("crypto/cipher: output smaller than input")
+		logs.Error("crypto/cipher: output smaller than input")
 		return
 	}
 
@@ -81,7 +79,7 @@ func (x *ecbDecrypter) CryptBlocks(dst, src []byte) {
 func EcbDecrypt(key, src []byte) ([]byte, error) {
 	block, err := aes.NewCipher(key)
 	if err != nil {
-		xlog.Errorf("Decrypt key error: % x", key)
+		logs.Errorf("Decrypt key error: % x", key)
 		return nil, err
 	}
 
@@ -114,7 +112,7 @@ func EcbDecryptBase64(key, src string) (string, error) {
 func EcbEncrypt(key, src []byte) ([]byte, error) {
 	block, err := aes.NewCipher(key)
 	if err != nil {
-		xlog.Errorf("Encrypt key error: % x", key)
+		logs.Errorf("Encrypt key error: % x", key)
 		return nil, err
 	}
 

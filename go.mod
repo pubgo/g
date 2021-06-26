@@ -15,12 +15,10 @@ require (
 	github.com/golang/snappy v0.0.3-0.20201103224600-674baa8c7fc3
 	github.com/google/go-cmp v0.5.1 // indirect
 	github.com/google/uuid v1.2.0
-	github.com/imdario/mergo v0.3.12 // indirect
 	github.com/iris-contrib/blackfriday v2.0.0+incompatible
 	github.com/jinzhu/copier v0.2.8
 	github.com/json-iterator/go v1.1.10
 	github.com/kr/pretty v0.2.0
-	github.com/kr/text v0.2.0 // indirect
 	github.com/mattn/go-colorable v0.1.6
 	github.com/mattn/go-isatty v0.0.12
 	github.com/melbahja/goph v0.2.0
@@ -29,12 +27,11 @@ require (
 	github.com/mitchellh/mapstructure v1.4.1
 	github.com/modern-go/reflect2 v1.0.1
 	github.com/nfnt/resize v0.0.0-20180221191011-83c6a9932646
-	github.com/niemeyer/pretty v0.0.0-20200227124842-a10e7caefd8e // indirect
 	github.com/pkg/errors v0.9.1
 	github.com/pkg/sftp v1.11.0
 	github.com/prometheus/tsdb v0.7.1 // indirect
 	github.com/pubgo/xerror v0.4.1
-	github.com/pubgo/xlog v0.0.18
+	github.com/pubgo/xlog v0.1.5
 	github.com/reactivex/rxgo/v2 v2.4.0
 	github.com/sergi/go-diff v1.1.0 // indirect
 	github.com/shopspring/decimal v0.0.0-20191009025716-f1972eb1d1f5
@@ -49,12 +46,10 @@ require (
 	go.uber.org/atomic v1.7.0
 	go.uber.org/automaxprocs v1.3.0
 	go.uber.org/multierr v1.5.0
+	go.uber.org/zap v1.16.0
 	golang.org/x/crypto v0.0.0-20201124201722-c8d3bf9c5392
 	golang.org/x/image v0.0.0-20191206065243-da761ea9ff43
-	golang.org/x/sys v0.0.0-20201126233918-771906719818 // indirect
 	golang.org/x/text v0.3.3
-	golang.org/x/tools v0.0.0-20200806022845-90696ccdc692 // indirect
-	google.golang.org/grpc v1.29.1
-	gopkg.in/check.v1 v1.0.0-20200227125254-8fa46927fb4f // indirect
+	google.golang.org/grpc v1.36.0
 	gopkg.in/src-d/go-git.v4 v4.13.1
 )

@@ -4,7 +4,7 @@ import (
 	"context"
 
 	"github.com/pubgo/xerror"
-	"github.com/pubgo/xlog"
+	"go.uber.org/zap"
 )
 
 type Group = group
@@ -50,7 +50,7 @@ func (g *group) Go(fn func(ctx context.Context)) {
 	g.wg.Inc()
 	go func() {
 		defer g.wg.Done()
-		defer xerror.Resp(func(err xerror.XErr) { xlog.Error("group.Go error", xlog.Any("err", err)) })
+		defer xerror.Resp(func(err xerror.XErr) { logs.Error("group.Go error", zap.Any("err", err)) })
 		fn(g.ctx)
 	}()
 }

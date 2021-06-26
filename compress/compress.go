@@ -4,8 +4,6 @@ import (
 	"bytes"
 	"compress/flate"
 	"io"
-
-	"github.com/pubgo/xlog"
 )
 
 // CompressWithOption returns compressed data using the specified level
@@ -34,11 +32,11 @@ func Decompress(src []byte) []byte {
 func compress(src []byte, dest io.Writer, level int) {
 	compressor, err := flate.NewWriter(dest, level)
 	if err != nil {
-		xlog.Debugf("error level data: %v", err)
+		logs.Debugf("error level data: %v", err)
 		return
 	}
 	if _, err := compressor.Write(src); err != nil {
-		xlog.Debugf("error writing data: %v", err)
+		logs.Debugf("error writing data: %v", err)
 	}
 	compressor.Close()
 }
@@ -47,7 +45,7 @@ func compress(src []byte, dest io.Writer, level int) {
 func decompress(src io.Reader, dest io.Writer) {
 	decompressor := flate.NewReader(src)
 	if _, err := io.Copy(dest, decompressor); err != nil {
-		xlog.Debugf("error copying data: %v", err)
+		logs.Debugf("error copying data: %v", err)
 	}
 	decompressor.Close()
 }
