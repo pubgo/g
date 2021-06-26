@@ -15,7 +15,7 @@
  *
  */
 
-// Package buffer provides an implementation of an unbounded buffer.
+// Package syncutil Package buffer provides an implementation of an unbounded buffer.
 package syncutil
 
 import "sync"

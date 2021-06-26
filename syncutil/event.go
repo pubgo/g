@@ -52,5 +52,5 @@ func (e *Event) Done() <-chan struct{} { return e.c }
 // HasFired returns true if Fire has been called.
 func (e *Event) HasFired() bool { return atomic.LoadInt32(&e.fired) == 1 }
 
-// NewEvent returns a new, ready-to-use Event.
+// New returns a new, ready-to-use Event.
 func New() *Event { return &Event{c: make(chan struct{})} }

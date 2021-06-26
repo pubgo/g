@@ -166,7 +166,7 @@ func (t *process) goWithTimeout(dur time.Duration, fn func()) (gErr error) {
 	case <-ch:
 		return
 	case <-time.After(dur):
-		return context.DeadlineExceeded
+		return xerror.WrapF(context.DeadlineExceeded, stack.Func(fn))
 	}
 }
 

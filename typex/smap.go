@@ -6,12 +6,12 @@ import (
 
 	"github.com/pubgo/x/fx"
 	"github.com/pubgo/xerror"
-	"go.uber.org/atomic"
 )
 
+var NotFound = new(struct{})
+
 type SMap struct {
-	data  sync.Map
-	count atomic.Uint32
+	data sync.Map
 }
 
 func (t *SMap) Each(fn interface{}) (err error) {
@@ -32,6 +32,13 @@ func (t *SMap) Each(fn interface{}) (err error) {
 	})
 
 	return nil
+}
+
+func (t *SMap) Map(fn func(val interface{}) interface{}) {
+	t.data.Range(func(key, value interface{}) bool {
+		t.data.Store(key, fn(value))
+		return true
+	})
 }
 
 func (t *SMap) MapTo(data interface{}) (err error) {
@@ -56,15 +63,19 @@ func (t *SMap) MapTo(data interface{}) (err error) {
 }
 
 func (t *SMap) Set(key, value interface{}) {
-	_, ok := t.data.LoadOrStore(key, value)
-	if !ok {
-		t.count.Inc()
+	t.data.Store(key, value)
+}
+
+func (t *SMap) Get(key interface{}) interface{} {
+	value, ok := t.data.Load(key)
+	if ok {
+		return value
 	}
+
+	return NotFound
 }
 
 func (t *SMap) Load(key interface{}) (value interface{}, ok bool) { return t.data.Load(key) }
 func (t *SMap) Range(f func(key, value interface{}) bool)         { t.data.Range(f) }
-func (t *SMap) Len() int                                          { return int(t.count.Load()) }
-func (t *SMap) Delete(key interface{})                            { t.data.Delete(key); t.count.Dec() }
-func (t *SMap) Get(key interface{}) (value interface{})           { value, _ = t.data.Load(key); return }
+func (t *SMap) Delete(key interface{})                            { t.data.Delete(key) }
 func (t *SMap) Has(key interface{}) (ok bool)                     { _, ok = t.data.Load(key); return }

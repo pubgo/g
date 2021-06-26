@@ -24,22 +24,28 @@ func (t *Queue) Push(val interface{}) {
 	t.data = append(t.data, val)
 }
 
-func (t *Queue) Pop() {
+func (t *Queue) Pop() interface{} {
 	t.mu.Lock()
 	defer t.mu.Unlock()
 
 	var data = make([]interface{}, len(t.data)-1)
 	copy(data, t.data[:len(t.data)-2])
 	t.data = data
+	return t.data[len(t.data)-1]
 }
 
-func (t *Queue) PopFirst() {
+func (t *Queue) PopFirst() interface{} {
 	t.mu.Lock()
 	defer t.mu.Unlock()
 
+	if len(t.data) == 0 {
+		return nil
+	}
+
 	var data = make([]interface{}, len(t.data)-1)
-	copy(data, t.data[2:])
+	copy(data, t.data[1:])
 	t.data = data
+	return t.data[0]
 }
 
 func (t *Queue) Del(index uint32) {

@@ -1,77 +1,87 @@
 package typex
 
-import (
-	"reflect"
+import "sync"
 
-	"github.com/pubgo/x/fx"
-	"github.com/pubgo/xerror"
-)
+var mu sync.Mutex
 
-var NotFound = new(interface{})
-
-type Map map[string]interface{}
-
-func (t Map) Each(fn interface{}) (err error) {
-	defer xerror.RespErr(&err)
-
-	xerror.Assert(fn == nil, "[fn] should not be nil")
-
-	vfn := fx.WrapRaw(fn)
-	onlyKey := reflect.TypeOf(fn).NumIn() == 1
-	t.data.Range(func(key, value interface{}) bool {
-		if onlyKey {
-			_ = vfn(key)
-			return true
-		}
-
-		_ = vfn(key, value)
-		return true
-	})
-
-	return nil
+type Map struct {
+	done int8
+	data map[string]interface{}
 }
 
-func (t *Map) MapTo(data interface{}) (err error) {
-	defer xerror.RespErr(&err)
+func (t *Map) once() {
+	mu.Lock()
+	defer mu.Unlock()
 
-	vd := reflect.ValueOf(data)
-	if vd.Kind() == reflect.Ptr {
-		vd = vd.Elem()
-		vd.Set(reflect.MakeMap(vd.Type()))
+	t.done = 1
+	t.data = make(map[string]interface{})
+}
+
+func (t *Map) check() {
+	if t.done == 1 {
+		return
 	}
 
-	// var data = make(map[string]int); MapTo(data)
-	// var data map[string]int; MapTo(&data)
-	xerror.Assert(!vd.IsValid() || vd.IsNil(), "[data] type error")
-
-	t.data.Range(func(key, value interface{}) bool {
-		vd.SetMapIndex(reflect.ValueOf(key), reflect.ValueOf(value))
-		return true
-	})
-
-	return nil
+	t.once()
 }
 
-func (t *Map) Set(key, value interface{}) {
-	_, ok := t.data.LoadOrStore(key, value)
-	if !ok {
-		t.count.Inc()
-	}
+func (t *Map) Has(key string) bool {
+	t.check()
+
+	_, ok := t.data[key]
+	return ok
 }
 
-func (t *Map) Load(key interface{}) (value interface{}, ok bool) { return t.data.Load(key) }
-func (t *Map) Range(f func(key, value interface{}) bool)         { t.data.Range(f) }
-func (t *Map) Len() int                                          { return int(t.count.Load()) }
-func (t *Map) Delete(key interface{})                            { t.data.Delete(key); t.count.Dec() }
-func (t Map) Get(key string) interface{} {
-	value, ok := t[key]
+func (t *Map) Map() map[string]interface{} {
+	t.check()
+
+	return t.data
+}
+
+func (t *Map) Get(key string) interface{} {
+	t.check()
+
+	val, ok := t.data[key]
 	if ok {
-		return value
+		return val
 	}
+
 	return NotFound
 }
 
-func (t Map) Has(key string) bool {
-	_, ok := t[key]
-	return ok
+func (t *Map) Load(key string) (interface{}, bool) {
+	t.check()
+
+	val, ok := t.data[key]
+	return val, ok
+}
+
+func (t *Map) Keys() []string {
+	t.check()
+
+	var keys = make([]string, 0, len(t.data))
+	for k := range t.data {
+		keys = append(keys, k)
+	}
+	return keys
+}
+
+func (t *Map) Each(fn func(name string, val interface{})) {
+	t.check()
+
+	for k, v := range t.data {
+		fn(k, v)
+	}
+}
+
+func (t *Map) Set(key string, val interface{}) {
+	t.check()
+
+	t.data[key] = val
+}
+
+func (t *Map) Del(key string) {
+	t.check()
+
+	delete(t.data, key)
 }
