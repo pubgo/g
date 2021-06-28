@@ -1,8 +1,21 @@
 package try
 
 import (
+	"github.com/pubgo/x/stack"
 	"github.com/pubgo/xerror"
+	"github.com/pubgo/xlog"
+	"go.uber.org/zap"
 )
+
+func Logs(fn func(), logs ...xlog.Xlog) {
+	xerror.Assert(fn == nil, "[fn] should not be nil")
+
+	if len(logs) > 0 && logs[0] != nil {
+		defer xerror.Resp(func(err xerror.XErr) { logs[0].Error(stack.Func(fn), zap.Any("err", err)) })
+	}
+
+	fn()
+}
 
 func Catch(fn func(), catch ...func(err error)) {
 	xerror.Assert(fn == nil, "[fn] should not be nil")
