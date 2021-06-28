@@ -7,12 +7,17 @@ import (
 	"go.uber.org/zap"
 )
 
-func Logs(fn func(), logs ...xlog.Xlog) {
+func Logs(logs xlog.Xlog, fn func(), fields ...zap.Field) {
 	xerror.Assert(fn == nil, "[fn] should not be nil")
+	xerror.Assert(logs == nil, "[logs] should not be nil")
 
-	if len(logs) > 0 && logs[0] != nil {
-		defer xerror.Resp(func(err xerror.XErr) { logs[0].Error(stack.Func(fn), zap.Any("err", err)) })
-	}
+	defer xerror.Resp(func(err xerror.XErr) {
+		var params = make([]interface{}, 0, len(fields)+2)
+		for i := range fields {
+			params = append(params, fields[i])
+		}
+		logs.Error(append(params, zap.Any("err", err), zap.String("stack", stack.Func(fn)))...)
+	})
 
 	fn()
 }
