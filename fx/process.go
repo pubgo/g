@@ -181,7 +181,7 @@ func (t *process) goWithDelay(fn func(), durList ...time.Duration) {
 	go func() {
 		defer xerror.Resp(func(err xerror.XErr) {
 			dur = 0
-			logs.Error("process.goWithDelay error")
+			logs.Error("process.goWithDelay error", zap.Any("err", err))
 		})
 
 		fn()
