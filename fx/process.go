@@ -45,46 +45,60 @@ func (t *process) count(n int) <-chan int {
 }
 
 // tick 简单定时器
-// Example: tick(100, time.Second)
-func (t *process) tick(args ...interface{}) <-chan time.Time {
-	var n int
-	var dur time.Duration
+func (t *process) tick(fn func(ctx Ctx), interval ...time.Duration) context.CancelFunc {
+	xerror.Assert(fn == nil, "[fn] should not be nil")
 
-	for _, arg := range args {
-		xerror.Assert(arg == nil, "[arg] should not be nil")
+	_ctx, cancel := CancelCtx()
+	var ctx = Ctx{_ctx}
 
-		switch ag := arg.(type) {
-		case int:
-			n = ag
-		case time.Duration:
-			dur = ag
-		}
+	var dur = time.Second
+	if len(interval) > 0 {
+		dur = interval[0]
 	}
 
-	if n <= 0 {
-		n = 1
-	}
+	var safeFn = func(ctx Ctx) (ok bool) {
+		ok = true
 
-	if dur <= 0 {
-		dur = time.Second
-	}
-
-	var c = make(chan time.Time)
-	go func() {
-		defer close(c)
-
-		tk := time.NewTicker(dur)
-		for i := 0; ; i++ {
-			if i == n {
-				tk.Stop()
-				break
+		defer xerror.Resp(func(err xerror.XErr) {
+			if xerror.Cause(err) == errBreak {
+				ok = false
+				return
 			}
 
-			c <- <-tk.C
+			logs.Error("[fx] tick error", zap.String("fn", stack.Func(fn)), zap.Any("err", err))
+		})
+
+		fn(ctx)
+
+		return
+	}
+
+	go func() {
+		defer cancel()
+		defer xerror.Resp(func(err xerror.XErr) {
+			if xerror.Cause(err) == errBreak {
+				return
+			}
+
+			logs.Error("[fx] tick error", zap.String("fn", stack.Func(fn)), zap.Any("err", err))
+		})
+
+		var ticker = time.NewTicker(dur)
+		defer ticker.Stop()
+
+		for {
+			select {
+			case <-ctx.Done():
+				return
+			case <-ticker.C:
+				if !safeFn(ctx) {
+					return
+				}
+			}
 		}
 	}()
 
-	return c
+	return cancel
 }
 
 func (t *process) goCtx(fn func(ctx context.Context)) context.CancelFunc {

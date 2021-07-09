@@ -12,8 +12,9 @@ func CostWith(fn func()) time.Duration { return defaultProcess.costWith(fn) }
 func Count(n int) <-chan int           { return defaultProcess.count(n) }
 
 // Tick 简单定时器
-// Example: Tick(100, time.Second)
-func Tick(args ...interface{}) <-chan time.Time { return defaultProcess.tick(args...) }
+func Tick(fn func(ctx Ctx), interval ...time.Duration) context.CancelFunc {
+	return defaultProcess.tick(fn, interval...)
+}
 
 // Go
 // 启动一个goroutine
