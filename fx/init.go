@@ -1,5 +1,14 @@
 package fx
 
-import "github.com/pubgo/xlog"
+import (
+	"context"
+	"github.com/pubgo/xlog"
+)
 
 var logs = xlog.GetLogger("fx")
+
+type Ctx struct {
+	context.Context
+}
+
+func (Ctx) Break() { panic(errBreak) }

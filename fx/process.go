@@ -119,10 +119,12 @@ func (t *process) loopCtx(fn func(i int)) (gErr error) {
 	}
 }
 
-func (t *process) goLoopCtx(fn func(ctx context.Context)) context.CancelFunc {
+func (t *process) goLoopCtx(fn func(ctx Ctx)) context.CancelFunc {
 	xerror.Assert(fn == nil, "[fn] should not be nil")
 
-	ctx, cancel := context.WithCancel(context.Background())
+	_ctx, cancel := CancelCtx()
+	var ctx = Ctx{_ctx}
+
 	go func() {
 		defer cancel()
 		defer xerror.Resp(func(err xerror.XErr) {
